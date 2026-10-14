@@ -65,6 +65,9 @@ main{overflow-x:clip}
 .gnb-r{display:flex;align-items:center;gap:8px;flex:0 0 auto}
 .btn-apply{background:var(--navy);color:#fff;border-radius:999px;padding:9px 18px;font-size:14px;font-weight:700;white-space:nowrap}
 .btn-apply:hover{background:var(--brand)}
+.gnb-q{display:flex;gap:4px}
+.gnb-q a{padding:8px 12px;border:1px solid var(--line);border-radius:999px;font-size:14px;font-weight:700;color:var(--ink);white-space:nowrap}
+.gnb-q a:hover,.gnb-q a[aria-current]{border-color:var(--brand);color:var(--brand)}
 .burger{display:none;width:42px;height:42px;border:1px solid var(--line);border-radius:8px;background:#fff;padding:0;place-items:center}
 .burger i{display:block;width:18px;height:2px;background:var(--ink);box-shadow:0 6px 0 var(--ink),0 -6px 0 var(--ink)}
 
@@ -173,8 +176,10 @@ main{overflow-x:clip}
 .list{list-style:none;margin:0;padding:0}
 .list li{border-bottom:1px solid var(--line)}
 .list button{width:100%;border:0;background:none;display:flex;justify-content:space-between;align-items:center;gap:14px;padding:15px 2px;text-align:left;font-size:15px}
-.list button:hover span{color:var(--brand);text-decoration:underline}
+.list button:hover>span{color:var(--brand);text-decoration:underline}
 .list span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.list button>span{flex:1}
+.list .by{font-style:normal;color:var(--body);font-size:13.5px;flex:0 1 auto;max-width:38%;display:flex;min-width:0}
 .list time{color:var(--muted);font-size:13.5px;flex:0 0 auto;font-variant-numeric:tabular-nums}
 .cat{display:inline-block;font-size:12px;font-weight:700;color:var(--brand);margin-right:6px}
 .feed{background:var(--gray);border-radius:16px;padding:22px 24px}
@@ -486,7 +491,9 @@ main{overflow-x:clip}
 }
 @media (max-width:900px){
   .menu,.btn-apply{display:none}
-  .burger{display:grid;margin-left:auto}
+  .burger{display:grid}
+  .gnb-r{margin-left:auto}
+  .gnb-q a{padding:7px 10px;font-size:13px}
   .gnb .in{height:64px}
   .stabs{top:calc(64px + env(safe-area-inset-top,0px))}
   .slide .in{grid-template-columns:1fr;min-height:0;padding-block:36px 100px;gap:10px}
@@ -503,6 +510,8 @@ main{overflow-x:clip}
 @media (max-width:560px){
   .util-r button:not(.keep){display:none}
   .logo-txt small{display:none}
+  .gnb-q .q-l{display:none}
+  .gnb-q a{padding:6px 9px}
   .logo-txt b{font-size:17px}
   .mv h1,.mv h2{font-size:31px}
   .mv p{font-size:15.5px}
@@ -559,6 +568,7 @@ main{overflow-x:clip}
     <a class="logo" href="#home" aria-label="아무튼 열심히 연구소 홈"><span class="logo-mark">아열</span><span class="logo-txt"><b>아무튼 열심히 연구소</b><small>AMUTUN DILIGENCE LAB</small></span></a>
     <ul class="menu" id="menu"></ul>
     <div class="gnb-r">
+      <nav class="gnb-q" aria-label="게시판 바로가기"><a href="#community-notice">공지<span class="q-l">사항</span></a><a href="#community-free"><span class="q-l">자유</span>게시판</a></nav>
       <a class="btn-apply" href="#recruit-apply">입사 지원</a>
       <button class="burger" id="burger" type="button" aria-label="전체 메뉴 열기"><i></i></button>
     </div>
@@ -1131,7 +1141,7 @@ function renderBoard(){const ul=$('boardList');ul.textContent='';$('boardMore').
   const live=homeLive[board];
   if(!live){ul.append(el('li',{className:'note',textContent:'글을 불러오는 중…',style:'padding:16px 2px'}));return}
   if(live){if(!live.length){ul.append(el('li',{className:'note',textContent:'아직 글이 없습니다. 첫 글을 남겨 주세요.',style:'padding:16px 2px'}));return}
-    live.forEach(p=>{const li=el('li');const btn=el('button',{type:'button'});const sp=el('span');if(p.tag)sp.append(el('i',{className:'cat',textContent:'['+p.tag+']'}));sp.append(p.title||'(제목 없음)');if(p.ai)sp.append(el('i',{className:'pill ai',textContent:'AI'}));btn.append(sp,el('time',{textContent:fmtDate(p.createdAt)}));btn.onclick=()=>{location.hash='community-'+board;setTimeout(()=>BBS[board].open(p.id),60)};li.append(btn);ul.append(li)});return}
+    live.forEach(p=>{const li=el('li');const btn=el('button',{type:'button'});const sp=el('span');if(p.tag)sp.append(el('i',{className:'cat',textContent:'['+p.tag+']'}));sp.append(p.title||'(제목 없음)');const by=el('em',{className:'by'});by.append(nickEl(p));btn.append(sp,by,el('time',{textContent:fmtDate(p.createdAt)}));btn.onclick=()=>{location.hash='community-'+board;setTimeout(()=>BBS[board].open(p.id),60)};li.append(btn);ul.append(li)});return}
   BOARD[board].forEach(([c,t,d,b])=>{const li=el('li');const btn=el('button',{type:'button'});const sp=el('span');sp.append(el('i',{className:'cat',textContent:'['+c+']'}),t);btn.append(sp,el('time',{textContent:d}));btn.onclick=()=>openModal(t,d,b);li.append(btn);ul.append(li)})}
 document.querySelectorAll('[data-board]').forEach(b=>b.onclick=()=>{board=b.dataset.board;document.querySelectorAll('[data-board]').forEach(x=>x.setAttribute('aria-selected',x===b));renderBoard()});
 function fmtDate(ms){if(!ms)return '';const d=new Date(ms),n=new Date();const p=x=>String(x).padStart(2,'0');if(d.toDateString()===n.toDateString())return p(d.getHours())+':'+p(d.getMinutes());return d.getFullYear()+'.'+p(d.getMonth()+1)+'.'+p(d.getDate())}
