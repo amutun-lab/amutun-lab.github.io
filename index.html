@@ -54,8 +54,8 @@ main{overflow-x:clip}
 .logo-txt small{font-size:10.5px;color:var(--muted);letter-spacing:.06em}
 .menu{display:flex;margin:0 auto;list-style:none;padding:0;height:100%}
 .menu>li{position:relative;height:100%}
-.menu>li>a{display:flex;align-items:center;height:100%;padding:0 22px;font-size:16.5px;font-weight:700;position:relative}
-.menu>li>a:after{content:"";position:absolute;left:22px;right:22px;bottom:-1px;height:3px;background:var(--brand);transform:scaleX(0);transition:transform .2s}
+.menu>li>a{display:flex;align-items:center;height:100%;padding:0 16px;font-size:16.5px;font-weight:700;position:relative;white-space:nowrap}
+.menu>li>a:after{content:"";position:absolute;left:16px;right:16px;bottom:-1px;height:3px;background:var(--brand);transform:scaleX(0);transition:transform .2s}
 .menu>li:hover>a:after,.menu>li:focus-within>a:after,.menu>li>a.on:after{transform:scaleX(1)}
 .menu>li>a.on{color:var(--brand)}
 .drop{position:absolute;top:100%;left:50%;transform:translateX(-50%);min-width:170px;background:#fff;border:1px solid var(--line);border-top:0;box-shadow:var(--shadow);padding:10px 0;display:none}
@@ -486,8 +486,14 @@ main{overflow-x:clip}
 }
 @media (max-width:1080px){
   .menu>li>a{padding:0 13px;font-size:15.5px}.menu>li>a:after{left:13px;right:13px}
+  .btn-apply{display:none}
   .cards{grid-template-columns:repeat(2,1fr)}
   .nums{grid-template-columns:repeat(2,1fr)}
+}
+@media (max-width:1180px){
+  .gnb .in{gap:16px}
+  .logo-txt small{display:none}
+  .menu>li>a{padding:0 10px;font-size:15px}.menu>li>a:after{left:10px;right:10px}
 }
 @media (max-width:900px){
   .menu,.btn-apply{display:none}
@@ -512,6 +518,8 @@ main{overflow-x:clip}
   .logo-txt small{display:none}
   .gnb-q .q-l{display:none}
   .gnb-q a{padding:6px 9px}
+  .gnb .in{gap:10px}
+  .gnb-r{gap:6px}
   .logo-txt b{font-size:17px}
   .mv h1,.mv h2{font-size:31px}
   .mv p{font-size:15.5px}
@@ -532,6 +540,7 @@ main{overflow-x:clip}
   .whack{gap:8px;padding:12px}
   .layer{top:calc(84px + env(safe-area-inset-top,0px))}
 }
+@media (max-width:420px){.logo-mark{display:none}}
 @media (prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
 </style>
 <style>body{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}</style>
