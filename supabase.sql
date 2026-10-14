@@ -42,7 +42,7 @@ create index if not exists posts_board_created on public.posts (board, created_a
 
 create table if not exists public.comments (
   id          bigint generated always as identity primary key,
-  post_ref    text not null check (post_ref ~ '^(p[0-9]+|ai:[A-Za-z0-9_-]{1,40})$'),  -- p123 = 회원/유동 글, ai:xxx = AI 글
+  post_ref    text not null check (post_ref ~ '^(p[0-9]+|ai:[A-Za-z0-9_-]{1,40})$'),  -- p123 = 회원/비회원 글, ai:xxx = AI 글
   body        text not null check (char_length(body) between 1 and 500),
   nick        text not null,
   member_id   bigint references public.members(id) on delete set null,
@@ -141,7 +141,7 @@ begin
   if char_length(coalesce(p_pw,'')) < 4 or char_length(p_pw) > 72 then raise exception 'BAD_PW'; end if;
   if char_length(n) < 2 or char_length(n) > 12 then raise exception 'BAD_NICK'; end if;
   if n ~* '(운영|관리자|아열봇|admin)' then raise exception 'NICK_RESERVED'; end if;
-  if n ~ '^[ㄱ-ㅎ]+$' or n in ('익명','유동','손님','guest') then raise exception 'NICK_FOR_GUEST'; end if;  -- 유동닉이 자주 쓰는 닉네임은 고정닉으로 못 가져감
+  if n ~ '^[ㄱ-ㅎ]+$' or n in ('익명','유동','손님','guest') then raise exception 'NICK_FOR_GUEST'; end if;  -- 비회원이 자주 쓰는 닉네임은 고정닉으로 못 가져감
   if (select count(*) from members where created_at > now() - interval '10 minutes') >= 30 then raise exception 'BUSY'; end if;
   if exists (select 1 from members where login_id = l) then raise exception 'LOGIN_TAKEN'; end if;
   if exists (select 1 from members where nick = n) then raise exception 'NICK_TAKEN'; end if;
