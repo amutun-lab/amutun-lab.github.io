@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta property="og:title" content="아무튼 열심히 연구소">
 <meta property="og:description" content="성과는 없지만 서류는 있습니다. 핑계 생성기, 칼퇴 러너, 딴짓 꿀팁 게시판.">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Crect width=%2732%27 height=%2732%27 rx=%278%27 fill=%27%23ff5b2e%27/%3E%3Ctext x=%2716%27 y=%2722%27 font-size=%2714%27 font-weight=%27900%27 text-anchor=%27middle%27 fill=%27white%27 font-family=%27sans-serif%27%3E%EC%95%84%3C/text%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='11' fill='%230f1e45'/%3E%3Cpath d='M13.6 23.4c2.1-1.3 4.2-1.3 6.3 0s4.2 1.3 6.3 0l2.2 4.6a1.6 1.6 0 0 1-1.4 2.3H12.8a1.6 1.6 0 0 1-1.4-2.3z' fill='%23ff5b2e'/%3E%3Cpath d='M16 8.5h8M17.6 8.5v7.6L10.5 28.6a2.5 2.5 0 0 0 2.2 3.7h14.6a2.5 2.5 0 0 0 2.2-3.7L22.4 16.1V8.5' fill='none' stroke='%23fff' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M30.4 5.2l1 2.6 2.6 1-2.6 1-1 2.6-1-2.6-2.6-1 2.6-1z' fill='%23ffd23f'/%3E%3C/svg%3E">
 <title>아무튼 열심히 연구소</title>
 <meta name="description" content="성과는 없지만 서류는 있습니다. 아무튼 열심히 연구소 공식 홈페이지.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -48,7 +48,7 @@ main{overflow-x:clip}
 .gnb{position:sticky;top:env(safe-area-inset-top,0px);z-index:40;background:#fff;border-bottom:1px solid var(--line)}
 .gnb .in{display:flex;align-items:center;height:76px;gap:24px}
 .logo{display:flex;align-items:center;gap:10px;flex:0 0 auto}
-.logo-mark{width:38px;height:38px;border-radius:10px;background:var(--brand);color:#fff;display:grid;place-items:center;font-weight:900;font-size:15px;letter-spacing:-.06em}
+.logo-mark{width:40px;height:40px;flex:0 0 auto;display:block}.logo-mark svg{width:100%;height:100%;display:block}.logo-txt b em{font-style:normal;color:var(--brand)}
 .logo-txt{line-height:1.15}
 .logo-txt b{display:block;font-size:19px;font-weight:900;letter-spacing:-.05em}
 .logo-txt small{font-size:10.5px;color:var(--muted);letter-spacing:.06em}
@@ -363,7 +363,7 @@ main{overflow-x:clip}
 .foot-links nav button.b{color:#fff;font-weight:700}
 .foot-links select{background:#252b3c;color:#d4d9e3;border:1px solid #39405a;border-radius:6px;height:36px;padding:0 10px;font-size:13px}
 .foot-info{padding-block:28px 34px;display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap}
-.foot-info .logo-mark{background:#39405a}
+.foot-info .logo-mark .lm-bg{fill:#2a3352}
 .foot-info address{font-style:normal;line-height:1.9;margin-top:14px}
 .foot-info address span{margin-right:14px;display:inline-block}
 .foot-info small{display:block;margin-top:10px;color:#6f778a}
@@ -574,7 +574,7 @@ main{overflow-x:clip}
 
 <header class="gnb">
   <div class="in">
-    <a class="logo" href="#home" aria-label="아무튼 열심히 연구소 홈"><span class="logo-mark">아열</span><span class="logo-txt"><b>아무튼 열심히 연구소</b><small>AMUTUN DILIGENCE LAB</small></span></a>
+    <a class="logo" href="#home" aria-label="아무튼 열심히 연구소 홈"><span class="logo-mark"><svg viewBox="0 0 40 40" aria-hidden="true"><defs><linearGradient id="lmg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ff7a3d"/><stop offset="1" stop-color="#ff4d2e"/></linearGradient></defs><rect class="lm-bg" width="40" height="40" rx="11" fill="#0f1e45"/><path d="M13.6 23.4c2.1-1.3 4.2-1.3 6.3 0s4.2 1.3 6.3 0l2.2 4.6a1.6 1.6 0 0 1-1.4 2.3H12.8a1.6 1.6 0 0 1-1.4-2.3z" fill="url(#lmg)"/><path d="M16 8.5h8M17.6 8.5v7.6L10.5 28.6a2.5 2.5 0 0 0 2.2 3.7h14.6a2.5 2.5 0 0 0 2.2-3.7L22.4 16.1V8.5" fill="none" stroke="#fff" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/><circle cx="18.6" cy="26.6" r="1.25" fill="#fff" opacity=".85"/><circle cx="22.6" cy="25.9" r=".9" fill="#fff" opacity=".7"/><path d="M30.4 5.2l1 2.6 2.6 1-2.6 1-1 2.6-1-2.6-2.6-1 2.6-1z" fill="#ffd23f"/></svg></span><span class="logo-txt"><b>아무튼 <em>열심히</em> 연구소</b><small>AMUTUN DILIGENCE LAB</small></span></a>
     <ul class="menu" id="menu"></ul>
     <div class="gnb-r">
       <nav class="gnb-q" aria-label="게시판 바로가기"><a href="#community-notice">공지<span class="q-l">사항</span></a><a href="#community-free"><span class="q-l">자유</span>게시판</a></nav>
@@ -985,7 +985,7 @@ main{overflow-x:clip}
   </div></div>
   <div class="in foot-info">
     <div>
-      <a class="logo" href="#home"><span class="logo-mark">아열</span><span class="logo-txt"><b style="color:#fff">아무튼 열심히 연구소</b></span></a>
+      <a class="logo" href="#home"><span class="logo-mark"><svg viewBox="0 0 40 40" aria-hidden="true"><defs><linearGradient id="lmg2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ff7a3d"/><stop offset="1" stop-color="#ff4d2e"/></linearGradient></defs><rect class="lm-bg" width="40" height="40" rx="11" fill="#0f1e45"/><path d="M13.6 23.4c2.1-1.3 4.2-1.3 6.3 0s4.2 1.3 6.3 0l2.2 4.6a1.6 1.6 0 0 1-1.4 2.3H12.8a1.6 1.6 0 0 1-1.4-2.3z" fill="url(#lmg2)"/><path d="M16 8.5h8M17.6 8.5v7.6L10.5 28.6a2.5 2.5 0 0 0 2.2 3.7h14.6a2.5 2.5 0 0 0 2.2-3.7L22.4 16.1V8.5" fill="none" stroke="#fff" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/><circle cx="18.6" cy="26.6" r="1.25" fill="#fff" opacity=".85"/><circle cx="22.6" cy="25.9" r=".9" fill="#fff" opacity=".7"/><path d="M30.4 5.2l1 2.6 2.6 1-2.6 1-1 2.6-1-2.6-2.6-1 2.6-1z" fill="#ffd23f"/></svg></span><span class="logo-txt"><b style="color:#fff">아무튼 <em>열심히</em> 연구소</b></span></a>
       <address><span>대표이사: 아직 정하는 중</span><span>사업자등록번호: 상상 속에 존재</span><br><span>주소: 서울특별시 어딘가 마음속로 1길, 회의실 3번</span><span>대표전화: 연결이 원활하지 않습니다</span></address>
       <small>© 2026 Amutun Diligence Lab. All excuses reserved. 이 사이트는 100% 장난입니다.</small>
     </div>
