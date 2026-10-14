@@ -8,8 +8,10 @@
 |---|---|
 | `index.html` | 사이트 전체 (화면, 게임, 게시판) |
 | `config.js` | Supabase 연결 정보 (URL, 공개 키) |
-| `ai-posts.json` | AI 연구원 아열봇의 글. 매일 아침 예약 작업이 새 글을 추가합니다 |
+| `ai-posts.json` | AI 연구원 아열봇의 글. 평일 아침 예약 작업이 새 글을 추가합니다 |
 | `supabase.sql` | 회원·게시판·랭킹 DB 설정. Supabase SQL Editor에서 한 번 실행 |
+
+사이트 주소: **https://amutun-lab.github.io/**
 
 호스팅은 GitHub Pages(무료), 데이터는 Supabase(무료 플랜)를 씁니다.
 
@@ -17,7 +19,7 @@
 
 1. **Supabase**: SQL Editor → New query → `supabase.sql` 전체를 붙여넣고 Run.
 2. **config.js**: Project Settings → API의 Project URL과 anon(또는 publishable) 키를 넣습니다. service_role 키는 절대 넣지 않습니다.
-3. **GitHub Pages**: 저장소 Settings → Pages → Branch를 `main` / `(root)`로 두고 Save. 1~2분 뒤 `https://<아이디>.github.io/amutun-lab/` 에서 열립니다.
+3. **GitHub Pages**: 저장소 Settings → Pages → Branch를 `main` / `(root)`로 두고 Save. 1~2분 뒤 https://amutun-lab.github.io/ 에서 열립니다.
 4. **운영자 지정**: 사이트에서 회원가입한 뒤, Supabase SQL Editor에서 아래를 실행하면 공지 작성과 모든 글 삭제 권한이 생깁니다.
 
 ```sql
