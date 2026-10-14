@@ -1008,7 +1008,7 @@ main{overflow-x:clip}
     <label><span class="lbl">비밀번호</span><input class="ipt" id="lgPw" name="password" type="password" autocomplete="current-password" maxlength="72"></label>
     <div class="auth-msg" id="lgMsg" aria-live="polite"></div>
     <button class="btn org" type="submit">로그인</button>
-    <p class="hint">회원가입 없이도 유동닉으로 글과 댓글을 쓸 수 있어요.</p>
+    <p class="hint">회원가입 없이도 닉네임과 비밀번호만으로 글과 댓글을 쓸 수 있어요.</p>
   </form>
   <form id="fSignup" autocomplete="on" hidden>
     <label><span class="lbl">아이디</span><input class="ipt" id="suId" name="username" autocomplete="username" maxlength="16" autocapitalize="off" spellcheck="false" placeholder="영문 소문자·숫자·밑줄 4~16자"></label>
@@ -1517,7 +1517,7 @@ async function rpc(fn,args){if(!API_ON)throw{code:'OFFLINE'};let r;try{r=await f
   const t=await r.text();let j=null;try{j=t?JSON.parse(t):null}catch(e){}if(!r.ok)throw{code:(j&&j.message)||('HTTP'+r.status)};return j}
 async function sel(q){if(!API_ON)throw{code:'OFFLINE'};let r;try{r=await fetch(API_URL+'/rest/v1/'+q,{headers:hdr()})}catch(e){throw{code:'NETWORK'}}if(!r.ok)throw{code:'HTTP'+r.status};return r.json()}
 const ERR={BAD_LOGIN_ID:'아이디는 영문 소문자·숫자·밑줄(_) 4~16자로 만들어 주세요.',BAD_PW:'비밀번호는 4자 이상이어야 해요.',BAD_NICK:'닉네임은 2~12자로 적어 주세요.',
-  NICK_RESERVED:'쓸 수 없는 닉네임이에요. 회원(고정닉)이 쓰는 닉네임이거나 운영진용 이름입니다.',LOGIN_TAKEN:'이미 사용 중인 아이디예요.',NICK_FOR_GUEST:'ㅇㅇ, 익명처럼 유동닉이 함께 쓰는 닉네임은 고정닉으로 쓸 수 없어요.',NICK_TAKEN:'이미 사용 중인 닉네임이에요.',
+  NICK_RESERVED:'쓸 수 없는 닉네임이에요. 회원(고정닉)이 쓰는 닉네임이거나 운영진용 이름입니다.',LOGIN_TAKEN:'이미 사용 중인 아이디예요.',NICK_FOR_GUEST:'ㅇㅇ, 익명처럼 여러 비회원이 함께 쓰는 닉네임은 고정닉으로 쓸 수 없어요.',NICK_TAKEN:'이미 사용 중인 닉네임이에요.',
   BAD_LOGIN:'아이디 또는 비밀번호가 맞지 않습니다.',NOT_ADMIN:'공지사항은 운영진만 쓸 수 있어요.',EMPTY:'제목과 내용을 모두 적어 주세요.',TOO_LONG:'글이 너무 길어요.',
   TOO_FAST:'조금 천천히! 잠시 후 다시 등록해 주세요.',BUSY:'지금 글이 너무 많이 올라오고 있어요. 1분 뒤에 다시 시도해 주세요.',BAD_TAG:'말머리를 다시 골라 주세요.',
   NOT_FOUND:'삭제되었거나 없는 글입니다.',NO_PERMISSION:'비밀번호가 맞지 않거나 삭제 권한이 없어요.',NEED_LOGIN:'로그인이 필요해요.',BAD_SCORE:'기록이 올바르지 않아요.',
@@ -1544,7 +1544,7 @@ $('fSignup').addEventListener('submit',async e=>{e.preventDefault();if($('suPw')
   try{const s=await rpc('signup',{p_login:$('suId').value,p_pw:$('suPw').value,p_nick:$('suNick').value});$('suPw').value=$('suPw2').value='';saveSession(s);closeAuth();confetti();toast(s.nick+'님, 가입을 축하합니다! 이제 고정닉으로 활동할 수 있어요.')}
   catch(err){say('suMsg',errMsg(err))}finally{if(btn)btn.disabled=false}});
 
-/* 글쓴이 표시: 고정닉 · 유동닉(IP 앞자리) · AI */
+/* 글쓴이 표시: 고정닉 · 비회원(IP 앞자리) · AI */
 function nickEl(it){const s=el('span');s.append(it.nick||'ㅇㅇ');
   if(it.ai)s.append(el('span',{className:'pill ai',textContent:'AI'}));
   else if(it.is_member)s.append(el('span',{className:'pill mine',textContent:'고정'}));
@@ -1591,7 +1591,7 @@ function makeBoard(root,board){
     tb.append(body);root.append(tb);
     if(!list.length)root.append(el('div',{className:'bbs-empty',textContent:q||tagF?'조건에 맞는 글이 없습니다.':'아직 글이 없습니다. 첫 글의 주인공이 되어 주세요.'}));
     if(pages>1){const pg=el('div',{className:'pager'});for(let i=1;i<=pages;i++){const b=el('button',{type:'button',textContent:i,className:i===page?'on':''});b.onclick=()=>{page=i;renderList();root.scrollIntoView({behavior:reduced?'auto':'smooth'})};pg.append(b)}root.append(pg)}
-    root.append(el('p',{className:'note',style:'margin-top:18px',textContent:board==='free'?'회원가입 없이 닉네임과 비밀번호만으로 글을 쓸 수 있어요(유동닉). 욕설·도배·특정인을 알아볼 수 있는 글은 삭제됩니다.':'공지사항은 운영팀과 AI 연구원 아열봇이 올립니다. AI 표시가 붙은 글은 AI가 쓴 글입니다.'}))}
+    root.append(el('p',{className:'note',style:'margin-top:18px',textContent:board==='free'?'회원가입 없이 닉네임과 비밀번호만으로 글을 쓸 수 있어요. 욕설·도배·특정인을 알아볼 수 있는 글은 삭제됩니다.':'공지사항은 운영팀과 AI 연구원 아열봇이 올립니다. AI 표시가 붙은 글은 AI가 쓴 글입니다.'}))}
   async function open(id){if(items===null)await load();let it=items.find(x=>x.id===id);
     if(it&&it.src==='db'&&it.body==null){try{const r=await sel(`v_posts?id=eq.${it.dbId}&select=id,board,tag,title,body,nick,is_member,ip_prefix,views,created_at,comment_count`);if(r[0])Object.assign(it,dbItem(r[0]))}catch(e){toast(errMsg(e));return}}
     if(!it){toast('삭제되었거나 없는 글입니다.');renderList();return}
@@ -1632,7 +1632,7 @@ function makeBoard(root,board){
   function renderWrite(){if(!canWrite()){toast(board==='notice'?'공지사항은 운영진만 쓸 수 있어요.':ERR.OFFLINE);return}mode='write';root.textContent='';
     const f=el('form',{className:'wform'});const tagSel=el('select',{className:'sel'});if(board==='free')tagSel.append(el('option',{value:'',textContent:'말머리 없음'}));TAGS[board].forEach(t=>tagSel.append(el('option',{value:t,textContent:t})));
     const tl=el('label');tl.append(el('span',{className:'lbl',textContent:'말머리'}),tagSel);f.append(tl);
-    let g=null;if(!session){g=guestFields();const gl=el('div');gl.append(el('span',{className:'lbl',textContent:'유동닉 (회원가입 없이 글쓰기)'}),g.wrap,el('p',{className:'note',style:'margin-top:6px',textContent:'비밀번호는 이 글을 지울 때 필요해요. 고정닉을 쓰려면 상단에서 회원가입하세요.'}));f.append(gl)}
+    let g=null;if(!session){g=guestFields();const gl=el('div');gl.append(el('span',{className:'lbl',textContent:'닉네임·비밀번호 (회원가입 없이 글쓰기)'}),g.wrap,el('p',{className:'note',style:'margin-top:6px',textContent:'비밀번호는 이 글을 지울 때 필요해요. 고정닉을 쓰려면 상단에서 회원가입하세요.'}));f.append(gl)}
     const ti=el('input',{className:'ipt',maxLength:60,placeholder:'제목을 입력하세요'});const l1=el('label');l1.append(el('span',{className:'lbl',textContent:'제목'}),ti);
     const ta=el('textarea',{maxLength:5000,placeholder:'내용을 입력하세요. 실명이나 특정인을 알아볼 수 있는 내용은 쓰지 말아 주세요.'});const l2=el('label');l2.append(el('span',{className:'lbl',textContent:'내용'}),ta);
     const r=el('div',{className:'row'});const ok=el('button',{type:'submit',className:'btn org',textContent:'등록하기'});const cancel=el('button',{type:'button',className:'btn line',textContent:'취소'});cancel.onclick=renderList;r.append(ok,cancel);
