@@ -5,6 +5,16 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta property="og:title" content="아무튼 열심히 연구소">
 <meta property="og:description" content="성과는 없지만 서류는 있습니다. 핑계 생성기, 칼퇴 러너, 딴짓 꿀팁 게시판.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://amutun-lab.github.io/">
+<meta property="og:site_name" content="아무튼 열심히 연구소">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:image" content="https://amutun-lab.github.io/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="아무튼 열심히 연구소 - 성과는 없지만 서류는 있습니다.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://amutun-lab.github.io/og.png">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='11' fill='%230f1e45'/%3E%3Cpath d='M13.6 23.4c2.1-1.3 4.2-1.3 6.3 0s4.2 1.3 6.3 0l2.2 4.6a1.6 1.6 0 0 1-1.4 2.3H12.8a1.6 1.6 0 0 1-1.4-2.3z' fill='%23ff5b2e'/%3E%3Cpath d='M16 8.5h8M17.6 8.5v7.6L10.5 28.6a2.5 2.5 0 0 0 2.2 3.7h14.6a2.5 2.5 0 0 0 2.2-3.7L22.4 16.1V8.5' fill='none' stroke='%23fff' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M30.4 5.2l1 2.6 2.6 1-2.6 1-1 2.6-1-2.6-2.6-1 2.6-1z' fill='%23ffd23f'/%3E%3C/svg%3E">
 <title>아무튼 열심히 연구소</title>
 <meta name="description" content="성과는 없지만 서류는 있습니다. 아무튼 열심히 연구소 공식 홈페이지.">
@@ -987,7 +997,7 @@ main{overflow-x:clip}
     <div>
       <a class="logo" href="#home"><span class="logo-mark"><svg viewBox="0 0 40 40" aria-hidden="true"><defs><linearGradient id="lmg2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ff7a3d"/><stop offset="1" stop-color="#ff4d2e"/></linearGradient></defs><rect class="lm-bg" width="40" height="40" rx="11" fill="#0f1e45"/><path d="M13.6 23.4c2.1-1.3 4.2-1.3 6.3 0s4.2 1.3 6.3 0l2.2 4.6a1.6 1.6 0 0 1-1.4 2.3H12.8a1.6 1.6 0 0 1-1.4-2.3z" fill="url(#lmg2)"/><path d="M16 8.5h8M17.6 8.5v7.6L10.5 28.6a2.5 2.5 0 0 0 2.2 3.7h14.6a2.5 2.5 0 0 0 2.2-3.7L22.4 16.1V8.5" fill="none" stroke="#fff" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/><circle cx="18.6" cy="26.6" r="1.25" fill="#fff" opacity=".85"/><circle cx="22.6" cy="25.9" r=".9" fill="#fff" opacity=".7"/><path d="M30.4 5.2l1 2.6 2.6 1-2.6 1-1 2.6-1-2.6-2.6-1 2.6-1z" fill="#ffd23f"/></svg></span><span class="logo-txt"><b style="color:#fff">아무튼 <em>열심히</em> 연구소</b></span></a>
       <address><span>대표이사: 아직 정하는 중</span><span>사업자등록번호: 상상 속에 존재</span><br><span>주소: 서울특별시 어딘가 마음속로 1길, 회의실 3번</span><span>대표전화: 연결이 원활하지 않습니다</span></address>
-      <small>© 2026 Amutun Diligence Lab. All excuses reserved. 이 사이트는 100% 장난입니다.</small>
+      <small>© 2026 Amutun Diligence Lab. All excuses reserved. 이 사이트는 100% 장난입니다. <button type="button" id="adminLogin" style="border:0;background:none;padding:0;margin-left:6px;color:inherit;font-size:inherit;text-decoration:underline">운영자 로그인</button></small>
     </div>
   </div>
 </footer>
@@ -1001,22 +1011,14 @@ main{overflow-x:clip}
 
 <div class="modal" id="modal" hidden><div class="modal-in" role="dialog" aria-modal="true" aria-labelledby="mTitle"><div class="modal-h"><h3 id="mTitle"></h3><time id="mDate"></time></div><div class="modal-b" id="mBody"></div><div class="modal-f"><button class="btn sm" type="button" id="mClose">목록으로</button></div></div></div>
 
-<div class="modal" id="authM" hidden><div class="modal-in auth" role="dialog" aria-modal="true" aria-label="로그인 및 회원가입">
-  <div class="auth-tabs" role="tablist"><button type="button" role="tab" data-at="login" aria-selected="true">로그인</button><button type="button" role="tab" data-at="signup" aria-selected="false">회원가입</button></div>
+<div class="modal" id="authM" hidden><div class="modal-in auth" role="dialog" aria-modal="true" aria-label="운영자 로그인">
+  <div class="auth-tabs"><button type="button" aria-selected="true" tabindex="-1">운영자 로그인</button></div>
   <form id="fLogin" autocomplete="on">
     <label><span class="lbl">아이디</span><input class="ipt" id="lgId" name="username" autocomplete="username" maxlength="16" autocapitalize="off" spellcheck="false"></label>
     <label><span class="lbl">비밀번호</span><input class="ipt" id="lgPw" name="password" type="password" autocomplete="current-password" maxlength="72"></label>
     <div class="auth-msg" id="lgMsg" aria-live="polite"></div>
     <button class="btn org" type="submit">로그인</button>
-    <p class="hint">회원가입 없이도 닉네임과 비밀번호만으로 글과 댓글을 쓸 수 있어요.</p>
-  </form>
-  <form id="fSignup" autocomplete="on" hidden>
-    <label><span class="lbl">아이디</span><input class="ipt" id="suId" name="username" autocomplete="username" maxlength="16" autocapitalize="off" spellcheck="false" placeholder="영문 소문자·숫자·밑줄 4~16자"></label>
-    <label><span class="lbl">닉네임 (고정닉)</span><input class="ipt" id="suNick" maxlength="12" placeholder="2~12자"><p class="hint">게시판과 명예의 전당에 표시되고, 다른 사람이 같은 닉네임을 쓸 수 없게 됩니다.</p></label>
-    <label><span class="lbl">비밀번호</span><input class="ipt" id="suPw" type="password" autocomplete="new-password" maxlength="72" placeholder="4자 이상"><p class="hint">다른 사이트에서 쓰는 비밀번호는 쓰지 마세요. 비밀번호는 되돌릴 수 없는 형태(bcrypt)로만 저장됩니다.</p></label>
-    <label><span class="lbl">비밀번호 확인</span><input class="ipt" id="suPw2" type="password" autocomplete="new-password" maxlength="72"></label>
-    <div class="auth-msg" id="suMsg" aria-live="polite"></div>
-    <button class="btn org" type="submit">가입하기</button>
+    <p class="hint">운영진 전용입니다. 일반 이용자는 로그인 없이 이름과 임시 비밀번호만으로 글과 댓글을 쓸 수 있어요.</p>
   </form>
   <div class="auth-x"><button class="btn sm line" type="button" id="authX">닫기</button></div>
 </div></div>
@@ -1516,11 +1518,11 @@ function hdr(){const h={apikey:API_KEY,'Content-Type':'application/json'};if(/^e
 async function rpc(fn,args){if(!API_ON)throw{code:'OFFLINE'};let r;try{r=await fetch(API_URL+'/rest/v1/rpc/'+fn,{method:'POST',headers:hdr(),body:JSON.stringify(args||{})})}catch(e){throw{code:'NETWORK'}}
   const t=await r.text();let j=null;try{j=t?JSON.parse(t):null}catch(e){}if(!r.ok)throw{code:(j&&j.message)||('HTTP'+r.status)};return j}
 async function sel(q){if(!API_ON)throw{code:'OFFLINE'};let r;try{r=await fetch(API_URL+'/rest/v1/'+q,{headers:hdr()})}catch(e){throw{code:'NETWORK'}}if(!r.ok)throw{code:'HTTP'+r.status};return r.json()}
-const ERR={BAD_LOGIN_ID:'아이디는 영문 소문자·숫자·밑줄(_) 4~16자로 만들어 주세요.',BAD_PW:'비밀번호는 4자 이상이어야 해요.',BAD_NICK:'닉네임은 2~12자로 적어 주세요.',
-  NICK_RESERVED:'쓸 수 없는 닉네임이에요. 회원(고정닉)이 쓰는 닉네임이거나 운영진용 이름입니다.',LOGIN_TAKEN:'이미 사용 중인 아이디예요.',NICK_FOR_GUEST:'ㅇㅇ, 익명처럼 여러 비회원이 함께 쓰는 닉네임은 고정닉으로 쓸 수 없어요.',NICK_TAKEN:'이미 사용 중인 닉네임이에요.',
+const ERR={BAD_LOGIN_ID:'아이디는 영문 소문자·숫자·밑줄(_) 4~16자로 만들어 주세요.',BAD_PW:'임시 비밀번호는 4자 이상이어야 해요.',BAD_NICK:'이름은 2~12자로 적어 주세요.',
+  NICK_RESERVED:'쓸 수 없는 이름이에요. 운영진이 쓰는 이름입니다.',
   BAD_LOGIN:'아이디 또는 비밀번호가 맞지 않습니다.',NOT_ADMIN:'공지사항은 운영진만 쓸 수 있어요.',EMPTY:'제목과 내용을 모두 적어 주세요.',TOO_LONG:'글이 너무 길어요.',
   TOO_FAST:'조금 천천히! 잠시 후 다시 등록해 주세요.',BUSY:'지금 글이 너무 많이 올라오고 있어요. 1분 뒤에 다시 시도해 주세요.',BAD_TAG:'말머리를 다시 골라 주세요.',
-  NOT_FOUND:'삭제되었거나 없는 글입니다.',NO_PERMISSION:'비밀번호가 맞지 않거나 삭제 권한이 없어요.',NEED_LOGIN:'로그인이 필요해요.',BAD_SCORE:'기록이 올바르지 않아요.',
+  NOT_FOUND:'삭제되었거나 없는 글입니다.',NO_PERMISSION:'임시 비밀번호가 맞지 않아요.',NEED_LOGIN:'로그인이 필요해요.',BAD_SCORE:'기록이 올바르지 않아요.',
   OFFLINE:'커뮤니티 서버가 아직 연결되지 않았어요.',NETWORK:'서버에 연결하지 못했어요. 인터넷 연결을 확인해 주세요.'};
 const errMsg=e=>ERR[e&&e.code]||'문제가 생겼어요. 잠시 후 다시 시도해 주세요.';
 
@@ -1529,29 +1531,24 @@ let session=null;try{session=JSON.parse(store.get('amutun-session')||'null')}cat
 const saveSession=s=>{session=s;store.set('amutun-session',s?JSON.stringify(s):'');renderUtil();renderMyRec();Object.values(BBS).forEach(b=>b.refresh())};
 const guestNick=()=>store.get('amutun-guest-nick')||'';
 function renderUtil(){const u=$('utilAuth');u.textContent='';
-  if(session){u.append(el('b',{textContent:session.nick+'님'}));const o=el('button',{type:'button',className:'keep',textContent:'로그아웃'});o.onclick=async()=>{const t=session.token;saveSession(null);toast('로그아웃했습니다. 퇴근도 이렇게 쉬우면 좋겠네요.');try{await rpc('logout',{p_token:t})}catch(e){}};u.append(o)}
-  else if(API_ON){[['login','로그인'],['signup','회원가입']].forEach(([k,n])=>{const b=el('button',{type:'button',className:'keep',textContent:n});b.onclick=()=>openAuth(k);u.append(b)})}}
+  if(session){u.append(el('b',{textContent:session.nick+'님'}));const o=el('button',{type:'button',className:'keep',textContent:'로그아웃'});o.onclick=async()=>{const t=session.token;saveSession(null);toast('로그아웃했습니다. 퇴근도 이렇게 쉬우면 좋겠네요.');try{await rpc('logout',{p_token:t})}catch(e){}};u.append(o)}}
 let authReturn=null;
-function openAuth(tab,msg){authReturn=document.activeElement;$('authM').hidden=false;showAuthTab(tab);['lgMsg','suMsg'].forEach(i=>{$(i).textContent='';$(i).className='auth-msg'});if(msg)$(tab==='signup'?'suMsg':'lgMsg').textContent=msg;$(tab==='signup'?'suId':'lgId').focus()}
-function showAuthTab(t){document.querySelectorAll('[data-at]').forEach(b=>b.setAttribute('aria-selected',b.dataset.at===t));$('fLogin').hidden=t!=='login';$('fSignup').hidden=t!=='signup'}
+function openAuth(msg){authReturn=document.activeElement;$('authM').hidden=false;$('lgMsg').textContent=typeof msg==='string'?msg:'';$('lgMsg').className='auth-msg';$('lgId').focus()}
 function closeAuth(){$('authM').hidden=true;if(authReturn)authReturn.focus()}
-document.querySelectorAll('[data-at]').forEach(b=>b.onclick=()=>showAuthTab(b.dataset.at));
+$('adminLogin').onclick=()=>openAuth();
 $('authX').onclick=closeAuth;$('authM').onclick=e=>{if(e.target===$('authM'))closeAuth()};
 const say=(id,m,ok)=>{$(id).textContent=m;$(id).className='auth-msg'+(ok?' ok':'')};
 $('fLogin').addEventListener('submit',async e=>{e.preventDefault();const btn=e.submitter;if(btn)btn.disabled=true;
   try{const s=await rpc('login',{p_login:$('lgId').value,p_pw:$('lgPw').value});$('lgPw').value='';saveSession(s);closeAuth();toast(s.nick+'님, 출근을 환영합니다.')}catch(err){say('lgMsg',errMsg(err))}finally{if(btn)btn.disabled=false}});
-$('fSignup').addEventListener('submit',async e=>{e.preventDefault();if($('suPw').value!==$('suPw2').value)return say('suMsg','비밀번호 확인이 일치하지 않아요.');const btn=e.submitter;if(btn)btn.disabled=true;
-  try{const s=await rpc('signup',{p_login:$('suId').value,p_pw:$('suPw').value,p_nick:$('suNick').value});$('suPw').value=$('suPw2').value='';saveSession(s);closeAuth();confetti();toast(s.nick+'님, 가입을 축하합니다! 이제 고정닉으로 활동할 수 있어요.')}
-  catch(err){say('suMsg',errMsg(err))}finally{if(btn)btn.disabled=false}});
 
-/* 글쓴이 표시: 고정닉 · 비회원(IP 앞자리) · AI */
+/* 글쓴이 표시: 운영진 · 일반(IP 앞자리) · AI */
 function nickEl(it){const s=el('span');s.append(it.nick||'ㅇㅇ');
   if(it.ai)s.append(el('span',{className:'pill ai',textContent:'AI'}));
-  else if(it.is_member)s.append(el('span',{className:'pill mine',textContent:'고정'}));
+  else if(it.is_member)s.append(el('span',{className:'pill mine',textContent:'운영진'}));
   else if(it.ip_prefix)s.append(el('span',{textContent:`(${it.ip_prefix})`,style:'color:var(--muted);font-size:.86em;margin-left:2px'}));
   return s}
-function guestFields(){const wrap=el('div',{className:'row',style:'flex-wrap:nowrap'});const n=el('input',{className:'ipt',maxLength:12,placeholder:'닉네임',value:guestNick()});n.setAttribute('aria-label','닉네임');
-  const p=el('input',{className:'ipt',type:'password',maxLength:72,placeholder:'비밀번호 (삭제용)'});p.setAttribute('aria-label','비밀번호');n.style.minWidth=p.style.minWidth='0';wrap.append(n,p);return{wrap,n,p}}
+function guestFields(){const wrap=el('div',{className:'row',style:'flex-wrap:nowrap'});const n=el('input',{className:'ipt',maxLength:12,placeholder:'이름',value:guestNick()});n.setAttribute('aria-label','이름');
+  const p=el('input',{className:'ipt',type:'password',maxLength:72,placeholder:'임시 비밀번호 (수정·삭제용)'});p.setAttribute('aria-label','임시 비밀번호');n.style.minWidth=p.style.minWidth='0';wrap.append(n,p);return{wrap,n,p}}
 
 /* AI 글 (저장소의 ai-posts.json, 매일 아침 추가) */
 let AIP={notices:[],posts:[]};
@@ -1579,7 +1576,7 @@ function makeBoard(root,board){
     const sb=el('button',{type:'button',className:'btn sm line',textContent:'검색'});sb.onclick=()=>{q=si.value.trim();page=1;renderList()};r.append(si,sb);
     if(canWrite()){const w=el('button',{type:'button',className:'btn sm org',textContent:'글쓰기'});w.onclick=renderWrite;r.append(w)}
     top.append(left,r);root.append(top);
-    if(loadErr)root.append(el('p',{className:'note',style:'margin-bottom:10px',textContent:'회원 글을 불러오지 못했어요. 잠시 후 새로고침해 주세요. (AI 글만 표시 중)'}));
+    if(loadErr)root.append(el('p',{className:'note',style:'margin-bottom:10px',textContent:'게시글을 불러오지 못했어요. 잠시 후 새로고침해 주세요. (AI 글만 표시 중)'}));
     const tb=el('table',{className:'bbs'});tb.innerHTML='<thead><tr><th class="c-no" style="width:64px">번호</th><th>제목</th><th style="width:150px">글쓴이</th><th class="c-dt" style="width:96px">날짜</th><th class="c-dt" style="width:56px">조회</th></tr></thead>';const body=el('tbody');
     const pages=Math.max(1,Math.ceil(list.length/PER));page=Math.min(page,pages);
     list.slice((page-1)*PER,page*PER).forEach((p,i)=>{const n=list.length-((page-1)*PER+i);const tr=el('tr');
@@ -1591,7 +1588,7 @@ function makeBoard(root,board){
     tb.append(body);root.append(tb);
     if(!list.length)root.append(el('div',{className:'bbs-empty',textContent:q||tagF?'조건에 맞는 글이 없습니다.':'아직 글이 없습니다. 첫 글의 주인공이 되어 주세요.'}));
     if(pages>1){const pg=el('div',{className:'pager'});for(let i=1;i<=pages;i++){const b=el('button',{type:'button',textContent:i,className:i===page?'on':''});b.onclick=()=>{page=i;renderList();root.scrollIntoView({behavior:reduced?'auto':'smooth'})};pg.append(b)}root.append(pg)}
-    root.append(el('p',{className:'note',style:'margin-top:18px',textContent:board==='free'?'회원가입 없이 닉네임과 비밀번호만으로 글을 쓸 수 있어요. 욕설·도배·특정인을 알아볼 수 있는 글은 삭제됩니다.':'공지사항은 운영팀과 AI 연구원 아열봇이 올립니다. AI 표시가 붙은 글은 AI가 쓴 글입니다.'}))}
+    root.append(el('p',{className:'note',style:'margin-top:18px',textContent:board==='free'?'누구나 이름과 임시 비밀번호만 적고 글을 쓸 수 있어요. 임시 비밀번호로 나중에 내 글을 수정하거나 지울 수 있습니다. 욕설·도배·특정인을 알아볼 수 있는 글은 삭제됩니다.':'공지사항은 운영팀과 AI 연구원 아열봇이 올립니다. AI 표시가 붙은 글은 AI가 쓴 글입니다.'}))}
   async function open(id){if(items===null)await load();let it=items.find(x=>x.id===id);
     if(it&&it.src==='db'&&it.body==null){try{const r=await sel(`v_posts?id=eq.${it.dbId}&select=id,board,tag,title,body,nick,is_member,ip_prefix,views,created_at,comment_count`);if(r[0])Object.assign(it,dbItem(r[0]))}catch(e){toast(errMsg(e));return}}
     if(!it){toast('삭제되었거나 없는 글입니다.');renderList();return}
@@ -1603,7 +1600,7 @@ function makeBoard(root,board){
     const act=el('div',{className:'post-act'});const back=el('button',{type:'button',className:'btn sm line',textContent:'목록'});back.onclick=()=>{renderList();window.scrollTo(0,0)};
     const right=el('div',{className:'row'});const idx=items.indexOf(it);
     [[idx-1,'다음 글'],[idx+1,'이전 글']].forEach(([k,n])=>{if(items[k]){const b=el('button',{type:'button',className:'btn sm line',textContent:n});b.onclick=()=>open(items[k].id);right.append(b)}});
-    if(it.src==='db'){const d=el('button',{type:'button',className:'btn sm line',textContent:'삭제'});d.onclick=()=>askDelete(right,d,(pw)=>rpc('delete_post',{p_id:it.dbId,p_token:session&&session.token,p_pw:pw}).then(async()=>{toast('삭제했습니다.');await load();renderList()}),it.is_member);right.append(d)}
+    if(it.src==='db'){const ed=el('button',{type:'button',className:'btn sm line',textContent:'수정'});ed.onclick=()=>renderWrite(it);right.append(ed);const d=el('button',{type:'button',className:'btn sm line',textContent:'삭제'});d.onclick=()=>askDelete(right,d,(pw)=>rpc('delete_post',{p_id:it.dbId,p_token:session&&session.token,p_pw:pw}).then(async()=>{toast('삭제했습니다.');await load();renderList()}),it.is_member);right.append(d)}
     act.append(back,right);
     cBox=el('div',{className:'cmts'});cBox.append(el('h4',{textContent:'댓글'}),el('ul'));
     if(API_ON){const f=el('form',{className:'form',style:'gap:8px'});let g=null;if(!session){g=guestFields();f.append(g.wrap)}
@@ -1617,26 +1614,31 @@ function makeBoard(root,board){
     if(cur!==it.id||mode!=='view')return;const ul=cBox.querySelector('ul');ul.textContent='';cBox.querySelector('h4').textContent='댓글 '+list.length;
     if(!list.length)ul.append(el('li',{textContent:'첫 댓글을 남겨 주세요.',style:'color:var(--muted)'}));
     list.forEach(c=>{const li=el('li');const s=el('small');const b=el('b');b.append(nickEl(c));s.append(b,' · '+fmtDate(Date.parse(c.created_at)));
-      const d=el('button',{type:'button',className:'linkbtn',textContent:'삭제',style:'margin-left:8px;font-size:12px'});const holder=el('span');
+      const e2=el('button',{type:'button',className:'linkbtn',textContent:'수정',style:'margin-left:8px;font-size:12px'});const d=el('button',{type:'button',className:'linkbtn',textContent:'삭제',style:'margin-left:8px;font-size:12px'});const holder=el('span');
+      e2.onclick=()=>{if(c.is_member&&!(session&&session.is_admin)){toast('운영진 댓글은 운영진만 고칠 수 있어요.');return}e2.hidden=d.hidden=true;const box=el('form',{className:'row',style:'margin-top:6px;gap:6px'});const bi=el('input',{className:'ipt',maxLength:500,value:c.body||'',style:'height:38px;flex:1;min-width:0'});bi.setAttribute('aria-label','댓글 수정');
+        const pw=session&&session.is_admin?null:el('input',{className:'ipt',type:'password',maxLength:72,placeholder:'임시 비밀번호',style:'height:38px;width:130px'});if(pw)pw.setAttribute('aria-label','임시 비밀번호');const sv=el('button',{type:'submit',className:'btn sm org',textContent:'저장'});const cn=el('button',{type:'button',className:'btn sm line',textContent:'취소'});cn.onclick=()=>{box.remove();e2.hidden=d.hidden=false};
+        box.onsubmit=async ev=>{ev.preventDefault();sv.disabled=true;try{await rpc('update_comment',{p_id:c.id,p_token:session&&session.token,p_pw:pw?pw.value:null,p_body:bi.value});toast('댓글을 수정했습니다.');loadComments(it)}catch(er){toast(errMsg(er));sv.disabled=false}};box.append(bi);if(pw)box.append(pw);box.append(sv,cn);li.append(box);bi.focus()};
       d.onclick=()=>askDelete(holder,d,(pw)=>rpc('delete_comment',{p_id:c.id,p_token:session&&session.token,p_pw:pw}).then(()=>{toast('댓글을 삭제했습니다.');loadComments(it)}),c.is_member);
-      s.append(d,holder);li.append(s,document.createTextNode(c.body||''));ul.append(li)})}
+      s.append(e2,d,holder);li.append(s,document.createTextNode(c.body||''));ul.append(li)})}
   function askDelete(host,btn,run,isMember){
     const box=el('span',{className:'row',style:'display:inline-flex;gap:6px;margin-left:6px'});btn.hidden=true;
     const cancel=el('button',{type:'button',className:'btn sm line',textContent:'취소'});cancel.onclick=()=>{box.remove();btn.hidden=false};
     const go=async pw=>{try{await run(pw)}catch(e){toast(errMsg(e))}};
-    if(isMember){if(!session){toast('회원 글은 작성자가 로그인해야 지울 수 있어요.');btn.hidden=false;return}
+    if(isMember){if(!session){toast('운영진 글은 운영진만 지울 수 있어요.');btn.hidden=false;return}
       const ok=el('button',{type:'button',className:'btn sm org',textContent:'정말 삭제'});ok.onclick=()=>go(null);box.append(ok,cancel)}
     else{const pw=el('input',{className:'ipt',type:'password',placeholder:'비밀번호',style:'height:38px;width:130px'});pw.setAttribute('aria-label','삭제 비밀번호');const ok=el('button',{type:'button',className:'btn sm org',textContent:'삭제'});
       ok.onclick=()=>go(session&&session.is_admin&&!pw.value?null:pw.value);pw.onkeydown=e=>{if(e.key==='Enter')ok.click()};box.append(pw,ok,cancel);setTimeout(()=>pw.focus(),20)}
     host.append(box)}
-  function renderWrite(){if(!canWrite()){toast(board==='notice'?'공지사항은 운영진만 쓸 수 있어요.':ERR.OFFLINE);return}mode='write';root.textContent='';
-    const f=el('form',{className:'wform'});const tagSel=el('select',{className:'sel'});if(board==='free')tagSel.append(el('option',{value:'',textContent:'말머리 없음'}));TAGS[board].forEach(t=>tagSel.append(el('option',{value:t,textContent:t})));
+  function renderWrite(edit){edit=edit&&edit.src==='db'?edit:null;if(!edit&&!canWrite()){toast(board==='notice'?'공지사항은 운영진만 쓸 수 있어요.':ERR.OFFLINE);return}if(edit&&!API_ON){toast(ERR.OFFLINE);return}mode='write';root.textContent='';
+    const f=el('form',{className:'wform'});const tagSel=el('select',{className:'sel'});if(board==='free')tagSel.append(el('option',{value:'',textContent:'말머리 없음'}));TAGS[board].forEach(t=>tagSel.append(el('option',{value:t,textContent:t})));if(edit)tagSel.value=edit.tag||'';
     const tl=el('label');tl.append(el('span',{className:'lbl',textContent:'말머리'}),tagSel);f.append(tl);
-    let g=null;if(!session){g=guestFields();const gl=el('div');gl.append(el('span',{className:'lbl',textContent:'닉네임·비밀번호 (회원가입 없이 글쓰기)'}),g.wrap,el('p',{className:'note',style:'margin-top:6px',textContent:'비밀번호는 이 글을 지울 때 필요해요. 고정닉을 쓰려면 상단에서 회원가입하세요.'}));f.append(gl)}
+    let g=null,ep=null;if(edit){if(!(session&&session.is_admin)){ep=el('input',{className:'ipt',type:'password',maxLength:72,placeholder:'글 쓸 때 정한 임시 비밀번호'});ep.setAttribute('aria-label','임시 비밀번호');const pl=el('label');pl.append(el('span',{className:'lbl',textContent:'임시 비밀번호 확인'}),ep);f.append(pl)}}
+    else if(!session){g=guestFields();const gl=el('div');gl.append(el('span',{className:'lbl',textContent:'이름 · 임시 비밀번호'}),g.wrap,el('p',{className:'note',style:'margin-top:6px',textContent:'임시 비밀번호는 나중에 이 글을 수정하거나 지울 때 필요해요. 꼭 기억해 두세요.'}));f.append(gl)}
     const ti=el('input',{className:'ipt',maxLength:60,placeholder:'제목을 입력하세요'});const l1=el('label');l1.append(el('span',{className:'lbl',textContent:'제목'}),ti);
-    const ta=el('textarea',{maxLength:5000,placeholder:'내용을 입력하세요. 실명이나 특정인을 알아볼 수 있는 내용은 쓰지 말아 주세요.'});const l2=el('label');l2.append(el('span',{className:'lbl',textContent:'내용'}),ta);
-    const r=el('div',{className:'row'});const ok=el('button',{type:'submit',className:'btn org',textContent:'등록하기'});const cancel=el('button',{type:'button',className:'btn line',textContent:'취소'});cancel.onclick=renderList;r.append(ok,cancel);
+    const ta=el('textarea',{maxLength:5000,placeholder:'내용을 입력하세요. 실명이나 특정인을 알아볼 수 있는 내용은 쓰지 말아 주세요.'});if(edit){ti.value=edit.title||'';ta.value=edit.body||''}const l2=el('label');l2.append(el('span',{className:'lbl',textContent:'내용'}),ta);
+    const r=el('div',{className:'row'});const ok=el('button',{type:'submit',className:'btn org',textContent:edit?'수정하기':'등록하기'});const cancel=el('button',{type:'button',className:'btn line',textContent:'취소'});cancel.onclick=()=>edit?open(edit.id):renderList();r.append(ok,cancel);
     f.append(l1,l2,r);f.onsubmit=async e=>{e.preventDefault();ok.disabled=true;
+      if(edit){try{await rpc('update_post',{p_id:edit.dbId,p_token:session&&session.token,p_pw:ep?ep.value:null,p_tag:tagSel.value||null,p_title:ti.value,p_body:ta.value});toast('수정했습니다.');await load();open(edit.id)}catch(err){toast(errMsg(err));ok.disabled=false}return}
       try{const id=await rpc('create_post',{p_token:session&&session.token,p_board:board,p_tag:tagSel.value||null,p_title:ti.value,p_body:ta.value,p_nick:g?g.n.value:null,p_pw:g?g.p.value:null});
         if(g)store.set('amutun-guest-nick',g.n.value.trim());toast('등록했습니다.');await load();open('p'+id)}catch(err){toast(errMsg(err));ok.disabled=false}};
     root.append(f);ti.focus()}
@@ -1663,15 +1665,14 @@ function rankRender(){for(const k in RK){const ol=$(RK[k]);ol.textContent='';con
   window.__ranksReady=true;renderPromo2();renderMyRec()}
 function renderPromo2(){[['runner','gpRunner'],['whack','gpWhack'],['slack','gpSlack']].forEach(([k,id])=>{const t=ranks[k]&&ranks[k][0];$(id).textContent=t?`1위 ${t.nick} ${fmtS(k,t.score)}`:'내 최고 '+(best[k]?fmtS(k,best[k]):'-')})}
 function renderMyRec(){const m=$('myRec');if(!m)return;m.textContent='';const s=el('span');
-  s.append('내 최고 기록 · 칼퇴 러너 ',el('b',{textContent:best.runner?fmtS('runner',best.runner):'-'}),' · 업무 떠넘기기 ',el('b',{textContent:best.whack?fmtS('whack',best.whack):'-'}),' · 딴짓 ',el('b',{textContent:best.slack?fmtS('slack',best.slack):'-'}));m.append(s);
-  if(API_ON&&!session){const b=el('button',{type:'button',className:'btn sm line',textContent:'고정닉 만들기'});b.onclick=()=>openAuth('signup');m.append(b)}}
+  s.append('내 최고 기록 · 칼퇴 러너 ',el('b',{textContent:best.runner?fmtS('runner',best.runner):'-'}),' · 업무 떠넘기기 ',el('b',{textContent:best.whack?fmtS('whack',best.whack):'-'}),' · 딴짓 ',el('b',{textContent:best.slack?fmtS('slack',best.slack):'-'}));m.append(s);}
 function offerScore(k,v){if(!API_ON||!(v>0))return;
   setTimeout(()=>{const host=$(MSG[k]);if(!host)return;const wrap=el('div',{className:'row',style:'margin-top:10px'});
     const send=async(nick,btn)=>{if(btn)btn.disabled=true;try{const ok=await rpc('submit_score',{p_game:k,p_score:v,p_token:session&&session.token,p_nick:nick});
-        wrap.textContent=ok?`명예의 전당에 ${fmtS(k,v)} 기록을 올렸어요.`:'명예의 전당에는 이 닉네임의 더 높은 기록이 이미 있어요.';if(nick)store.set('amutun-guest-nick',nick);loadRanks()}
+        wrap.textContent=ok?`명예의 전당에 ${fmtS(k,v)} 기록을 올렸어요.`:'명예의 전당에는 이 이름의 더 높은 기록이 이미 있어요.';if(nick)store.set('amutun-guest-nick',nick);loadRanks()}
       catch(e){toast(errMsg(e));if(btn)btn.disabled=false}};
     if(session){wrap.textContent='명예의 전당에 기록하는 중…';send(null)}
-    else{const n=el('input',{className:'ipt',maxLength:12,placeholder:'닉네임',value:guestNick(),style:'height:38px;width:150px'});n.setAttribute('aria-label','랭킹에 올릴 닉네임');
+    else{const n=el('input',{className:'ipt',maxLength:12,placeholder:'이름',value:guestNick(),style:'height:38px;width:150px'});n.setAttribute('aria-label','랭킹에 올릴 이름');
       const b=el('button',{type:'button',className:'btn sm org',textContent:'명예의 전당 등록'});b.onclick=()=>send(n.value.trim(),b);n.onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();b.click()}};
       wrap.append(n,b,el('span',{className:'note',textContent:fmtS(k,v)}))}
     host.append(wrap)},0)}
