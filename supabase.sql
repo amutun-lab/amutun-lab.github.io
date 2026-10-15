@@ -278,12 +278,50 @@ end $$;
 -- ---------- API 권한 ----------
 revoke execute on all functions in schema public from public;
 grant execute on function
-  public.signup(text,text,text), public.login(text,text), public.me(text), public.logout(text),
+  public.login(text,text), public.me(text), public.logout(text),
   public.change_password(text,text,text),
   public.create_post(text,text,text,text,text,text,text), public.delete_post(bigint,text,text), public.view_post(bigint),
   public.create_comment(text,text,text,text,text), public.delete_comment(bigint,text,text),
   public.submit_score(text,integer,text,text)
 to anon, authenticated;
+
+-- ---------- 글·댓글 수정 (임시 비밀번호 또는 운영진) ----------
+create or replace function public.update_post(p_id bigint, p_token text, p_pw text, p_tag text, p_title text, p_body text) returns void
+language plpgsql security definer set search_path = public, extensions as $$
+declare m members := private.member_by_token(p_token); p posts; t text := nullif(btrim(coalesce(p_tag,'')), '');
+begin
+  select * into p from posts where id = p_id;
+  if p.id is null then raise exception 'NOT_FOUND'; end if;
+  if not ((m.id is not null and (m.is_admin or p.member_id = m.id))
+          or (p.member_id is null and p.pw_hash is not null and p_pw is not null and crypt(p_pw, p.pw_hash) = p.pw_hash)) then
+    raise exception 'NO_PERMISSION';
+  end if;
+  if char_length(btrim(coalesce(p_title,''))) = 0 or char_length(btrim(coalesce(p_body,''))) = 0 then raise exception 'EMPTY'; end if;
+  if char_length(p_title) > 60 or char_length(p_body) > 5000 then raise exception 'TOO_LONG'; end if;
+  if t is not null and not (t = any (case when p.board = 'notice' then array['딴짓 꿀팁','공지','안내'] else array['잡담','질문','하소연','꿀팁'] end)) then raise exception 'BAD_TAG'; end if;
+  update posts set tag = t, title = btrim(p_title), body = btrim(p_body) where id = p_id;
+end $$;
+
+create or replace function public.update_comment(p_id bigint, p_token text, p_pw text, p_body text) returns void
+language plpgsql security definer set search_path = public, extensions as $$
+declare m members := private.member_by_token(p_token); c comments;
+begin
+  select * into c from comments where id = p_id;
+  if c.id is null then raise exception 'NOT_FOUND'; end if;
+  if not ((m.id is not null and (m.is_admin or c.member_id = m.id))
+          or (c.member_id is null and c.pw_hash is not null and p_pw is not null and crypt(p_pw, c.pw_hash) = c.pw_hash)) then
+    raise exception 'NO_PERMISSION';
+  end if;
+  if char_length(btrim(coalesce(p_body,''))) = 0 then raise exception 'EMPTY'; end if;
+  if char_length(p_body) > 500 then raise exception 'TOO_LONG'; end if;
+  update comments set body = btrim(p_body) where id = p_id;
+end $$;
+
+revoke execute on function public.update_post(bigint,text,text,text,text,text), public.update_comment(bigint,text,text,text) from public;
+grant execute on function public.update_post(bigint,text,text,text,text,text), public.update_comment(bigint,text,text,text) to anon, authenticated;
+
+-- 회원가입 닫기: 일반 이용자는 이름 + 임시 비밀번호로만 글을 씁니다. (운영자 로그인은 유지)
+revoke execute on function public.signup(text,text,text) from anon, authenticated;
 
 -- 운영자 지정 (사이트에서 회원가입한 뒤 아래 줄의 아이디를 바꿔 따로 실행):
 -- update public.members set is_admin = true where login_id = '내아이디';
