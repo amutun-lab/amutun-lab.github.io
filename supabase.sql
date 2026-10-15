@@ -199,7 +199,7 @@ begin
   insert into posts(board, tag, title, body, nick, member_id, pw_hash, ip_prefix)
   values (p_board, t, btrim(p_title), btrim(p_body), n, m.id,
           case when m.id is null then crypt(p_pw, gen_salt('bf', 8)) end,
-          case when m.id is null then ip end)
+          ip)
   returning id into pid;
   return pid;
 end $$;
@@ -240,7 +240,7 @@ begin
   insert into comments(post_ref, body, nick, member_id, pw_hash, ip_prefix)
   values (p_ref, btrim(p_body), n, m.id,
           case when m.id is null then crypt(p_pw, gen_salt('bf', 8)) end,
-          case when m.id is null then ip end)
+          ip)
   returning id into cid;
   return cid;
 end $$;
