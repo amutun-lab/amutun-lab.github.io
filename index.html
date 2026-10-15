@@ -1082,7 +1082,7 @@ const SITE=[
  {id:'about',name:'연구소 소개',desc:'성과는 없지만 서류는 있는 곳',subs:[['greeting','인사말'],['history','연혁'],['org','조직도'],['numbers','숫자로 보는 연구소']]},
  {id:'service',name:'핑계 서비스',desc:'할 말이 없을 때, 그럴듯하게',subs:[['excuse','핑계 생성기'],['translate','직장어 번역기'],['fortune','오늘의 운세']]},
  {id:'tools',name:'업무 도구',desc:'일하는 것처럼 보이게 도와드립니다',subs:[['kyul','퇴근 결재'],['project','99% 프로젝트'],['meeting','회의 생성기'],['inflate','보고서 늘리기']]},
- {id:'game',name:'게임존',desc:'일하는 척하면서 할 수 있는 미니게임',subs:[['runner','칼퇴 러너'],['whack','업무 떠넘기기'],['slack','딴짓 들키지 마'],['rank','명예의 전당'],['bingo','회의 빙고']]},
+ {id:'game',name:'게임존',desc:'일하는 척하면서 할 수 있는 미니게임',subs:[['runner','칼퇴 러너'],['whack','업무 떠넘기기'],['slack','딴짓 들키지 마'],['bingo','회의 빙고'],['rank','명예의 전당']]},
  {id:'community',name:'커뮤니티',desc:'딴짓 꿀팁과 사무실 이야기가 오가는 곳',subs:[['notice','공지사항'],['free','자유게시판']]},
  {id:'recruit',name:'인재채용',desc:'미룬 일이 많을수록 우대합니다',subs:[['jobs','채용 공고'],['test','직무 적성 진단'],['apply','입사 지원']]}
 ];
@@ -1519,7 +1519,7 @@ async function rpc(fn,args){if(!API_ON)throw{code:'OFFLINE'};let r;try{r=await f
   const t=await r.text();let j=null;try{j=t?JSON.parse(t):null}catch(e){}if(!r.ok)throw{code:(j&&j.message)||('HTTP'+r.status)};return j}
 async function sel(q){if(!API_ON)throw{code:'OFFLINE'};let r;try{r=await fetch(API_URL+'/rest/v1/'+q,{headers:hdr()})}catch(e){throw{code:'NETWORK'}}if(!r.ok)throw{code:'HTTP'+r.status};return r.json()}
 const ERR={BAD_LOGIN_ID:'아이디는 영문 소문자·숫자·밑줄(_) 4~16자로 만들어 주세요.',BAD_PW:'임시 비밀번호는 4자 이상이어야 해요.',BAD_NICK:'이름은 2~12자로 적어 주세요.',
-  NICK_RESERVED:'쓸 수 없는 이름이에요. 운영진이 쓰는 이름입니다.',
+  NICK_RESERVED:'쓸 수 없는 이름이에요. 다른 이름을 적어 주세요.',
   BAD_LOGIN:'아이디 또는 비밀번호가 맞지 않습니다.',NOT_ADMIN:'공지사항은 운영진만 쓸 수 있어요.',EMPTY:'제목과 내용을 모두 적어 주세요.',TOO_LONG:'글이 너무 길어요.',
   TOO_FAST:'조금 천천히! 잠시 후 다시 등록해 주세요.',BUSY:'지금 글이 너무 많이 올라오고 있어요. 1분 뒤에 다시 시도해 주세요.',BAD_TAG:'말머리를 다시 골라 주세요.',
   NOT_FOUND:'삭제되었거나 없는 글입니다.',NO_PERMISSION:'임시 비밀번호가 맞지 않아요.',NEED_LOGIN:'로그인이 필요해요.',BAD_SCORE:'기록이 올바르지 않아요.',
@@ -1541,10 +1541,9 @@ const say=(id,m,ok)=>{$(id).textContent=m;$(id).className='auth-msg'+(ok?' ok':'
 $('fLogin').addEventListener('submit',async e=>{e.preventDefault();const btn=e.submitter;if(btn)btn.disabled=true;
   try{const s=await rpc('login',{p_login:$('lgId').value,p_pw:$('lgPw').value});$('lgPw').value='';saveSession(s);closeAuth();toast(s.nick+'님, 출근을 환영합니다.')}catch(err){say('lgMsg',errMsg(err))}finally{if(btn)btn.disabled=false}});
 
-/* 글쓴이 표시: 운영진 · 일반(IP 앞자리) · AI */
+/* 글쓴이 표시: 이름(IP 앞자리) · AI */
 function nickEl(it){const s=el('span');s.append(it.nick||'ㅇㅇ');
   if(it.ai)s.append(el('span',{className:'pill ai',textContent:'AI'}));
-  else if(it.is_member)s.append(el('span',{className:'pill mine',textContent:'운영진'}));
   else if(it.ip_prefix)s.append(el('span',{textContent:`(${it.ip_prefix})`,style:'color:var(--muted);font-size:.86em;margin-left:2px'}));
   return s}
 function guestFields(){const wrap=el('div',{className:'row',style:'flex-wrap:nowrap'});const n=el('input',{className:'ipt',maxLength:12,placeholder:'이름',value:guestNick()});n.setAttribute('aria-label','이름');
@@ -1615,7 +1614,7 @@ function makeBoard(root,board){
     if(!list.length)ul.append(el('li',{textContent:'첫 댓글을 남겨 주세요.',style:'color:var(--muted)'}));
     list.forEach(c=>{const li=el('li');const s=el('small');const b=el('b');b.append(nickEl(c));s.append(b,' · '+fmtDate(Date.parse(c.created_at)));
       const e2=el('button',{type:'button',className:'linkbtn',textContent:'수정',style:'margin-left:8px;font-size:12px'});const d=el('button',{type:'button',className:'linkbtn',textContent:'삭제',style:'margin-left:8px;font-size:12px'});const holder=el('span');
-      e2.onclick=()=>{if(c.is_member&&!(session&&session.is_admin)){toast('운영진 댓글은 운영진만 고칠 수 있어요.');return}e2.hidden=d.hidden=true;const box=el('form',{className:'row',style:'margin-top:6px;gap:6px'});const bi=el('input',{className:'ipt',maxLength:500,value:c.body||'',style:'height:38px;flex:1;min-width:0'});bi.setAttribute('aria-label','댓글 수정');
+      e2.onclick=()=>{e2.hidden=d.hidden=true;const box=el('form',{className:'row',style:'margin-top:6px;gap:6px'});const bi=el('input',{className:'ipt',maxLength:500,value:c.body||'',style:'height:38px;flex:1;min-width:0'});bi.setAttribute('aria-label','댓글 수정');
         const pw=session&&session.is_admin?null:el('input',{className:'ipt',type:'password',maxLength:72,placeholder:'임시 비밀번호',style:'height:38px;width:130px'});if(pw)pw.setAttribute('aria-label','임시 비밀번호');const sv=el('button',{type:'submit',className:'btn sm org',textContent:'저장'});const cn=el('button',{type:'button',className:'btn sm line',textContent:'취소'});cn.onclick=()=>{box.remove();e2.hidden=d.hidden=false};
         box.onsubmit=async ev=>{ev.preventDefault();sv.disabled=true;try{await rpc('update_comment',{p_id:c.id,p_token:session&&session.token,p_pw:pw?pw.value:null,p_body:bi.value});toast('댓글을 수정했습니다.');loadComments(it)}catch(er){toast(errMsg(er));sv.disabled=false}};box.append(bi);if(pw)box.append(pw);box.append(sv,cn);li.append(box);bi.focus()};
       d.onclick=()=>askDelete(holder,d,(pw)=>rpc('delete_comment',{p_id:c.id,p_token:session&&session.token,p_pw:pw}).then(()=>{toast('댓글을 삭제했습니다.');loadComments(it)}),c.is_member);
@@ -1624,7 +1623,7 @@ function makeBoard(root,board){
     const box=el('span',{className:'row',style:'display:inline-flex;gap:6px;margin-left:6px'});btn.hidden=true;
     const cancel=el('button',{type:'button',className:'btn sm line',textContent:'취소'});cancel.onclick=()=>{box.remove();btn.hidden=false};
     const go=async pw=>{try{await run(pw)}catch(e){toast(errMsg(e))}};
-    if(isMember){if(!session){toast('운영진 글은 운영진만 지울 수 있어요.');btn.hidden=false;return}
+    if(isMember&&session){
       const ok=el('button',{type:'button',className:'btn sm org',textContent:'정말 삭제'});ok.onclick=()=>go(null);box.append(ok,cancel)}
     else{const pw=el('input',{className:'ipt',type:'password',placeholder:'비밀번호',style:'height:38px;width:130px'});pw.setAttribute('aria-label','삭제 비밀번호');const ok=el('button',{type:'button',className:'btn sm org',textContent:'삭제'});
       ok.onclick=()=>go(session&&session.is_admin&&!pw.value?null:pw.value);pw.onkeydown=e=>{if(e.key==='Enter')ok.click()};box.append(pw,ok,cancel);setTimeout(()=>pw.focus(),20)}
