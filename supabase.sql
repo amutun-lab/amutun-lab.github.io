@@ -54,7 +54,7 @@ create index if not exists comments_ref on public.comments (post_ref, created_at
 
 create table if not exists public.scores (
   id          bigint generated always as identity primary key,
-  game        text not null check (game in ('runner','whack','slack')),
+  game        text not null check (game in ('runner','whack','slack','stack')),
   score       integer not null check (score >= 0),
   nick        text not null,
   member_id   bigint references public.members(id) on delete set null,
@@ -261,8 +261,8 @@ create or replace function public.submit_score(p_game text, p_score integer, p_t
 language plpgsql security definer set search_path = public, extensions as $$
 declare m members := private.member_by_token(p_token); n text; best integer;
 begin
-  if p_game not in ('runner','whack','slack') then raise exception 'BAD_GAME'; end if;
-  if p_score is null or p_score <= 0 or p_score > (case p_game when 'runner' then 200000 when 'whack' then 3000 else 3600000 end) then raise exception 'BAD_SCORE'; end if;
+  if p_game not in ('runner','whack','slack','stack') then raise exception 'BAD_GAME'; end if;
+  if p_score is null or p_score <= 0 or p_score > (case p_game when 'runner' then 200000 when 'whack' then 3000 when 'stack' then 500 else 3600000 end) then raise exception 'BAD_SCORE'; end if;
   if m.id is null then
     n := btrim(coalesce(p_nick,''));
     if char_length(n) < 2 or char_length(n) > 12 then raise exception 'BAD_NICK'; end if;
