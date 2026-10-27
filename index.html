@@ -308,7 +308,7 @@ main{overflow-x:clip}
 .howto div{background:var(--gray);border-radius:12px;padding:14px 16px;font-size:14px;color:var(--body)}
 .howto b{display:block;color:var(--ink);margin-bottom:2px}
 #rcv{display:block;width:100%;height:260px;touch-action:manipulation;cursor:pointer;background:#eef3ff}
-.whack{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;padding:18px;background:#fbfbfc}
+#kcv{display:block;width:100%;height:340px;touch-action:manipulation;cursor:pointer;background:#eef3ff;user-select:none;-webkit-user-select:none}
 .hole{position:relative;aspect-ratio:1.25;border:0;border-radius:14px;background:var(--gray);overflow:hidden;padding:0}
 .hole:after{content:"";position:absolute;left:0;right:0;bottom:0;height:24%;background:#c9b49a;border-top:4px solid #a8916f}
 .pop{position:absolute;left:14%;right:14%;bottom:-80%;height:66%;border-radius:8px;display:grid;place-items:center;font-size:clamp(12px,1.6vw,16px);font-weight:900;transition:bottom .14s ease-out;z-index:1;padding:4px;text-align:center;line-height:1.25}
@@ -547,7 +547,6 @@ main{overflow-x:clip}
   .bingo button{font-size:10.5px;padding:2px}
   .kyul .bx{height:72px}.stamp{width:50px;height:50px;font-size:13px}.stamp.rj{width:54px;height:32px}
   .stabs a{padding:14px 12px;font-size:14.5px}
-  .whack{gap:8px;padding:12px}
   .layer{top:calc(84px + env(safe-area-inset-top,0px))}
 }
 @media (max-width:420px){.logo-mark{display:none}}
@@ -702,7 +701,7 @@ main{overflow-x:clip}
         <p class="sub">일하는 척하면서 할 수 있는 미니게임</p>
         <ul class="gp-list">
           <li><a href="#game-runner">칼퇴 러너 <span id="gpRunner">최고 -</span></a></li>
-          <li><a href="#game-whack">업무 떠넘기기 <span id="gpWhack">최고 -</span></a></li>
+          <li><a href="#game-stack">서류 탑 쌓기 <span id="gpStack">최고 -</span></a></li>
           <li><a href="#game-slack">딴짓 들키지 마 <span id="gpSlack">최고 -</span></a></li>
         </ul>
         <a class="btn" href="#game-runner">플레이하기</a>
@@ -901,13 +900,13 @@ main{overflow-x:clip}
     </div>
     <div class="howto"><div><b>조작</b>스페이스바, 위쪽 화살표, 또는 화면 터치로 점프</div><div><b>피할 것</b>야근, 회의, 추가업무, 주말출근 상자</div><div><b>보너스</b>커피를 먹으면 50점 추가</div></div>
   </div>
-  <div data-sub="whack">
+  <div data-sub="stack">
     <div class="game">
-      <div class="game-top"><b>업무 떠넘기기</b><div class="sc"><span>남은 시간 <b id="wTime">30.0</b></span><span>점수 <b id="wScore">0</b></span><span>최고 <b id="wBest">0</b></span></div></div>
-      <div class="whack" id="whack"></div>
-      <div class="game-msg" id="wMsg"><button class="btn org sm" id="wStart" type="button">게임 시작</button> 책상에 올라오는 업무를 눌러 옆자리로 떠넘기세요.</div>
+      <div class="game-top"><b>서류 탑 쌓기</b><div class="sc"><span>현재 <b id="kScore">0층</b></span><span>최고 <b id="kBest">0층</b></span></div></div>
+      <canvas id="kcv" aria-label="서류 탑 쌓기 게임 화면. 화면을 누르거나 스페이스바로 서류를 내려놓기"></canvas>
+      <div class="game-msg" id="kMsg">화면을 누르거나 스페이스바를 눌러 시작하세요.</div>
     </div>
-    <div class="howto"><div><b>업무 카드</b>누르면 +10점</div><div><b>팀장님</b>누르면 −30점. 팀장님은 떠넘길 수 없습니다.</div><div><b>커피</b>누르면 시간 +3초</div></div>
+    <div class="howto"><div><b>조작</b>움직이는 서류가 탑 위에 올 때 화면 터치 또는 스페이스바</div><div><b>잘림</b>삐져나간 부분은 잘려 나가고 서류가 점점 좁아집니다</div><div><b>완벽 결재</b>딱 맞추면 그대로, 3번 연속이면 서류가 다시 넓어집니다</div></div>
   </div>
   <div data-sub="slack">
     <div class="game">
@@ -935,7 +934,7 @@ main{overflow-x:clip}
     <div class="ph"><h2>명예의 전당</h2><p>게임이 끝나면 닉네임으로 기록을 등록할 수 있습니다. 닉네임마다 최고 기록 하나만 남습니다.</p></div>
     <div class="ranks">
       <div class="rank"><h3>칼퇴 러너 <a href="#game-runner">플레이 →</a></h3><ol id="rkRunner"><li class="empty">불러오는 중…</li></ol></div>
-      <div class="rank"><h3>업무 떠넘기기 <a href="#game-whack">플레이 →</a></h3><ol id="rkWhack"><li class="empty">불러오는 중…</li></ol></div>
+      <div class="rank"><h3>서류 탑 쌓기 <a href="#game-stack">플레이 →</a></h3><ol id="rkStack"><li class="empty">불러오는 중…</li></ol></div>
       <div class="rank"><h3>딴짓 들키지 마 <a href="#game-slack">플레이 →</a></h3><ol id="rkSlack"><li class="empty">불러오는 중…</li></ol></div>
     </div>
     <div class="my-rec" id="myRec"></div>
@@ -1082,7 +1081,7 @@ const SITE=[
  {id:'about',name:'연구소 소개',desc:'성과는 없지만 서류는 있는 곳',subs:[['greeting','인사말'],['history','연혁'],['org','조직도'],['numbers','숫자로 보는 연구소']]},
  {id:'service',name:'핑계 서비스',desc:'할 말이 없을 때, 그럴듯하게',subs:[['excuse','핑계 생성기'],['translate','직장어 번역기'],['fortune','오늘의 운세']]},
  {id:'tools',name:'업무 도구',desc:'일하는 것처럼 보이게 도와드립니다',subs:[['kyul','퇴근 결재'],['project','99% 프로젝트'],['meeting','회의 생성기'],['inflate','보고서 늘리기']]},
- {id:'game',name:'게임존',desc:'일하는 척하면서 할 수 있는 미니게임',subs:[['runner','칼퇴 러너'],['whack','업무 떠넘기기'],['slack','딴짓 들키지 마'],['bingo','회의 빙고'],['rank','명예의 전당']]},
+ {id:'game',name:'게임존',desc:'일하는 척하면서 할 수 있는 미니게임',subs:[['runner','칼퇴 러너'],['stack','서류 탑 쌓기'],['slack','딴짓 들키지 마'],['bingo','회의 빙고'],['rank','명예의 전당']]},
  {id:'community',name:'커뮤니티',desc:'딴짓 꿀팁과 사무실 이야기가 오가는 곳',subs:[['notice','공지사항'],['free','자유게시판']]},
  {id:'recruit',name:'인재채용',desc:'미룬 일이 많을수록 우대합니다',subs:[['jobs','채용 공고'],['test','직무 적성 진단'],['apply','입사 지원']]}
 ];
@@ -1336,12 +1335,12 @@ function checkBingo(){const cells=$('bingo').children;[...cells].forEach(c=>c.cl
 $('bingoNew').onclick=newBingo;newBingo();
 
 /* ───── 게임: 최고 기록 ───── */
-const best={runner:+(store.get('amutun-runner')||0),whack:+(store.get('amutun-whack')||0),slack:+(store.get('amutun-slack')||0)};
+const best={runner:+(store.get('amutun-runner')||0),stack:+(store.get('amutun-stack')||0),slack:+(store.get('amutun-slack')||0)};
 function saveBest(k,v){logRecent(k,v);offerScore(k,v);if(v>best[k]){best[k]=v;store.set('amutun-'+k,String(v));showBest();return true}return false}
-function showBest(){$('rBest').textContent=best.runner;$('wBest').textContent=best.whack;$('sBest').textContent=(best.slack/1000).toFixed(1)+'초';
+function showBest(){$('rBest').textContent=best.runner;$('kBest').textContent=best.stack+'층';$('sBest').textContent=(best.slack/1000).toFixed(1)+'초';
   renderPromo()}
-function renderPromo(){if(typeof renderPromo2==='function'&&window.__ranksReady)return renderPromo2();const f=(k,v)=>k==='slack'?(v/1000).toFixed(1)+'초':fmt(v)+'점';
-  [['runner','gpRunner'],['whack','gpWhack'],['slack','gpSlack']].forEach(([k,id])=>{$(id).textContent='내 최고 '+(best[k]?f(k,best[k]):'-')})}
+function renderPromo(){if(typeof renderPromo2==='function'&&window.__ranksReady)return renderPromo2();const f=(k,v)=>k==='slack'?(v/1000).toFixed(1)+'초':k==='stack'?fmt(v)+'층':fmt(v)+'점';
+  [['runner','gpRunner'],['stack','gpStack'],['slack','gpSlack']].forEach(([k,id])=>{$(id).textContent='내 최고 '+(best[k]?f(k,best[k]):'-')})}
 showBest();
 
 /* ───── 게임 1: 칼퇴 러너 ───── */
@@ -1398,29 +1397,68 @@ const R=(()=>{
 })();
 onEnter['game-runner']=()=>R.enter();onLeave['game-runner']=()=>R.leave();
 
-/* ───── 게임 2: 업무 떠넘기기 ───── */
-const Wk=(()=>{
-  const TASKS=['주간보고','회의록','엑셀 정리','견적서','기안서','PPT 수정','메일 회신','설문 취합','영수증 처리','출장 정산','회의실 예약','보도자료'];
-  const grid=$('whack');const holes=[];
-  for(let i=0;i<9;i++){const b=el('button',{type:'button',className:'hole'});b.setAttribute('aria-label','책상 '+(i+1));const pop=el('span',{className:'pop'});b.append(pop);b.onclick=()=>hit(i);grid.append(b);holes.push({b,pop,up:false,type:'',t:null})}
-  let run=false,time=30,score=0,elapsed=0,tick=null,nextSpawn=0;
-  function start(){stop();run=true;time=30;score=0;elapsed=0;nextSpawn=0;$('wScore').textContent=0;$('wMsg').textContent='업무가 올라옵니다! 팀장님은 누르지 마세요.';tick=setInterval(step,100)}
-  function stop(){run=false;clearInterval(tick);holes.forEach(h=>{clearTimeout(h.t);h.up=false;h.b.classList.remove('up','hit')})}
-  function step(){time-=.1;elapsed+=.1;if(time<=0){end();return}$('wTime').textContent=time.toFixed(1);nextSpawn-=100;if(nextSpawn<=0){spawn();nextSpawn=Math.max(360,820-elapsed*14)}}
-  function spawn(){const free=holes.filter(h=>!h.up);if(!free.length)return;const h=pick(free);const r=Math.random();h.type=r<.16?'boss':r<.26?'cof':'task';
-    h.pop.className='pop '+h.type;h.pop.textContent=h.type==='boss'?'팀장님':h.type==='cof'?'커피 +3초':pick(TASKS);h.up=true;h.b.classList.remove('hit');h.b.classList.add('up');
-    h.t=setTimeout(()=>{h.up=false;h.b.classList.remove('up')},Math.max(560,1050-elapsed*16))}
-  function floatTxt(h,txt,color){const f=el('span',{className:'float',textContent:txt});f.style.color=color;h.b.append(f);setTimeout(()=>f.remove(),700)}
-  function hit(i){const h=holes[i];if(!run||!h.up)return;clearTimeout(h.t);h.up=false;h.b.classList.add('hit');h.b.classList.remove('up');
-    if(h.type==='task'){score+=10;floatTxt(h,'+10 떠넘김','#12a36b')}else if(h.type==='boss'){score=Math.max(0,score-30);floatTxt(h,'−30','#e2461b');$('wMsg').textContent=pick(['팀장님은 떠넘길 수 없습니다.','"방금 나 누른 거야?"','팀장님이 업무를 두 배로 돌려줬습니다.'])}else{time+=3;floatTxt(h,'+3초','#7a4a24')}
-    $('wScore').textContent=score}
-  function end(){stop();$('wTime').textContent='0.0';const nb=saveBest('whack',score);const rank=score>=300?'업무 떠넘기기 명예의 전당':score>=200?'프로 떠넘기기러':score>=100?'성실한 회피러':'아직은 착한 사원';
-    $('wMsg').textContent='';$('wMsg').append(el('b',{textContent:`종료! ${score}점 · ${rank}${nb?' · 최고 기록 갱신!':''} `}),startBtn());if(nb)confetti()}
-  function startBtn(){const b=el('button',{type:'button',className:'btn org sm',textContent:'다시 하기'});b.onclick=start;return b}
-  $('wStart').onclick=start;
-  return{leave(){if(run){stop();$('wMsg').textContent='';$('wMsg').append(startBtn(),' 게임이 중단되었습니다.')}}};
+/* ───── 게임 2: 서류 탑 쌓기 ───── */
+const Sk=(()=>{
+  const cv=$('kcv'),ctx=cv.getContext('2d');let W=600,H=340,dpr=1;
+  const DOCS=['주간보고','회의록','기안서','견적서','품의서','결과보고','출장 정산','PPT 최종','최종_진짜','사업계획서','설문 결과','영수증 철','시말서','휴가 신청서','재검토 요청'];
+  const COLORS=['#ff5b2e','#2f5bea','#12a36b','#ffd23f','#9b5de5','#0f1e45'];
+  const BH=24,FLOOR=36;
+  const RANKS=[[0,'인턴'],[5,'사원'],[10,'주임'],[16,'대리'],[24,'과장'],[34,'차장'],[46,'부장'],[60,'상무'],[80,'사장']];
+  const rankOf=n=>{let r=RANKS[0][1];for(const [k,v] of RANKS)if(n>=k)r=v;return r};
+  let state='ready',stack=[],cur=null,falls=[],floats=[],cam=0,camT=0,score=0,streak=0,raf=0,last=0,dir=1,speed=2.4,shake=0;
+  const baseW=()=>Math.min(240,W*.62);
+  function resize(){dpr=Math.min(2,window.devicePixelRatio||1);W=cv.clientWidth||600;H=340;cv.width=W*dpr;cv.height=H*dpr;ctx.setTransform(dpr,0,0,dpr,0,0);if(state!=='run')reset();draw()}
+  function reset(){const bw=baseW();stack=[{x:(W-bw)/2,w:bw,label:'',color:'#8a91a0'}];falls=[];floats=[];cam=camT=0;score=0;streak=0;shake=0;newCur();$('kScore').textContent='0층'}
+  function newCur(){const top=stack[stack.length-1];dir=Math.random()<.5?1:-1;speed=Math.min(8,2.4+(stack.length-1)*.17);
+    cur={x:dir>0?0:W-top.w,w:top.w,label:pick(DOCS),color:COLORS[stack.length%COLORS.length]}}
+  const yOf=i=>H-FLOOR-(i+1)*BH+cam;
+  function start(){reset();state='run';$('kMsg').textContent='서류를 차곡차곡! 삐져나간 부분은 잘려 나갑니다.';last=performance.now();cancelAnimationFrame(raf);raf=requestAnimationFrame(loop)}
+  function addFloat(txt,color,x,y){floats.push({txt,color,x,y,a:1})}
+  function drop(){if(state!=='run'){start();return}
+    const top=stack[stack.length-1],y=yOf(stack.length);
+    if(Math.abs(cur.x-top.x)<=5){cur.x=top.x;cur.w=top.w;streak++;
+      if(streak>=3&&cur.w<baseW()){const g=Math.min(14,baseW()-cur.w);cur.x=Math.max(0,cur.x-g/2);cur.w+=g;addFloat('완벽 결재! 서류가 늘어남','#12a36b',cur.x+cur.w/2,y-6)}
+      else addFloat(streak>1?`완벽 결재 x${streak}`:'완벽 결재!','#12a36b',cur.x+cur.w/2,y-6)}
+    else{const s=Math.max(cur.x,top.x),e=Math.min(cur.x+cur.w,top.x+top.w),ov=e-s;
+      if(ov<=0){falls.push({...cur,y,vy:0,r:0,vr:dir*.04});over();return}
+      const cut=cur.x<top.x?{x:cur.x,w:top.x-cur.x}:{x:e,w:cur.x+cur.w-e};
+      falls.push({x:cut.x,w:cut.w,label:'',color:cur.color,y,vy:0,r:0,vr:(cur.x<top.x?-1:1)*.05});
+      cur.x=s;cur.w=ov;streak=0;shake=4}
+    stack.push(cur);score=stack.length-1;$('kScore').textContent=score+'층';
+    if(score%10===0)addFloat(`${score}층 돌파! ${rankOf(score)} 승진`,'#ff5b2e',W/2,yOf(stack.length-1)-30);
+    camT=Math.max(0,(stack.length-7)*BH);newCur()}
+  function over(){state='over';cancelAnimationFrame(raf);shake=8;const nb=saveBest('stack',score);
+    $('kMsg').textContent=`결재 반려! ${score}층 · 직급 ${rankOf(score)}${nb?' · 최고 기록 갱신!':''} · 다시 하려면 화면을 누르세요.`;
+    const t0=performance.now();const fin=t=>{update(Math.min(3,(t-last)/16.67));last=t;draw();if(t-t0<1200)requestAnimationFrame(fin)};last=t0;requestAnimationFrame(fin);if(nb)confetti()}
+  function loop(t){if(state!=='run')return;const dt=Math.min(3,(t-last)/16.67);last=t;update(dt);draw();raf=requestAnimationFrame(loop)}
+  function update(dt){
+    if(state==='run'&&cur){cur.x+=dir*speed*dt;if(cur.x<=0){cur.x=0;dir=1}else if(cur.x+cur.w>=W){cur.x=W-cur.w;dir=-1}}
+    falls.forEach(f=>{f.vy+=.55*dt;f.y+=f.vy*dt;f.r+=f.vr*dt});falls=falls.filter(f=>f.y<H+80);
+    floats.forEach(f=>{f.y-=.7*dt;f.a-=.016*dt});floats=floats.filter(f=>f.a>0);
+    cam+=(camT-cam)*Math.min(1,.12*dt);shake=Math.max(0,shake-.5*dt)}
+  function sheet(b,y){ctx.fillStyle='#fff';ctx.fillRect(b.x,y,b.w,BH-2);ctx.fillStyle=b.color;ctx.fillRect(b.x,y,Math.min(8,b.w),BH-2);
+    ctx.strokeStyle='#1a1f2b';ctx.lineWidth=1.5;ctx.strokeRect(b.x+.75,y+.75,b.w-1.5,BH-3.5);
+    if(b.label&&b.w>58){ctx.fillStyle='#1a1f2b';ctx.font='700 12px "Noto Sans KR",sans-serif';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(b.label,b.x+b.w/2+4,y+BH/2-1,b.w-16)}}
+  function draw(){const sx=shake?(Math.random()-.5)*shake:0;ctx.save();ctx.translate(sx,0);
+    ctx.fillStyle='#eef3ff';ctx.fillRect(-10,0,W+20,H);
+    ctx.fillStyle='#dfe7ff';for(let i=0;i<4;i++){const wx=W*(.08+i*.24),wy=40+cam*.3%60;ctx.fillRect(wx,wy,W*.14,60)}
+    const fy=H-FLOOR+cam;ctx.fillStyle='#e3e6ec';ctx.fillRect(-10,fy,W+20,H);ctx.strokeStyle='#1a1f2b';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(-10,fy+1);ctx.lineTo(W+10,fy+1);ctx.stroke();
+    stack.forEach((b,i)=>{const y=yOf(i);if(y>H+BH||y<-BH)return;
+      if(i===0){ctx.fillStyle='#7a6a58';ctx.fillRect(b.x-10,y,b.w+20,BH-4);ctx.fillRect(b.x,y+BH-4,10,FLOOR);ctx.fillRect(b.x+b.w-10,y+BH-4,10,FLOOR)}else sheet(b,y)});
+    if(state==='run'&&cur)sheet(cur,yOf(stack.length));
+    falls.forEach(f=>{ctx.save();ctx.translate(f.x+f.w/2,f.y+BH/2);ctx.rotate(f.r);sheet({...f,x:-f.w/2},-BH/2);ctx.restore()});
+    floats.forEach(f=>{ctx.globalAlpha=Math.max(0,f.a);ctx.fillStyle=f.color;ctx.font='900 14px "Noto Sans KR",sans-serif';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(f.txt,f.x,f.y);ctx.globalAlpha=1});
+    ctx.restore();
+    ctx.textAlign='left';ctx.textBaseline='alphabetic';ctx.fillStyle='#0f1e45';ctx.font='900 22px "Noto Sans KR",sans-serif';ctx.fillText(score+'층',14,32);
+    ctx.font='700 13px "Noto Sans KR",sans-serif';ctx.fillStyle='#4a5161';ctx.fillText('직급 '+rankOf(score),14,52);
+    if(state!=='run'){ctx.fillStyle='rgba(15,30,69,.78)';ctx.fillRect(0,0,W,H);ctx.fillStyle='#fff';ctx.textAlign='center';ctx.font='900 22px "Noto Sans KR",sans-serif';
+      ctx.fillText(state==='over'?'결재 반려!':'서류 탑 쌓기',W/2,H/2-16);ctx.font='500 14px "Noto Sans KR",sans-serif';
+      ctx.fillText(state==='over'?`${score}층 · 직급 ${rankOf(score)} · 눌러서 다시 시작`:'화면을 누르거나 스페이스바로 서류를 내려놓으세요',W/2,H/2+14);ctx.textAlign='left'}}
+  cv.addEventListener('pointerdown',e=>{e.preventDefault();drop()});
+  window.addEventListener('resize',()=>{if(current==='game-stack')resize()});
+  return{enter(){state='ready';resize()},leave(){if(state==='run'){state='ready';cancelAnimationFrame(raf);reset();draw();$('kMsg').textContent='게임이 중단되었습니다. 화면을 눌러 다시 시작하세요.'}},key(){drop()}};
 })();
-onLeave['game-whack']=()=>Wk.leave();
+onEnter['game-stack']=()=>Sk.enter();onLeave['game-stack']=()=>Sk.leave();
 
 /* ───── 게임 3: 딴짓 들키지 마 ───── */
 const Sl=(()=>{
@@ -1507,7 +1545,7 @@ function fillBoss(){const names=['프로젝트 종합 달성률','전략적 정�
   const tasks=['글로벌 운영 효율화 방안 도출','차세대 협업 프로세스 최적화','핵심 이해관계자 커뮤니케이션','데이터 기반 의사결정 체계 고도화','전사 업무 표준화 2.0','고객 경험 혁신 로드맵'];const depts=['혁신전략팀','기획실','전사 공통','경영지원실','DX추진단'];
   const tb=$('btbl');tb.textContent='';shuffle(tasks).slice(0,4).forEach(t=>{const tr=el('tr');[t,pick(depts),pick(['매우 높음','높음']),pick(['정상 진행','순항 중','조기 달성 예상'])].forEach(v=>tr.append(el('td',{textContent:v})));tb.append(tr)});
   $('bossMeta').textContent='전사 핵심성과지표(KPI) 실시간 모니터링 · 업데이트: '+clockNow()}
-function setBoss(o){bossOpen=o;if(o){Wk.leave();Sl.leave();R.leave();fillBoss();lastF=document.activeElement;$('boss').hidden=false;document.body.style.overflow='hidden';$('bossClose').focus()}else{$('boss').hidden=true;document.body.style.overflow='';if(lastF)lastF.focus()}}
+function setBoss(o){bossOpen=o;if(o){Sk.leave();Sl.leave();R.leave();fillBoss();lastF=document.activeElement;$('boss').hidden=false;document.body.style.overflow='hidden';$('bossClose').focus()}else{$('boss').hidden=true;document.body.style.overflow='';if(lastF)lastF.focus()}}
 $('bossLink').onclick=()=>setBoss(true);$('bossClose').onclick=()=>setBoss(false);
 
 /* ═════ 커뮤니티 · 회원 · 명예의 전당 (Supabase) ═════ */
@@ -1650,11 +1688,11 @@ document.addEventListener('click',e=>{const a=e.target.closest&&e.target.closest
 BBS.notice.load();BBS.free.load();
 
 /* 내 기록 + 명예의 전당 */
-const RK={runner:'rkRunner',whack:'rkWhack',slack:'rkSlack'};const MSG={runner:'rMsg',whack:'wMsg',slack:'sMsg'};
-const fmtS=(k,v)=>k==='slack'?(v/1000).toFixed(1)+'초':fmt(v)+'점';
+const RK={runner:'rkRunner',stack:'rkStack',slack:'rkSlack'};const MSG={runner:'rMsg',stack:'kMsg',slack:'sMsg'};
+const fmtS=(k,v)=>k==='slack'?(v/1000).toFixed(1)+'초':k==='stack'?fmt(v)+'층':fmt(v)+'점';
 const histGet=k=>{try{return JSON.parse(store.get('amutun-hist-'+k)||'[]')}catch(e){return[]}};
 function logRecent(k,v){const h=histGet(k);h.unshift({v,t:Date.now()});store.set('amutun-hist-'+k,JSON.stringify(h.slice(0,10)))}
-const ranks={runner:null,whack:null,slack:null};
+const ranks={runner:null,stack:null,slack:null};
 async function loadRanks(){if(!API_ON){rankRender();return}
   await Promise.all(Object.keys(RK).map(async k=>{try{ranks[k]=await sel(`v_ranks?game=eq.${k}&select=nick,is_member,score&order=score.desc,created_at.asc&limit=10`)}catch(e){ranks[k]=ranks[k]||[]}}));rankRender()}
 function rankRender(){for(const k in RK){const ol=$(RK[k]);ol.textContent='';const list=ranks[k];
@@ -1664,9 +1702,9 @@ function rankRender(){for(const k in RK){const ol=$(RK[k]);ol.textContent='';con
     const me=session?session.nick:guestNick();
     list.forEach((d,i)=>{const li=el('li');if(me&&d.nick===me)li.className='me';li.append(el('span',{className:'no',textContent:i+1}),nickEl(d),el('span',{className:'sc',textContent:fmtS(k,d.score)}));ol.append(li)})}
   window.__ranksReady=true;renderPromo2();renderMyRec()}
-function renderPromo2(){[['runner','gpRunner'],['whack','gpWhack'],['slack','gpSlack']].forEach(([k,id])=>{const t=ranks[k]&&ranks[k][0];$(id).textContent=t?`1위 ${t.nick} ${fmtS(k,t.score)}`:'내 최고 '+(best[k]?fmtS(k,best[k]):'-')})}
+function renderPromo2(){[['runner','gpRunner'],['stack','gpStack'],['slack','gpSlack']].forEach(([k,id])=>{const t=ranks[k]&&ranks[k][0];$(id).textContent=t?`1위 ${t.nick} ${fmtS(k,t.score)}`:'내 최고 '+(best[k]?fmtS(k,best[k]):'-')})}
 function renderMyRec(){const m=$('myRec');if(!m)return;m.textContent='';const s=el('span');
-  s.append('내 최고 기록 · 칼퇴 러너 ',el('b',{textContent:best.runner?fmtS('runner',best.runner):'-'}),' · 업무 떠넘기기 ',el('b',{textContent:best.whack?fmtS('whack',best.whack):'-'}),' · 딴짓 ',el('b',{textContent:best.slack?fmtS('slack',best.slack):'-'}));m.append(s);}
+  s.append('내 최고 기록 · 칼퇴 러너 ',el('b',{textContent:best.runner?fmtS('runner',best.runner):'-'}),' · 서류 탑 ',el('b',{textContent:best.stack?fmtS('stack',best.stack):'-'}),' · 딴짓 ',el('b',{textContent:best.slack?fmtS('slack',best.slack):'-'}));m.append(s);}
 function offerScore(k,v){if(!API_ON||!(v>0))return;
   setTimeout(()=>{const host=$(MSG[k]);if(!host)return;const wrap=el('div',{className:'row',style:'margin-top:10px'});
     const send=async(nick,btn)=>{if(btn)btn.disabled=true;try{const ok=await rpc('submit_score',{p_game:k,p_score:v,p_token:session&&session.token,p_nick:nick});
@@ -1686,6 +1724,7 @@ if(session&&API_ON)rpc('me',{p_token:session.token}).then(m=>{if(!m)saveSession(
 document.addEventListener('keydown',e=>{
   const tag=(document.activeElement&&document.activeElement.tagName)||'';const typing=['INPUT','TEXTAREA','SELECT'].includes(tag);
   if(!typing&&!bossOpen&&(e.code==='Space'||e.key==='ArrowUp')&&current==='game-runner'){e.preventDefault();R.key();return}
+  if(!typing&&!bossOpen&&e.code==='Space'&&current==='game-stack'){e.preventDefault();if(!e.repeat)Sk.key();return}
   if(!typing&&!bossOpen&&e.code==='Space'&&current==='game-slack'){e.preventDefault();if(!e.repeat)Sl.key(true);return}
   if(e.key&&e.key.toLowerCase()==='b'&&!e.ctrlKey&&!e.metaKey&&!e.altKey&&!typing){e.preventDefault();setBoss(!bossOpen);return}
   if(e.key==='Escape'){if(bossOpen)setBoss(false);else if(!$('authM').hidden)closeAuth();else if(!$('modal').hidden)closeModal();else if(!$('drawer').hidden)$('drawer').hidden=true;else if(!$('layer').hidden)$('layer').hidden=true}
