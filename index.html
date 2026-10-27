@@ -1560,9 +1560,9 @@ function makeBoard(root,board){
   const label=board==='free'?'자유게시판':'공지사항';
   let items=null,mode='list',page=1,q='',tagF='',cur=null,loadErr=null;const PER=15;
   async function load(){await aiLoaded;loadErr=null;let db=[],counts={};
-    if(API_ON){try{const [rows,c]=await Promise.all([sel(`v_posts?board=eq.${board}&select=id,board,tag,title,nick,is_member,ip_prefix,views,created_at,comment_count&order=created_at.desc&limit=300`),sel('v_ai_counts?select=post_ref,comment_count')]);
-      db=rows.map(dbItem);c.forEach(x=>counts[x.post_ref]=x.comment_count)}catch(e){loadErr=e}}
-    const ai=(board==='free'?AIP.posts:AIP.notices).map(aiItem);ai.forEach(a=>a.comment_count=counts[a.id]||0);
+    if(API_ON){try{const [rows,c]=await Promise.all([sel(`v_posts?board=eq.${board}&select=id,board,tag,title,nick,is_member,ip_prefix,views,created_at,comment_count&order=created_at.desc&limit=300`),sel('v_ai_stats?select=post_ref,comment_count,views')]);
+      db=rows.map(dbItem);c.forEach(x=>counts[x.post_ref]=x)}catch(e){loadErr=e}}
+    const ai=(board==='free'?AIP.posts:AIP.notices).map(aiItem);ai.forEach(a=>{const x=counts[a.id];a.comment_count=x?x.comment_count:0;if(API_ON&&!loadErr)a.views=x?x.views:0});
     items=db.concat(ai).sort((a,b)=>b.createdAt-a.createdAt);homeLive[board==='free'?'free':'notice']=items.slice(0,5);renderBoard();return items}
   function canWrite(){return API_ON&&(board==='free'||(session&&session.is_admin))}
   function renderList(){mode='list';root.textContent='';
@@ -1591,7 +1591,7 @@ function makeBoard(root,board){
   async function open(id){if(items===null)await load();let it=items.find(x=>x.id===id);
     if(it&&it.src==='db'&&it.body==null){try{const r=await sel(`v_posts?id=eq.${it.dbId}&select=id,board,tag,title,body,nick,is_member,ip_prefix,views,created_at,comment_count`);if(r[0])Object.assign(it,dbItem(r[0]))}catch(e){toast(errMsg(e));return}}
     if(!it){toast('삭제되었거나 없는 글입니다.');renderList();return}
-    mode='view';cur=it.id;if(it.src==='db')rpc('view_post',{p_id:it.dbId}).then(()=>{it.views=(it.views||0)+1}).catch(()=>{});
+    mode='view';cur=it.id;if(it.src==='db')rpc('view_post',{p_id:it.dbId}).then(()=>{it.views=(it.views||0)+1}).catch(()=>{});else if(it.src==='ai'&&API_ON)rpc('view_ai',{p_ref:it.id}).then(()=>{it.views=(it.views||0)+1}).catch(()=>{});
     renderView(it);loadComments(it)}
   let cBox=null;
   function renderView(it){root.textContent='';const h=el('div',{className:'post-h'});const t=el('h3');if(it.tag)t.append(el('span',{className:'pill tip',textContent:it.tag}));t.append(it.title||'(제목 없음)');
@@ -1641,10 +1641,12 @@ function makeBoard(root,board){
       try{const id=await rpc('create_post',{p_token:session&&session.token,p_board:board,p_tag:tagSel.value||null,p_title:ti.value,p_body:ta.value,p_nick:g?g.n.value:null,p_pw:g?g.p.value:null});
         if(g)store.set('amutun-guest-nick',g.n.value.trim());toast('등록했습니다.');await load();open('p'+id)}catch(err){toast(errMsg(err));ok.disabled=false}};
     root.append(f);ti.focus()}
-  return{load,enter(){if(mode!=='view'&&mode!=='write')renderList();load().then(()=>{if(mode==='list')renderList()})},open,refresh(){if(mode==='list')renderList();else if(mode==='write')renderWrite()}};
+  return{load,enter(){renderList();load().then(()=>{if(mode==='list')renderList()})},open,refresh(){if(mode==='list')renderList();else if(mode==='write')renderWrite()}};
 }
 const BBS={notice:makeBoard($('bbsNotice'),'notice'),free:makeBoard($('bbsFree'),'free')};
 onEnter['community-notice']=()=>BBS.notice.enter();onEnter['community-free']=()=>BBS.free.enter();
+/* 이미 보고 있는 게시판 링크를 다시 누르면 목록으로 */
+document.addEventListener('click',e=>{const a=e.target.closest&&e.target.closest('a[href^="#community-"]');if(!a)return;const h=a.getAttribute('href');if(h!==location.hash)return;const b=BBS[h.slice(11)];if(b){b.enter();window.scrollTo(0,0)}});
 BBS.notice.load();BBS.free.load();
 
 /* 내 기록 + 명예의 전당 */
