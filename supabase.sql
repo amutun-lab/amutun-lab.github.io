@@ -323,5 +323,29 @@ grant execute on function public.update_post(bigint,text,text,text,text,text), p
 -- 회원가입 닫기: 일반 이용자는 이름 + 임시 비밀번호로만 글을 씁니다. (운영자 로그인은 유지)
 revoke execute on function public.signup(text,text,text) from anon, authenticated;
 
+-- ---------- AI 글(공지·아열봇) 조회수 ----------
+create table if not exists public.ai_views (
+  post_ref text primary key check (post_ref ~ '^ai:[A-Za-z0-9_-]{1,40}$'),
+  views    integer not null default 0
+);
+alter table public.ai_views enable row level security;
+revoke all on public.ai_views from anon, authenticated;
+
+create or replace view public.v_ai_stats as
+  select coalesce(c.post_ref, v.post_ref) as post_ref, coalesce(c.comment_count, 0) as comment_count, coalesce(v.views, 0) as views
+  from (select post_ref, count(*)::int as comment_count from public.comments where post_ref like 'ai:%' group by post_ref) c
+  full join public.ai_views v on v.post_ref = c.post_ref;
+grant select on public.v_ai_stats to anon, authenticated;
+
+create or replace function public.view_ai(p_ref text) returns void
+language plpgsql security definer set search_path = public as $$
+begin
+  if coalesce(p_ref,'') !~ '^ai:[A-Za-z0-9_-]{1,40}$' then raise exception 'NOT_FOUND'; end if;
+  insert into ai_views(post_ref, views) values (p_ref, 1)
+  on conflict (post_ref) do update set views = ai_views.views + 1;
+end $$;
+revoke execute on function public.view_ai(text) from public;
+grant execute on function public.view_ai(text) to anon, authenticated;
+
 -- 운영자 지정 (사이트에서 회원가입한 뒤 아래 줄의 아이디를 바꿔 따로 실행):
 -- update public.members set is_admin = true where login_id = '내아이디';
