@@ -311,7 +311,7 @@ main{overflow-x:clip}
 #rcv{display:block;width:100%;height:260px;touch-action:manipulation;cursor:pointer;background:#eef3ff}
 #k2cv{display:block;width:100%;height:380px;touch-action:manipulation;cursor:pointer;background:#eef3ff;user-select:none;-webkit-user-select:none}
 .mail-stage{position:relative;height:340px;background:linear-gradient(#f5f7fb,#eef3ff);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:18px;overflow:hidden;user-select:none;-webkit-user-select:none}
-.mail-stage:not(.on)::before{content:"📥 받은편지함 9,999+";font-size:24px;font-weight:900;color:var(--navy)}
+.mail-stage:not(.on)::before{content:"📥 받은 편지함 9,999+";font-size:24px;font-weight:900;color:var(--navy)}
 .mail-count{position:absolute;left:18px;top:14px;font-size:13px;font-weight:700;color:var(--body)}
 .mail-card{display:none;width:min(420px,100%);min-height:150px;background:#fff;border:1px solid var(--line);border-radius:14px;box-shadow:0 10px 30px -12px rgba(15,30,69,.35);padding:18px 20px;touch-action:none;cursor:grab;transition:transform .18s ease,opacity .18s ease}
 .mail-stage.on .mail-card{display:block}
@@ -423,7 +423,9 @@ main{overflow-x:clip}
 .sp-meet input{width:40px;height:22px;margin:0 3px;padding:0 4px;border:1px solid #7f9db9;background:#fff;font:700 13px "Gulim",sans-serif;text-align:center;user-select:text}
 .sp-tv{margin:4px auto 10px;width:44%;min-width:170px;height:46px;background:#5a3410;border:3px solid #2e1a06;box-shadow:inset 0 0 0 2px #8a5a2a,2px 2px 0 rgba(0,0,0,.25);color:#ffd84a;font:900 20px/40px "Gulim",sans-serif;letter-spacing:.9em;text-indent:.9em;text-align:center}
 .sp-head{display:flex;justify-content:center;gap:4px;margin-bottom:10px}
-.sp-head .sp-seat{width:min(160px,32%);height:52px;padding-top:16px}
+.sp-head .sp-seat{width:min(160px,32%);height:58px;padding-top:13px;padding-bottom:13px}
+.sp-head .sp-seat small{left:0;right:0;text-align:center}
+.sp-head .sp-seat .lock{left:0;right:0;bottom:2px;text-align:center}
 .sp-room{display:grid;grid-template-columns:1fr minmax(54px,.9fr) 1fr;gap:10px;align-items:stretch}
 .sp-col{display:grid;gap:4px}
 .sp-table{border:2px solid #9aa5b5;border-radius:40px;background:linear-gradient(90deg,#f3f5f8,#fff 50%,#f3f5f8);display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;letter-spacing:.5em;font-size:13px;color:#8a95a6}
@@ -790,7 +792,7 @@ main{overflow-x:clip}
           <li><a href="#game-runner">칼퇴 러너 <span id="gpRunner">최고 -</span></a></li>
           <li><a href="#game-stack2">서류 탑 쌓기 2 <span id="gpStack2">최고 -</span></a></li>
           <li><a href="#game-slack">딴짓 들키지 마 <span id="gpSlack">최고 -</span></a></li>
-          <li><a href="#game-mail">받은편지함 0 <span id="gpMail">최고 -</span></a></li>
+          <li><a href="#game-mail">받은 편지함 <span id="gpMail">최고 -</span></a></li>
         </ul>
         <a class="btn" href="#game-runner">플레이하기</a>
         <svg viewBox="0 0 120 120" aria-hidden="true"><circle cx="70" cy="30" r="14" fill="#ffd7b0"/><path d="M56 27a14 14 0 0 1 28 0z" fill="#ffd23f"/><rect x="56" y="46" width="28" height="38" rx="7" fill="#ff5b2e"/><path d="M62 82l-12 28M78 82l16 24" stroke="#ff5b2e" stroke-width="8" stroke-linecap="round"/></svg>
@@ -1047,13 +1049,13 @@ main{overflow-x:clip}
       <div class="rank"><h3>칼퇴 러너 <a href="#game-runner">플레이 →</a></h3><ol id="rkRunner"><li class="empty">불러오는 중…</li></ol></div>
       <div class="rank"><h3>서류 탑 쌓기 2 <a href="#game-stack2">플레이 →</a></h3><ol id="rkStack2"><li class="empty">불러오는 중…</li></ol></div>
       <div class="rank"><h3>딴짓 들키지 마 <a href="#game-slack">플레이 →</a></h3><ol id="rkSlack"><li class="empty">불러오는 중…</li></ol></div>
-      <div class="rank"><h3>받은편지함 0 <a href="#game-mail">플레이 →</a></h3><ol id="rkMail"><li class="empty">불러오는 중…</li></ol></div>
+      <div class="rank"><h3>받은 편지함 <a href="#game-mail">플레이 →</a></h3><ol id="rkMail"><li class="empty">불러오는 중…</li></ol></div>
     </div>
     <div class="my-rec" id="myRec"></div>
   </div>
   <div data-sub="mail">
     <div class="game">
-      <div class="game-top"><b>받은편지함 0</b><div class="sc"><span>목숨 <b id="mLife">♥♥♥</b></span><span>점수 <b id="mScore">0</b></span><span>최고 <b id="mBest">0</b></span></div></div>
+      <div class="game-top"><b>받은 편지함</b><div class="sc"><span>목숨 <b id="mLife">♥♥♥</b></span><span>점수 <b id="mScore">0</b></span><span>최고 <b id="mBest">0</b></span></div></div>
       <div class="mail-stage" id="mailStage">
         <div class="mail-count" id="mCount">처리한 메일 0통</div>
         <div class="mail-card" id="mCard"></div>
@@ -1206,7 +1208,7 @@ const SITE=[
  {id:'about',name:'연구소 소개',desc:'성과는 없지만 서류는 있는 곳',subs:[['greeting','인사말'],['history','연혁'],['org','조직도'],['numbers','숫자로 보는 연구소']]},
  {id:'service',name:'핑계 서비스',desc:'할 말이 없을 때, 그럴듯하게',subs:[['excuse','핑계 생성기'],['translate','직장어 번역기'],['fortune','오늘의 운세']]},
  {id:'tools',name:'업무 도구',desc:'일하는 것처럼 보이게 도와드립니다',subs:[['kyul','퇴근 결재'],['project','99% 프로젝트'],['meeting','회의 생성기'],['inflate','보고서 늘리기'],['seat','중운위 자리 배치']]},
- {id:'game',name:'게임존',desc:'일하는 척하면서 할 수 있는 미니게임',subs:[['runner','칼퇴 러너'],['stack2','서류 탑 쌓기 2'],['slack','딴짓 들키지 마'],['mail','받은편지함 0'],['bingo','회의 빙고'],['rank','명예의 전당']]},
+ {id:'game',name:'게임존',desc:'일하는 척하면서 할 수 있는 미니게임',subs:[['runner','칼퇴 러너'],['stack2','서류 탑 쌓기 2'],['slack','딴짓 들키지 마'],['mail','받은 편지함'],['bingo','회의 빙고'],['rank','명예의 전당']]},
  {id:'community',name:'커뮤니티',desc:'딴짓 꿀팁과 사무실 이야기가 오가는 곳',subs:[['notice','공지사항'],['free','자유게시판']]},
  {id:'recruit',name:'인재채용',desc:'미룬 일이 많을수록 우대합니다',subs:[['jobs','채용 공고'],['test','직무 적성 진단'],['apply','입사 지원']]}
 ];
@@ -1653,7 +1655,7 @@ const Sk2=(()=>{
   return{enter(){state='ready';resize()},leave(){if(state==='run'){state='ready';cancelAnimationFrame(raf);reset();draw();$('k2Msg').textContent='게임이 중단되었습니다. 화면을 눌러 다시 시작하세요.'}},key(){drop()}};
 })();
 onEnter['game-stack2']=()=>Sk2.enter();onLeave['game-stack2']=()=>Sk2.leave();
-/* ───── 게임 4: 받은편지함 0 ───── */
+/* ───── 게임 4: 받은 편지함 ───── */
 const Ml=(()=>{
   const KEEP=[['팀장님','[긴급] 오늘 3시 회의 자료 부탁해요'],['인사팀','11월 급여 명세서 안내','gold'],['고객사 김 과장','견적서 수정본 요청드립니다'],['총무팀','회의실 예약 변경 안내'],['팀장님','금요일 회식 장소 공지'],['인사팀','연차 신청이 승인되었습니다'],['프로젝트 봇','[리마인더] 보고서 마감 D-1'],['재무팀','법인카드 영수증 제출 요청'],['옆팀 대리','어제 말씀하신 파일 보내드려요'],['대표이사','전 직원 공지: 오늘 조기 퇴근','gold'],['IT지원팀','사내 메신저 점검 일정 안내'],['고객센터','고객 문의 #4521 답변 요청'],['팀장님','이 문서 검토 부탁해요'],['교육팀','필수 교육 이수 마감 안내']];
   const DEL=[['(광고) 무한쇼핑','오늘만 90% 할인! 지금 클릭','광고 메일이었습니다'],['당첨 안내센터','축하합니다! 아이폰에 당첨되셨습니다','당첨 사기 메일이었습니다'],['이 과장','RE: RE: RE: 저도요','전체회신 "저도요"였습니다'],['뉴스레터','이번 주 꼭 읽어야 할 자기계발 10선','안 읽을 뉴스레터였습니다'],['보안팀(외부메일)','비밀번호 만료! 링크로 재설정하세요','피싱 메일이었습니다'],['팀장님(외부메일)','급하게 상품권 좀 사줄 수 있어요?','팀장님 사칭 피싱이었습니다'],['자동응답','퇴사하였습니다. 연락 주지 마세요','퇴사자 자동응답이었습니다'],['코인부자','하루 300% 수익 보장 리딩방','투자 사기 메일이었습니다'],['전체회신','[전체] 엘리베이터 사진 공유합니다','쓸데없는 전체메일이었습니다'],['(광고) 헬스장','작심삼일 회원님, 다시 돌아오세요','광고 메일이었습니다'],['해외 왕자','귀하에게 유산을 상속하고자 합니다','국제 사기 메일이었습니다'],['택배사(외부메일)','배송 실패. 주소 확인 링크 클릭','택배 사칭 피싱이었습니다']];
@@ -1675,7 +1677,7 @@ const Ml=(()=>{
     else{combo=0;lives--;hearts();stage.classList.remove('shake');void stage.offsetWidth;stage.classList.add('shake');
       $('mMsg').textContent=keep===null?'시간 초과! 메일이 쌓였습니다.':cur.keep?`앗, 업무 메일(${cur.from})을 지웠습니다!`:`앗, ${cur.why}!`}
     if(lives<=0){setTimeout(end,350);return}setTimeout(show,220)}
-  function title(n){return n>=80?'받은편지함 0의 신':n>=50?'메일 정리 장인':n>=30?'칼답 대리':n>=15?'성실한 사원':'아직은 메일함 9,999+'}
+  function title(n){return n>=80?'받은 편지함의 신':n>=50?'메일 정리 장인':n>=30?'칼답 대리':n>=15?'성실한 사원':'아직은 메일함 9,999+'}
   function end(){stop();stage.classList.remove('on');card.className='mail-card';card.textContent='';const nb=saveBest('mail',score);
     $('mMsg').textContent='';$('mMsg').append(el('b',{textContent:`종료! ${fmt(score)}점 · ${done}통 처리 · ${title(done)}${nb?' · 최고 기록 갱신!':''} `}),startBtn());if(nb)confetti()}
   function startBtn(){const b=el('button',{type:'button',className:'btn org sm',textContent:'다시 하기'});b.onclick=start;return b}
@@ -1940,6 +1942,7 @@ function offerScore(k,v){if(!API_ON||!(v>0))return;
         wrap.textContent=ok?`명예의 전당에 ${fmtS(k,v)} 기록을 올렸어요.`:'명예의 전당에는 이 이름의 더 높은 기록이 이미 있어요.';if(nick)store.set('amutun-guest-nick',nick);loadRanks()}
       catch(e){toast(errMsg(e));if(btn)btn.disabled=false}};
     if(session){wrap.textContent='명예의 전당에 기록하는 중…';send(null)}
+    else if(guestNick()){const nick=guestNick();wrap.textContent=`명예의 전당에 '${nick}' 이름으로 올리는 중…`;send(nick).then(()=>{const c=el('button',{type:'button',className:'linkbtn',textContent:'다른 이름으로 올리기',style:'margin-left:8px'});c.onclick=()=>{wrap.remove();store.set('amutun-guest-nick','');offerScore(k,v)};wrap.append(c)})}
     else{const n=el('input',{className:'ipt',maxLength:12,placeholder:'이름',value:guestNick(),style:'height:38px;width:150px'});n.setAttribute('aria-label','랭킹에 올릴 이름');
       const b=el('button',{type:'button',className:'btn sm org',textContent:'명예의 전당 등록'});b.onclick=()=>send(n.value.trim(),b);n.onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();b.click()}};
       wrap.append(n,b,el('span',{className:'note',textContent:fmtS(k,v)}))}
