@@ -309,7 +309,32 @@ main{overflow-x:clip}
 .howto div{background:var(--gray);border-radius:12px;padding:14px 16px;font-size:14px;color:var(--body)}
 .howto b{display:block;color:var(--ink);margin-bottom:2px}
 #rcv{display:block;width:100%;height:260px;touch-action:manipulation;cursor:pointer;background:#eef3ff}
-#kcv{display:block;width:100%;height:340px;touch-action:manipulation;cursor:pointer;background:#eef3ff;user-select:none;-webkit-user-select:none}
+#k2cv{display:block;width:100%;height:380px;touch-action:manipulation;cursor:pointer;background:#eef3ff;user-select:none;-webkit-user-select:none}
+.mail-stage{position:relative;height:340px;background:linear-gradient(#f5f7fb,#eef3ff);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:18px;overflow:hidden;user-select:none;-webkit-user-select:none}
+.mail-stage:not(.on)::before{content:"📥 받은편지함 9,999+";font-size:24px;font-weight:900;color:var(--navy)}
+.mail-count{position:absolute;left:18px;top:14px;font-size:13px;font-weight:700;color:var(--body)}
+.mail-card{display:none;width:min(420px,100%);min-height:150px;background:#fff;border:1px solid var(--line);border-radius:14px;box-shadow:0 10px 30px -12px rgba(15,30,69,.35);padding:18px 20px;touch-action:none;cursor:grab;transition:transform .18s ease,opacity .18s ease}
+.mail-stage.on .mail-card{display:block}
+.mail-card.in{animation:mailIn .18s ease-out}
+@keyframes mailIn{from{transform:translateY(16px) scale(.96);opacity:0}}
+.mail-card.out-l{transform:translateX(-140%) rotate(-14deg)!important;opacity:0}
+.mail-card.out-r{transform:translateX(140%) rotate(14deg)!important;opacity:0}
+.mail-card.out-d{transform:translateY(60px)!important;opacity:0}
+.mail-card.gold{border:2px solid #ffd23f;background:#fffbea}
+.mc-from{display:flex;align-items:center;gap:10px;margin-bottom:10px;font-size:14px}
+.mc-from i{width:34px;height:34px;border-radius:50%;background:var(--navy);color:#fff;display:grid;place-items:center;font-style:normal;font-weight:900;flex:0 0 auto}
+.mc-from span{margin-left:auto;color:var(--muted);font-size:12px}
+.mc-subj{font-size:17px;font-weight:900;color:var(--ink);line-height:1.4}
+.mc-body{margin-top:6px;font-size:13px;color:var(--muted)}
+.mail-timer{width:min(420px,100%);height:6px;background:#dfe5f1;border-radius:3px;overflow:hidden}
+.mail-timer i{display:block;height:100%;background:var(--green);transform-origin:left}
+.mail-timer i.hurry{background:var(--brand)}
+.mail-btns{display:flex;gap:12px;width:min(420px,100%)}
+.mail-btn{flex:1;height:52px;border-radius:12px;border:0;font-size:16px;font-weight:900;cursor:pointer;color:#fff}
+.mail-btn.del{background:#1a1f2b}.mail-btn.keep{background:var(--brand)}
+.mail-btn:active{transform:scale(.97)}
+.mail-stage.shake{animation:mailShake .3s}
+@keyframes mailShake{20%{transform:translateX(-8px)}40%{transform:translateX(8px)}60%{transform:translateX(-5px)}80%{transform:translateX(5px)}}
 .hole{position:relative;aspect-ratio:1.25;border:0;border-radius:14px;background:var(--gray);overflow:hidden;padding:0}
 .hole:after{content:"";position:absolute;left:0;right:0;bottom:0;height:24%;background:#c9b49a;border-top:4px solid #a8916f}
 .pop{position:absolute;left:14%;right:14%;bottom:-80%;height:66%;border-radius:8px;display:grid;place-items:center;font-size:clamp(12px,1.6vw,16px);font-weight:900;transition:bottom .14s ease-out;z-index:1;padding:4px;text-align:center;line-height:1.25}
@@ -378,6 +403,66 @@ main{overflow-x:clip}
 .foot-info address{font-style:normal;line-height:1.9;margin-top:14px}
 .foot-info address span{margin-right:14px;display:inline-block}
 .foot-info small{display:block;margin-top:10px;color:#6f778a}
+
+/* 중운위 자리 배치 (옛날 자리바꾸기 프로그램 스타일) */
+.sp{max-width:760px;margin:0 auto;border:1px solid #6b7a8f;border-radius:8px 8px 3px 3px;background:#cfd8e6;box-shadow:0 14px 34px -12px rgba(15,30,69,.45);font-family:"Gulim","굴림","Dotum","돋움","Noto Sans KR",sans-serif;user-select:none;-webkit-user-select:none;color:#10202a}
+.sp-title{display:flex;align-items:center;gap:8px;height:30px;padding:0 6px 0 8px;background:linear-gradient(#eef3fa,#c3d0e5);border-bottom:1px solid #8a9ab0;border-radius:7px 7px 0 0;font-size:13px}
+.sp-title i{width:16px;height:16px;border-radius:3px;background:linear-gradient(135deg,#ff6a3d,#b31f00);color:#fff;font:italic 900 12px/16px Georgia,serif;text-align:center;flex:0 0 auto}
+.sp-title b{font-weight:400;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sp-win{margin-left:auto;display:flex;gap:2px;flex:0 0 auto}
+.sp-win span{width:26px;height:18px;border:1px solid #7d8ea6;border-radius:3px;background:linear-gradient(#f6f8fc,#d1dae8);font:11px/16px sans-serif;text-align:center;color:#334}
+.sp-win span:last-child{width:42px;background:linear-gradient(#eba48d,#c4472b);color:#fff;border-color:#8f2d17}
+.sp-menu{display:flex;gap:14px;padding:3px 8px;background:#f0f0f0;border-bottom:1px solid #b9c2cf;font-size:13px}
+.sp-menu button{border:0;background:none;padding:0 2px;font:inherit;color:inherit;cursor:pointer}
+.sp-menu button:hover{background:#cfe0f7;outline:1px solid #8fb2e4}
+.sp-bar{height:10px;background:#16b922;border-bottom:1px solid #0e7a15;transform-origin:left center}
+.sp-stage{position:relative;padding:12px 16px 12px;background:radial-gradient(60px 22px at 14% 16%,#fff 60%,transparent 62%),radial-gradient(90px 26px at 22% 14%,#fff 60%,transparent 62%),radial-gradient(70px 22px at 84% 22%,#fff 60%,transparent 62%),radial-gradient(100px 28px at 74% 18%,#fff 60%,transparent 62%),linear-gradient(#a9dcff 0%,#e2f5ff 52%,#d4f0c4 76%,#9fd88a 100%)}
+.sp-top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;font-size:12px;margin-bottom:4px;flex-wrap:wrap}
+.sp-top label{display:inline-flex;align-items:center;gap:4px;cursor:pointer}
+.sp-meet{font-size:13px;font-weight:700}
+.sp-meet input{width:40px;height:22px;margin:0 3px;padding:0 4px;border:1px solid #7f9db9;background:#fff;font:700 13px "Gulim",sans-serif;text-align:center;user-select:text}
+.sp-tv{margin:4px auto 10px;width:44%;min-width:170px;height:46px;background:#5a3410;border:3px solid #2e1a06;box-shadow:inset 0 0 0 2px #8a5a2a,2px 2px 0 rgba(0,0,0,.25);color:#ffd84a;font:900 20px/40px "Gulim",sans-serif;letter-spacing:.9em;text-indent:.9em;text-align:center}
+.sp-head{display:flex;justify-content:center;gap:4px;margin-bottom:10px}
+.sp-head .sp-seat{width:min(150px,31%)}
+.sp-room{display:grid;grid-template-columns:1fr minmax(54px,.9fr) 1fr;gap:10px;align-items:stretch}
+.sp-col{display:grid;gap:4px}
+.sp-table{border:2px solid #9aa5b5;border-radius:40px;background:linear-gradient(90deg,#f3f5f8,#fff 50%,#f3f5f8);display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;letter-spacing:.5em;font-size:13px;color:#8a95a6}
+.sp-seat{position:relative;height:44px;border:2px solid #4a8a3a;background:linear-gradient(#ecfde2,#bdeea6);display:flex;align-items:center;justify-content:center;font-size:clamp(16px,2.8vw,23px);font-weight:700;color:#0d2a0d;box-shadow:inset 0 0 0 1px #fff,1px 1px 0 #2f5f25;white-space:nowrap}
+.sp-seat small{position:absolute;left:4px;top:2px;font-size:10px;font-weight:400;color:#2f5f25;letter-spacing:0}
+.sp-seat .pin{position:absolute;right:3px;bottom:3px;width:12px;height:12px;border-radius:50%;border:1px solid #3a5ad0;background:#fff;padding:0;cursor:pointer}
+.sp-seat .pin.on{background:#ff8a1e;border-color:#a34b00;box-shadow:0 0 0 2px rgba(255,138,30,.35)}
+.sp-seat.pinned{border-color:#d07a10}
+.sp-seat .lock{position:absolute;right:4px;bottom:2px;font-size:10px;font-weight:400;color:#8a6a00}
+.sp-hl .sp-seat.fixed{background:linear-gradient(#fff8d2,#ffe07a);border-color:#b08a10;box-shadow:inset 0 0 0 1px #fff,1px 1px 0 #7a5d00}
+.sp-seat.flick{color:#6c8c6c}
+.sp-seat.pop{animation:spPop .38s ease-out}
+@keyframes spPop{0%{transform:scale(.55)}70%{transform:scale(1.12)}100%{transform:scale(1)}}
+.sp-note{margin:8px 0 0;font-size:11px;color:#2c4a2c;text-align:center}
+.sp-bottom{display:flex;align-items:flex-end;gap:10px;margin-top:10px;flex-wrap:wrap}
+.sp-mascot{display:flex;align-items:flex-end;gap:6px;font-size:12px}
+.sp-mascot svg{width:56px;height:56px;display:block}
+.sp-btns{margin-left:auto;display:flex;gap:10px;flex-wrap:wrap}
+.sp-btn{font:700 20px "Gulim","굴림",sans-serif;padding:4px 18px;border:2px solid #222;border-radius:10px;background:linear-gradient(#fff,#dadada);box-shadow:inset 0 0 0 2px #fff,inset 0 0 0 3px #8a8a8a,2px 2px 0 #333;cursor:pointer;color:#111}
+.sp-btn:hover{background:linear-gradient(#fff,#e9f3ff)}
+.sp-btn:active{transform:translate(2px,2px);box-shadow:inset 0 0 0 2px #fff,inset 0 0 0 3px #8a8a8a}
+.sp-btn:disabled{color:#888;cursor:wait}
+.sp-foot{font-size:11px;text-align:right;color:#24425a;margin-top:6px}
+.sp-dlg{position:absolute;inset:0;background:rgba(0,0,0,.18);display:flex;align-items:center;justify-content:center;padding:16px;z-index:2}
+.sp-dlg>div{max-width:400px;background:#ece9d8;border:1px solid #0a246a;box-shadow:3px 3px 0 rgba(0,0,0,.35)}
+.sp-dlg h4{margin:0;padding:4px 8px;background:linear-gradient(90deg,#0a246a,#a6caf0);color:#fff;font-size:13px}
+.sp-dlg p{margin:0;padding:12px 14px;font-size:13px;line-height:1.75}
+.sp-dlg .r{text-align:center;padding:0 0 12px}
+.sp-dlg button{min-width:80px;padding:3px 10px;border:1px solid #003c74;border-radius:3px;background:linear-gradient(#fff,#e3e3db);font:13px "Gulim",sans-serif;cursor:pointer}
+.sp-ph{display:none}
+@media (max-width:560px){.sp-stage{padding:10px 8px}.sp-room{gap:5px}.sp-seat{height:40px}.sp-btn{font-size:16px;padding:4px 10px}.sp-tv{letter-spacing:.5em;text-indent:.5em}}
+@media print{
+  body.print-seat *{visibility:hidden!important}
+  body.print-seat #spPrint,body.print-seat #spPrint *{visibility:visible!important}
+  body.print-seat #spPrint{position:absolute;left:0;top:0;width:100%;background:#fff!important;padding:0!important}
+  body.print-seat #spPrint .pin,body.print-seat #spPrint .sp-top label{display:none}
+  body.print-seat .sp-ph{display:block;text-align:center;font:700 18px "Gulim",sans-serif;margin-bottom:8px}
+  body.print-seat .sp-seat{background:#fff!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
 
 /* 팝업, 모달, 토스트, 퀵바 */
 .layer{position:fixed;z-index:80;left:max(20px,env(safe-area-inset-left,0px));top:calc(130px + env(safe-area-inset-top,0px));width:min(380px,calc(100vw - 40px));background:#fff;box-shadow:0 20px 50px -10px rgba(15,30,69,.45);border-radius:12px;overflow:hidden}
@@ -475,7 +560,8 @@ main{overflow-x:clip}
 .offline{background:var(--gray);border-radius:12px;padding:26px;color:var(--body);line-height:1.8}
 
 /* 랭킹 */
-.ranks{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.ranks{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+@media (max-width:1180px){.ranks{grid-template-columns:repeat(2,1fr)}}
 .rank{border:1px solid var(--line);border-radius:16px;overflow:hidden}
 .rank h3{font-size:17px;font-weight:900;padding:16px 18px;background:var(--navy);color:#fff;display:flex;justify-content:space-between;align-items:center}
 .rank h3 a{font-size:12.5px;font-weight:500;color:var(--yellow)}
@@ -702,8 +788,9 @@ main{overflow-x:clip}
         <p class="sub">일하는 척하면서 할 수 있는 미니게임</p>
         <ul class="gp-list">
           <li><a href="#game-runner">칼퇴 러너 <span id="gpRunner">최고 -</span></a></li>
-          <li><a href="#game-stack">서류 탑 쌓기 <span id="gpStack">최고 -</span></a></li>
+          <li><a href="#game-stack2">서류 탑 쌓기 2 <span id="gpStack2">최고 -</span></a></li>
           <li><a href="#game-slack">딴짓 들키지 마 <span id="gpSlack">최고 -</span></a></li>
+          <li><a href="#game-mail">받은편지함 0 <span id="gpMail">최고 -</span></a></li>
         </ul>
         <a class="btn" href="#game-runner">플레이하기</a>
         <svg viewBox="0 0 120 120" aria-hidden="true"><circle cx="70" cy="30" r="14" fill="#ffd7b0"/><path d="M56 27a14 14 0 0 1 28 0z" fill="#ffd23f"/><rect x="56" y="46" width="28" height="38" rx="7" fill="#ff5b2e"/><path d="M62 82l-12 28M78 82l16 24" stroke="#ff5b2e" stroke-width="8" stroke-linecap="round"/></svg>
@@ -889,6 +976,29 @@ main{overflow-x:clip}
       </div>
     </div>
   </div>
+  <div data-sub="seat">
+    <div class="sp" id="seatApp">
+      <div class="sp-title"><i>f</i><b>Macromedia Flash Player 7 - 중운위 자리바꾸기 2.5</b><div class="sp-win" aria-hidden="true"><span>_</span><span>□</span><span>X</span></div></div>
+      <div class="sp-menu"><button type="button" data-sp="print">파일(<u>F</u>)</button><button type="button" data-sp="hl">보기(<u>V</u>)</button><button type="button" data-sp="go">컨트롤(<u>C</u>)</button><button type="button" data-sp="help">도움말(<u>H</u>)</button></div>
+      <div class="sp-bar" id="spBar"></div>
+      <div class="sp-stage sp-hl" id="spPrint">
+        <div class="sp-ph" id="spPh"></div>
+        <div class="sp-top">
+          <span class="sp-meet">제<input id="spNo" inputmode="numeric" maxlength="4" value="46" aria-label="회차">차 중앙운영위원회</span>
+          <label><input type="checkbox" id="spHl" checked> 위원장단 자리표시</label>
+        </div>
+        <div class="sp-tv">T V</div>
+        <div class="sp-head" id="spHead"></div>
+        <div class="sp-room"><div class="sp-col" id="spL"></div><div class="sp-table">회의 테이블</div><div class="sp-col" id="spR"></div></div>
+        <p class="sp-note">※ 좌·우는 TV 앞 위원장 자리에서 회의장을 바라본 기준 · 이름 옆 동그라미를 누르면 그 자리는 고정됩니다</p>
+        <div class="sp-bottom">
+          <div class="sp-mascot"><svg viewBox="0 0 56 56" aria-hidden="true"><circle cx="28" cy="30" r="17" fill="#ffd9b8"/><path d="M11 30c0-13 8-20 17-20s17 7 17 20c-3-6-8-9-17-9s-14 3-17 9z" fill="#3a2414"/><circle cx="41" cy="13" r="6" fill="#3a2414"/><path d="M36 11l9-3 1 6z" fill="#e8463a"/><circle cx="22" cy="31" r="2" fill="#222"/><circle cx="34" cy="31" r="2" fill="#222"/><path d="M23 38q5 4 10 0" stroke="#c0392b" stroke-width="2" fill="none" stroke-linecap="round"/><circle cx="19" cy="36" r="2.5" fill="#ff9e9e" opacity=".7"/><circle cx="37" cy="36" r="2.5" fill="#ff9e9e" opacity=".7"/><path d="M14 56c2-8 7-11 14-11s12 3 14 11z" fill="#4a7bd0"/></svg><label><input type="checkbox" id="spFx"> 효과끄기</label></div>
+          <div class="sp-btns"><button class="sp-btn" type="button" data-sp="help">도움말</button><button class="sp-btn" type="button" data-sp="go" id="spGo">자리배치</button><button class="sp-btn" type="button" data-sp="print">프린트</button></div>
+        </div>
+        <div class="sp-foot">http://amutun-lab.github.io</div>
+      </div>
+    </div>
+  </div>
 </section>
 
 <!-- ================= 게임존 ================= -->
@@ -901,13 +1011,13 @@ main{overflow-x:clip}
     </div>
     <div class="howto"><div><b>조작</b>스페이스바, 위쪽 화살표, 또는 화면 터치로 점프</div><div><b>피할 것</b>야근, 회의, 추가업무, 주말출근 상자</div><div><b>보너스</b>커피를 먹으면 50점 추가</div></div>
   </div>
-  <div data-sub="stack">
+  <div data-sub="stack2">
     <div class="game">
-      <div class="game-top"><b>서류 탑 쌓기</b><div class="sc"><span>현재 <b id="kScore">0층</b></span><span>최고 <b id="kBest">0층</b></span></div></div>
-      <canvas id="kcv" aria-label="서류 탑 쌓기 게임 화면. 화면을 누르거나 스페이스바로 서류를 내려놓기"></canvas>
-      <div class="game-msg" id="kMsg">화면을 누르거나 스페이스바를 눌러 시작하세요.</div>
+      <div class="game-top"><b>서류 탑 쌓기 2</b><div class="sc"><span>점수 <b id="k2Score">0</b></span><span>높이 <b id="k2Floor">0층</b></span><span>최고 <b id="k2Best">0</b></span></div></div>
+      <canvas id="k2cv" aria-label="서류 탑 쌓기 2 게임 화면. 화면을 누르거나 스페이스바로 서류를 내려놓기"></canvas>
+      <div class="game-msg" id="k2Msg">화면을 누르거나 스페이스바를 눌러 시작하세요.</div>
     </div>
-    <div class="howto"><div><b>조작</b>움직이는 서류가 탑 위에 올 때 화면 터치 또는 스페이스바</div><div><b>잘림</b>삐져나간 부분은 잘려 나가고 서류가 점점 좁아집니다</div><div><b>완벽 결재</b>딱 맞추면 그대로, 3번 연속이면 서류가 다시 넓어집니다</div></div>
+    <div class="howto"><div><b>콤보 &amp; FEVER</b>딱 맞추면 콤보 점수가 x10까지 커지고, 5콤보마다 8초 FEVER(점수 2배·판정 넓어짐)</div><div><b>특수 서류</b>☕ 커피 수혈은 폭 회복, 🔥 긴급 결재는 빠르지만 +60점, 📎 자석 클립은 3번 동안 판정 넓어짐</div><div><b>결재 반려권</b>한 번 빗나가도 반려권으로 버팁니다. 20층마다 하나씩 더(최대 3개)</div></div>
   </div>
   <div data-sub="slack">
     <div class="game">
@@ -935,10 +1045,24 @@ main{overflow-x:clip}
     <div class="ph"><h2>명예의 전당</h2><p>게임이 끝나면 닉네임으로 기록을 등록할 수 있습니다. 닉네임마다 최고 기록 하나만 남습니다.</p></div>
     <div class="ranks">
       <div class="rank"><h3>칼퇴 러너 <a href="#game-runner">플레이 →</a></h3><ol id="rkRunner"><li class="empty">불러오는 중…</li></ol></div>
-      <div class="rank"><h3>서류 탑 쌓기 <a href="#game-stack">플레이 →</a></h3><ol id="rkStack"><li class="empty">불러오는 중…</li></ol></div>
+      <div class="rank"><h3>서류 탑 쌓기 2 <a href="#game-stack2">플레이 →</a></h3><ol id="rkStack2"><li class="empty">불러오는 중…</li></ol></div>
       <div class="rank"><h3>딴짓 들키지 마 <a href="#game-slack">플레이 →</a></h3><ol id="rkSlack"><li class="empty">불러오는 중…</li></ol></div>
+      <div class="rank"><h3>받은편지함 0 <a href="#game-mail">플레이 →</a></h3><ol id="rkMail"><li class="empty">불러오는 중…</li></ol></div>
     </div>
     <div class="my-rec" id="myRec"></div>
+  </div>
+  <div data-sub="mail">
+    <div class="game">
+      <div class="game-top"><b>받은편지함 0</b><div class="sc"><span>목숨 <b id="mLife">♥♥♥</b></span><span>점수 <b id="mScore">0</b></span><span>최고 <b id="mBest">0</b></span></div></div>
+      <div class="mail-stage" id="mailStage">
+        <div class="mail-count" id="mCount">처리한 메일 0통</div>
+        <div class="mail-card" id="mCard"></div>
+        <div class="mail-timer"><i id="mTimer"></i></div>
+        <div class="mail-btns"><button type="button" class="mail-btn del" id="mDel">← 삭제</button><button type="button" class="mail-btn keep" id="mKeep">보관 →</button></div>
+      </div>
+      <div class="game-msg" id="mMsg"><button class="btn org sm" id="mStart" type="button">게임 시작</button> 업무 메일은 보관, 스팸·광고·피싱은 삭제!</div>
+    </div>
+    <div class="howto"><div><b>조작</b>← / → 방향키(A / D), 버튼, 또는 메일 카드를 좌우로 밀기</div><div><b>보관</b>팀장님·인사팀·고객사 같은 진짜 업무 메일. ⭐ 메일은 보너스 + 목숨 회복</div><div><b>삭제</b>광고, 전체회신 "저도요", 사칭·피싱 메일. 외부메일로 온 "팀장님"은 의심하세요</div></div>
   </div>
   <div data-sub="bingo">
     <div class="ph" style="display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap"><div><h2>회의 빙고</h2><p id="bingoMsg">다음 회의에 띄워 두고 들린 말을 누르세요. 가운데 칸은 무료입니다.</p></div><button class="btn line" id="bingoNew" type="button">새 빙고판</button></div>
@@ -1081,8 +1205,8 @@ async function genJson(prompt,btn){if(!sample)return null;if(btn)btn.disabled=tr
 const SITE=[
  {id:'about',name:'연구소 소개',desc:'성과는 없지만 서류는 있는 곳',subs:[['greeting','인사말'],['history','연혁'],['org','조직도'],['numbers','숫자로 보는 연구소']]},
  {id:'service',name:'핑계 서비스',desc:'할 말이 없을 때, 그럴듯하게',subs:[['excuse','핑계 생성기'],['translate','직장어 번역기'],['fortune','오늘의 운세']]},
- {id:'tools',name:'업무 도구',desc:'일하는 것처럼 보이게 도와드립니다',subs:[['kyul','퇴근 결재'],['project','99% 프로젝트'],['meeting','회의 생성기'],['inflate','보고서 늘리기']]},
- {id:'game',name:'게임존',desc:'일하는 척하면서 할 수 있는 미니게임',subs:[['runner','칼퇴 러너'],['stack','서류 탑 쌓기'],['slack','딴짓 들키지 마'],['bingo','회의 빙고'],['rank','명예의 전당']]},
+ {id:'tools',name:'업무 도구',desc:'일하는 것처럼 보이게 도와드립니다',subs:[['kyul','퇴근 결재'],['project','99% 프로젝트'],['meeting','회의 생성기'],['inflate','보고서 늘리기'],['seat','중운위 자리 배치']]},
+ {id:'game',name:'게임존',desc:'일하는 척하면서 할 수 있는 미니게임',subs:[['runner','칼퇴 러너'],['stack2','서류 탑 쌓기 2'],['slack','딴짓 들키지 마'],['mail','받은편지함 0'],['bingo','회의 빙고'],['rank','명예의 전당']]},
  {id:'community',name:'커뮤니티',desc:'딴짓 꿀팁과 사무실 이야기가 오가는 곳',subs:[['notice','공지사항'],['free','자유게시판']]},
  {id:'recruit',name:'인재채용',desc:'미룬 일이 많을수록 우대합니다',subs:[['jobs','채용 공고'],['test','직무 적성 진단'],['apply','입사 지원']]}
 ];
@@ -1335,13 +1459,54 @@ function checkBingo(){const cells=$('bingo').children;[...cells].forEach(c=>c.cl
   $('bingoMsg').textContent=n?`현재 빙고 ${n}줄 · 다섯 줄이면 회의 탈출권 지급`:'다음 회의에 띄워 두고 들린 말을 누르세요. 가운데 칸은 무료입니다.'}
 $('bingoNew').onclick=newBingo;newBingo();
 
+/* ───── 업무 도구: 중운위 자리 배치 ───── */
+(()=>{
+  /* 위원장단 고정석: 박성재는 TV 앞, 차해나는 박성재의 왼쪽, 전종현은 박성재의 오른쪽 (화면에서는 좌우가 반대로 보임) */
+  const HEAD=[['전종현','중집장'],['박성재','위원장'],['차해나','부위원장']];
+  const MEMBERS=[['박규현','공과'],['변다예','국제'],['김여울','자연'],['이재후','의과'],['박영주','간호'],['김민찬','인문'],['류다영','경영'],['이준희','생활'],['이민규','기혁'],['허다연','사회'],['천세진','건축'],['이찬혁','예체'],['장한결','정책'],['도우경','사범'],['당현우','경금'],['한민성','인칼']];
+  const N=MEMBERS.length,HALF=Math.ceil(N/2),KEY='amutun-seat';
+  const rnd=n=>{const a=new Uint32Array(1);crypto.getRandomValues(a);return a[0]%n};
+  const shuffle=a=>{for(let i=a.length-1;i>0;i--){const j=rnd(i+1);[a[i],a[j]]=[a[j],a[i]]}return a};
+  let arr=MEMBERS.map((_,i)=>i),pins=new Set(),busy=false;
+  try{const s=JSON.parse(store.get(KEY)||'null');if(s&&Array.isArray(s.arr)&&s.arr.length===N&&new Set(s.arr).size===N&&s.arr.every(i=>i>=0&&i<N)){arr=s.arr;pins=new Set((s.pins||[]).filter(i=>i>=0&&i<N));if(s.no)$('spNo').value=s.no}}catch(e){}
+  const save=()=>store.set(KEY,JSON.stringify({arr,pins:[...pins],no:$('spNo').value}));
+  const tiles=[];
+  function seatEl(name,dept,fixed){const d=el('div',{className:'sp-seat'+(fixed?' fixed':'')});d.append(el('small',{textContent:dept}),el('span',{textContent:name}));if(fixed)d.append(el('span',{className:'lock',textContent:'고정'}));return d}
+  HEAD.forEach(([n,r])=>$('spHead').append(seatEl(n,r,true)));
+  for(let s=0;s<N;s++){const d=seatEl('','',false);const p=el('button',{type:'button',className:'pin'});p.setAttribute('aria-label',(s+1)+'번 자리 고정');
+    p.onclick=()=>{if(busy)return;pins.has(s)?pins.delete(s):pins.add(s);paint(s);save()};d.append(p);($(s<HALF?'spL':'spR')).append(d);tiles.push(d)}
+  function paint(s,name){const d=tiles[s],m=MEMBERS[arr[s]];d.querySelector('small').textContent=name?'':m[1];d.querySelector('span').textContent=name||m[0];
+    const on=pins.has(s);d.classList.toggle('pinned',on);const p=d.querySelector('.pin');p.classList.toggle('on',on);p.setAttribute('aria-pressed',on);p.title=on?'고정 해제':'이 자리 고정'}
+  const paintAll=()=>{for(let s=0;s<N;s++)paint(s)};
+  let ac=null;function beep(f,t){if($('spFx').checked)return;try{ac=ac||new (window.AudioContext||window.webkitAudioContext)();const o=ac.createOscillator(),g=ac.createGain();o.type='square';o.frequency.value=f;g.gain.value=.04;o.connect(g);g.connect(ac.destination);o.start();o.stop(ac.currentTime+t)}catch(e){}}
+  function go(){if(busy)return;const free=[...Array(N).keys()].filter(s=>!pins.has(s));if(!free.length){alert('모든 자리가 고정되어 있습니다. 동그라미를 눌러 고정을 풀어 주세요.');return}
+    const pool=shuffle(free.map(s=>arr[s]));free.forEach((s,i)=>arr[s]=pool[i]);save();
+    const fx=!$('spFx').checked&&!reduced;if(!fx){paintAll();return}
+    busy=true;$('spGo').disabled=true;const bar=$('spBar');let k=0;const K=16;
+    const t=setInterval(()=>{k++;bar.style.transform=`scaleX(${k/K})`;
+      free.forEach(s=>{tiles[s].classList.add('flick');paint(s,MEMBERS[rnd(N)][0])});beep(380+rnd(500),.04);
+      if(k>=K){clearInterval(t);free.forEach((s,i)=>setTimeout(()=>{tiles[s].classList.remove('flick');paint(s);tiles[s].classList.remove('pop');void tiles[s].offsetWidth;tiles[s].classList.add('pop');beep(660+i*40,.06);
+        if(i===free.length-1){busy=false;$('spGo').disabled=false;bar.style.transform='scaleX(1)'}},i*45))}},70)}
+  function help(){const stage=$('spPrint');if(stage.querySelector('.sp-dlg'))return;const w=el('div',{className:'sp-dlg'});const b=el('div');b.setAttribute('role','dialog');b.setAttribute('aria-label','도움말');
+    const ok=el('button',{type:'button',textContent:'확인'});ok.onclick=()=>w.remove();const r=el('div',{className:'r'});r.append(ok);
+    b.append(el('h4',{textContent:'중운위 자리바꾸기 2.5 도움말'}),el('p',{textContent:'① [자리배치]를 누르면 위원장단(박성재·차해나·전종현)을 뺀 위원들의 자리가 무작위로 바뀝니다.\n② 이름 옆 동그라미를 누르면 그 자리는 다음 배치에서도 그대로 고정됩니다. 다시 누르면 풀립니다.\n③ 회차 숫자를 바꾸고 [프린트]를 누르면 자리표만 인쇄됩니다.\n④ 마지막 배치는 이 브라우저에 저장되어 다시 열어도 그대로입니다.'}),r);
+    b.querySelector('p').style.whiteSpace='pre-line';w.append(b);w.onclick=e=>{if(e.target===w)w.remove()};stage.append(w);ok.focus()}
+  function printIt(){$('spPh').textContent=`제${$('spNo').value||''}차 중앙운영위원회 자리배치 · ${new Date().toLocaleDateString('ko-KR')}`;document.body.classList.add('print-seat');
+    const done=()=>{document.body.classList.remove('print-seat');window.removeEventListener('afterprint',done)};window.addEventListener('afterprint',done);window.print();setTimeout(done,1500)}
+  $('seatApp').addEventListener('click',e=>{const b=e.target.closest('[data-sp]');if(!b)return;const a=b.dataset.sp;
+    if(a==='go')go();else if(a==='help')help();else if(a==='print')printIt();else if(a==='hl'){$('spHl').checked=!$('spHl').checked;$('spPrint').classList.toggle('sp-hl',$('spHl').checked)}});
+  $('spHl').onchange=()=>$('spPrint').classList.toggle('sp-hl',$('spHl').checked);
+  $('spNo').oninput=()=>{$('spNo').value=$('spNo').value.replace(/\D/g,'');save()};
+  paintAll();
+})();
+
 /* ───── 게임: 최고 기록 ───── */
-const best={runner:+(store.get('amutun-runner')||0),stack:+(store.get('amutun-stack')||0),slack:+(store.get('amutun-slack')||0)};
+const best={runner:+(store.get('amutun-runner')||0),stack2:+(store.get('amutun-stack2')||0),slack:+(store.get('amutun-slack')||0),mail:+(store.get('amutun-mail')||0)};
 function saveBest(k,v){logRecent(k,v);offerScore(k,v);if(v>best[k]){best[k]=v;store.set('amutun-'+k,String(v));showBest();return true}return false}
-function showBest(){$('rBest').textContent=best.runner;$('kBest').textContent=best.stack+'층';$('sBest').textContent=(best.slack/1000).toFixed(1)+'초';
+function showBest(){$('rBest').textContent=best.runner;$('k2Best').textContent=fmt(best.stack2);$('mBest').textContent=fmt(best.mail);$('sBest').textContent=(best.slack/1000).toFixed(1)+'초';
   renderPromo()}
-function renderPromo(){if(typeof renderPromo2==='function'&&window.__ranksReady)return renderPromo2();const f=(k,v)=>k==='slack'?(v/1000).toFixed(1)+'초':k==='stack'?fmt(v)+'층':fmt(v)+'점';
-  [['runner','gpRunner'],['stack','gpStack'],['slack','gpSlack']].forEach(([k,id])=>{$(id).textContent='내 최고 '+(best[k]?f(k,best[k]):'-')})}
+function renderPromo(){if(typeof renderPromo2==='function'&&window.__ranksReady)return renderPromo2();const f=(k,v)=>k==='slack'?(v/1000).toFixed(1)+'초':fmt(v)+'점';
+  [['runner','gpRunner'],['stack2','gpStack2'],['slack','gpSlack'],['mail','gpMail']].forEach(([k,id])=>{$(id).textContent='내 최고 '+(best[k]?f(k,best[k]):'-')})}
 showBest();
 
 /* ───── 게임 1: 칼퇴 러너 ───── */
@@ -1398,68 +1563,131 @@ const R=(()=>{
 })();
 onEnter['game-runner']=()=>R.enter();onLeave['game-runner']=()=>R.leave();
 
-/* ───── 게임 2: 서류 탑 쌓기 ───── */
-const Sk=(()=>{
-  const cv=$('kcv'),ctx=cv.getContext('2d');let W=600,H=340,dpr=1;
-  const DOCS=['주간보고','회의록','기안서','견적서','품의서','결과보고','출장 정산','PPT 최종','최종_진짜','사업계획서','설문 결과','영수증 철','시말서','휴가 신청서','재검토 요청'];
+/* ───── 게임 2: 서류 탑 쌓기 2 ───── */
+const Sk2=(()=>{
+  const cv=$('k2cv'),ctx=cv.getContext('2d');let W=600,H=380,dpr=1;
+  const DOCS=['주간보고','회의록','기안서','견적서','품의서','결과보고','출장 정산','PPT 최종','최종_진짜','최종_진짜_수정','사업계획서','설문 결과','영수증 철','시말서','휴가 신청서','재검토 요청','감사 자료','예산안','인수인계서','업무 일지'];
   const COLORS=['#ff5b2e','#2f5bea','#12a36b','#ffd23f','#9b5de5','#0f1e45'];
-  const BH=24,FLOOR=36;
-  const RANKS=[[0,'인턴'],[5,'사원'],[10,'주임'],[16,'대리'],[24,'과장'],[34,'차장'],[46,'부장'],[60,'상무'],[80,'사장']];
+  const SPECIAL={coffee:{label:'☕ 커피 수혈',color:'#c8892e',fill:'#fff3d6'},urgent:{label:'🔥 긴급 결재',color:'#e2461b',fill:'#ffe4da'},clip:{label:'📎 자석 클립',color:'#2f5bea',fill:'#e6edff'}};
+  const BH=24,FLOOR=40,FEVER=480;
+  const RANKS=[[0,'인턴'],[5,'사원'],[10,'주임'],[16,'대리'],[24,'과장'],[34,'차장'],[46,'부장'],[60,'상무'],[80,'사장'],[110,'회장']];
   const rankOf=n=>{let r=RANKS[0][1];for(const [k,v] of RANKS)if(n>=k)r=v;return r};
-  let state='ready',stack=[],cur=null,falls=[],floats=[],cam=0,camT=0,score=0,streak=0,raf=0,last=0,dir=1,speed=2.4,shake=0;
-  const baseW=()=>Math.min(240,W*.62);
-  function resize(){dpr=Math.min(2,window.devicePixelRatio||1);W=cv.clientWidth||600;H=340;cv.width=W*dpr;cv.height=H*dpr;ctx.setTransform(dpr,0,0,dpr,0,0);if(state!=='run')reset();draw()}
-  function reset(){const bw=baseW();stack=[{x:(W-bw)/2,w:bw,label:'',color:'#8a91a0'}];falls=[];floats=[];cam=camT=0;score=0;streak=0;shake=0;newCur();$('kScore').textContent='0층'}
-  function newCur(){const top=stack[stack.length-1];dir=Math.random()<.5?1:-1;speed=Math.min(8,2.4+(stack.length-1)*.17);
-    cur={x:dir>0?0:W-top.w,w:top.w,label:pick(DOCS),color:COLORS[stack.length%COLORS.length]}}
+  const SKY=[[0,[238,243,255]],[15,[255,226,200]],[30,[52,46,96]],[50,[11,15,36]]];
+  const STARS=Array.from({length:60},(_,i)=>({x:(i*97)%100/100,y:(i*53)%100/100,s:1+(i%3)*.6}));
+  let state='ready',stack=[],cur=null,falls=[],floats=[],parts=[],cam=0,camT=0,score=0,floors=0,combo=0,maxC=0,fever=0,clip=0,lives=1,nextLife=20,raf=0,last=0,dir=1,speed=2.5,shake=0,flash=0,tick=0;
+  const baseW=()=>Math.min(250,W*.6);
   const yOf=i=>H-FLOOR-(i+1)*BH+cam;
-  function start(){reset();state='run';$('kMsg').textContent='서류를 차곡차곡! 삐져나간 부분은 잘려 나갑니다.';last=performance.now();cancelAnimationFrame(raf);raf=requestAnimationFrame(loop)}
-  function addFloat(txt,color,x,y){floats.push({txt,color,x,y,a:1})}
+  function resize(){dpr=Math.min(2,window.devicePixelRatio||1);W=cv.clientWidth||600;H=380;cv.width=W*dpr;cv.height=H*dpr;ctx.setTransform(dpr,0,0,dpr,0,0);if(state!=='run')reset();draw()}
+  function reset(){const bw=baseW();stack=[{x:(W-bw)/2,w:bw,desk:true}];falls=[];floats=[];parts=[];cam=camT=0;score=0;floors=0;combo=0;maxC=0;fever=0;clip=0;lives=1;nextLife=20;shake=0;flash=0;newCur();hud()}
+  function hud(){$('k2Score').textContent=fmt(score);$('k2Floor').textContent=floors+'층'}
+  function newCur(){const top=stack[stack.length-1];dir=Math.random()<.5?1:-1;let kind=null;const r=Math.random();
+    if(floors>=4){if(r<.09)kind='coffee';else if(floors>=8&&r<.2)kind='urgent';else if(r<.27)kind='clip'}
+    speed=Math.min(8.5,2.5+floors*.15)*(kind==='urgent'?1.45:1);
+    cur={x:dir>0?0:W-top.w,w:top.w,label:kind?SPECIAL[kind].label:pick(DOCS),color:COLORS[(floors+1)%COLORS.length],kind,ph:Math.random()*6.28}}
+  function start(){reset();state='run';$('k2Msg').textContent='콤보를 이어 FEVER를 노리세요! 특수 서류는 놓치지 말 것.';last=performance.now();cancelAnimationFrame(raf);raf=requestAnimationFrame(loop)}
+  const addFloat=(txt,color,x,y,big)=>floats.push({txt,color,x:Math.max(90,Math.min(W-90,x)),y,a:1,big});
+  function burst(x,y,color,n){for(let i=0;i<n;i++){const a=Math.random()*6.28,v=1.5+Math.random()*3.5;parts.push({x,y,vx:Math.cos(a)*v,vy:Math.sin(a)*v-2,life:1,color})}}
   function drop(){if(state!=='run'){start();return}
-    const top=stack[stack.length-1],y=yOf(stack.length);
-    if(Math.abs(cur.x-top.x)<=5){cur.x=top.x;cur.w=top.w;streak++;
-      if(streak>=3&&cur.w<baseW()){const g=Math.min(14,baseW()-cur.w);cur.x=Math.max(0,cur.x-g/2);cur.w+=g;addFloat('완벽 결재! 서류가 늘어남','#12a36b',cur.x+cur.w/2,y-6)}
-      else addFloat(streak>1?`완벽 결재 x${streak}`:'완벽 결재!','#12a36b',cur.x+cur.w/2,y-6)}
+    const top=stack[stack.length-1],y=yOf(stack.length),tol=Math.max(fever>0?14:clip>0?12:5,(cur.step||0)/2+1);if(clip>0)clip--;let perfect=false;
+    if(Math.abs(cur.x-top.x)<=tol){perfect=true;cur.x=top.x;cur.w=top.w;combo++;maxC=Math.max(maxC,combo);
+      if(combo>=3&&combo%3===0&&cur.w<baseW()){const g=Math.min(12,baseW()-cur.w);cur.x=Math.max(0,cur.x-g/2);cur.w+=g}}
     else{const s=Math.max(cur.x,top.x),e=Math.min(cur.x+cur.w,top.x+top.w),ov=e-s;
-      if(ov<=0){falls.push({...cur,y,vy:0,r:0,vr:dir*.04});over();return}
+      if(ov<=0){miss(y);return}
       const cut=cur.x<top.x?{x:cur.x,w:top.x-cur.x}:{x:e,w:cur.x+cur.w-e};
-      falls.push({x:cut.x,w:cut.w,label:'',color:cur.color,y,vy:0,r:0,vr:(cur.x<top.x?-1:1)*.05});
-      cur.x=s;cur.w=ov;streak=0;shake=4}
-    stack.push(cur);score=stack.length-1;$('kScore').textContent=score+'층';
-    if(score%10===0)addFloat(`${score}층 돌파! ${rankOf(score)} 승진`,'#ff5b2e',W/2,yOf(stack.length-1)-30);
-    camT=Math.max(0,(stack.length-7)*BH);newCur()}
-  function over(){state='over';cancelAnimationFrame(raf);shake=8;const nb=saveBest('stack',score);
-    $('kMsg').textContent=`결재 반려! ${score}층 · 직급 ${rankOf(score)}${nb?' · 최고 기록 갱신!':''} · 다시 하려면 화면을 누르세요.`;
-    const t0=performance.now();const fin=t=>{update(Math.min(3,(t-last)/16.67));last=t;draw();if(t-t0<1200)requestAnimationFrame(fin)};last=t0;requestAnimationFrame(fin);if(nb)confetti()}
+      falls.push({x:cut.x,w:cut.w,color:cur.color,y,vy:0,r:0,vr:(cur.x<top.x?-1:1)*.05});cur.x=s;cur.w=ov;combo=0;shake=4}
+    let pts=10;const cx=cur.x+cur.w/2;
+    if(perfect){const m=Math.min(10,combo);pts+=20*m;burst(cx,y+BH/2,fever>0?'#ff5b2e':'#12a36b',10+m*2);addFloat(combo>1?`완벽 결재 x${combo}`:'완벽 결재!','#12a36b',cx,y-8)}
+    if(cur.kind==='coffee'){const g=Math.min(40,baseW()-cur.w);if(g>0){cur.x=Math.max(0,Math.min(W-cur.w-g,cur.x-g/2));cur.w+=g}addFloat('커피 수혈! 서류 폭 회복','#c8892e',cx,y-28);burst(cx,y,'#c8892e',14)}
+    if(cur.kind==='clip'){clip=3;addFloat('자석 클립! 3번 동안 판정 넓어짐','#2f5bea',cx,y-28)}
+    if(cur.kind==='urgent'){pts+=60;addFloat('긴급 결재 처리 +60','#e2461b',cx,y-28);burst(cx,y,'#e2461b',16)}
+    if(fever>0)pts*=2;score+=pts;floors++;
+    if(combo>0&&combo%5===0&&fever<=0){fever=FEVER;flash=1;addFloat('🔥 FEVER! 8초간 점수 2배','#ff5b2e',W/2,yOf(stack.length)-50,true)}
+    if(floors>=nextLife){nextLife+=20;if(lives<3){lives++;addFloat('결재 반려권 +1','#9b5de5',W/2,yOf(stack.length)-70)}}
+    if(floors%10===0)addFloat(`${floors}층 돌파! ${rankOf(floors)} 승진`,'#ff5b2e',W/2,yOf(stack.length)-90,true);
+    stack.push(cur);camT=Math.max(0,(stack.length-8)*BH);newCur();hud()}
+  function miss(y){falls.push({...cur,y,vy:0,r:0,vr:dir*.04});combo=0;
+    if(lives>0){lives--;shake=10;addFloat('결재 반려권 사용! 한 번 더','#9b5de5',W/2,y-10,true);newCur();return}over()}
+  function over(){state='over';cancelAnimationFrame(raf);shake=10;const nb=saveBest('stack2',score);
+    $('k2Msg').textContent=`결재 반려! ${fmt(score)}점 · ${floors}층 · 최대 콤보 ${maxC} · 직급 ${rankOf(floors)}${nb?' · 최고 기록 갱신!':''} · 다시 하려면 화면을 누르세요.`;
+    const t0=performance.now();const fin=t=>{update(Math.min(3,(t-last)/16.67));last=t;draw();if(t-t0<1400)requestAnimationFrame(fin)};last=t0;requestAnimationFrame(fin);if(nb)confetti()}
   function loop(t){if(state!=='run')return;const dt=Math.min(3,(t-last)/16.67);last=t;update(dt);draw();raf=requestAnimationFrame(loop)}
-  function update(dt){
-    if(state==='run'&&cur){cur.x+=dir*speed*dt;if(cur.x<=0){cur.x=0;dir=1}else if(cur.x+cur.w>=W){cur.x=W-cur.w;dir=-1}}
+  function update(dt){tick+=dt;
+    if(state==='run'&&cur){let v=speed;if(floors>=15){cur.ph+=dt*.07;v*=1+.5*Math.sin(cur.ph)}cur.step=v*dt;cur.x+=dir*v*dt;if(cur.x<=0){cur.x=0;dir=1}else if(cur.x+cur.w>=W){cur.x=W-cur.w;dir=-1}}
+    if(fever>0)fever=Math.max(0,fever-dt);flash=Math.max(0,flash-.03*dt);
     falls.forEach(f=>{f.vy+=.55*dt;f.y+=f.vy*dt;f.r+=f.vr*dt});falls=falls.filter(f=>f.y<H+80);
-    floats.forEach(f=>{f.y-=.7*dt;f.a-=.016*dt});floats=floats.filter(f=>f.a>0);
+    parts.forEach(p=>{p.vy+=.18*dt;p.x+=p.vx*dt;p.y+=p.vy*dt;p.life-=.025*dt});parts=parts.filter(p=>p.life>0);
+    floats.forEach(f=>{f.y-=.6*dt;f.a-=.013*dt});floats=floats.filter(f=>f.a>0);
     cam+=(camT-cam)*Math.min(1,.12*dt);shake=Math.max(0,shake-.5*dt)}
-  function sheet(b,y){ctx.fillStyle='#fff';ctx.fillRect(b.x,y,b.w,BH-2);ctx.fillStyle=b.color;ctx.fillRect(b.x,y,Math.min(8,b.w),BH-2);
-    ctx.strokeStyle='#1a1f2b';ctx.lineWidth=1.5;ctx.strokeRect(b.x+.75,y+.75,b.w-1.5,BH-3.5);
-    if(b.label&&b.w>58){ctx.fillStyle='#1a1f2b';ctx.font='700 12px "Noto Sans KR",sans-serif';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(b.label,b.x+b.w/2+4,y+BH/2-1,b.w-16)}}
+  function sky(){const n=floors;let a=SKY[0],b=SKY[SKY.length-1];for(let i=0;i<SKY.length-1;i++)if(n>=SKY[i][0]&&n<SKY[i+1][0]){a=SKY[i];b=SKY[i+1];break}
+    if(n>=SKY[SKY.length-1][0])return SKY[SKY.length-1][1];const t=(n-a[0])/(b[0]-a[0]);return a[1].map((c,i)=>Math.round(c+(b[1][i]-c)*t))}
+  function sheet(b,y,i){const sp=b.kind&&SPECIAL[b.kind];const col=fever>0&&!b.desk?`hsl(${(tick*4+(i||0)*40)%360},85%,55%)`:sp?sp.color:b.color;
+    ctx.fillStyle=sp?sp.fill:'#fff';ctx.fillRect(b.x,y,b.w,BH-2);ctx.fillStyle=col;ctx.fillRect(b.x,y,Math.min(8,b.w),BH-2);
+    ctx.strokeStyle=sp?sp.color:'#1a1f2b';ctx.lineWidth=sp?2:1.5;ctx.strokeRect(b.x+.75,y+.75,b.w-1.5,BH-3.5);
+    if(b.label&&b.w>58){ctx.fillStyle=sp?sp.color:'#1a1f2b';ctx.font=(sp?'900 ':'700 ')+'12px "Noto Sans KR",sans-serif';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(b.label,b.x+b.w/2+4,y+BH/2-1,b.w-16)}}
   function draw(){const sx=shake?(Math.random()-.5)*shake:0;ctx.save();ctx.translate(sx,0);
-    ctx.fillStyle='#eef3ff';ctx.fillRect(-10,0,W+20,H);
-    ctx.fillStyle='#dfe7ff';for(let i=0;i<4;i++){const wx=W*(.08+i*.24),wy=40+cam*.3%60;ctx.fillRect(wx,wy,W*.14,60)}
-    const fy=H-FLOOR+cam;ctx.fillStyle='#e3e6ec';ctx.fillRect(-10,fy,W+20,H);ctx.strokeStyle='#1a1f2b';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(-10,fy+1);ctx.lineTo(W+10,fy+1);ctx.stroke();
+    const c=sky();ctx.fillStyle=`rgb(${c})`;ctx.fillRect(-12,0,W+24,H);
+    if(floors>=24){ctx.fillStyle='#fff';ctx.globalAlpha=Math.min(1,(floors-24)/10);STARS.forEach(s=>{const yy=(s.y*H+cam*.15)%H;ctx.fillRect(s.x*W,yy,s.s,s.s)});ctx.globalAlpha=1}
+    if(floors<26){ctx.globalAlpha=Math.max(0,1-floors/26);ctx.fillStyle='rgba(255,255,255,.55)';for(let i=0;i<4;i++){const wx=W*(.07+i*.24),wy=46+(cam*.3)%70;ctx.fillRect(wx,wy,W*.14,62)}ctx.globalAlpha=1}
+    if(fever>0){ctx.fillStyle=`rgba(255,91,46,${.08+.06*Math.sin(tick*.3)})`;ctx.fillRect(-12,0,W+24,H)}
+    const fy=H-FLOOR+cam;if(fy<H){ctx.fillStyle='#e3e6ec';ctx.fillRect(-12,fy,W+24,H);ctx.strokeStyle='#1a1f2b';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(-12,fy+1);ctx.lineTo(W+12,fy+1);ctx.stroke()}
     stack.forEach((b,i)=>{const y=yOf(i);if(y>H+BH||y<-BH)return;
-      if(i===0){ctx.fillStyle='#7a6a58';ctx.fillRect(b.x-10,y,b.w+20,BH-4);ctx.fillRect(b.x,y+BH-4,10,FLOOR);ctx.fillRect(b.x+b.w-10,y+BH-4,10,FLOOR)}else sheet(b,y)});
-    if(state==='run'&&cur)sheet(cur,yOf(stack.length));
-    falls.forEach(f=>{ctx.save();ctx.translate(f.x+f.w/2,f.y+BH/2);ctx.rotate(f.r);sheet({...f,x:-f.w/2},-BH/2);ctx.restore()});
-    floats.forEach(f=>{ctx.globalAlpha=Math.max(0,f.a);ctx.fillStyle=f.color;ctx.font='900 14px "Noto Sans KR",sans-serif';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(f.txt,f.x,f.y);ctx.globalAlpha=1});
-    ctx.restore();
-    ctx.textAlign='left';ctx.textBaseline='alphabetic';ctx.fillStyle='#0f1e45';ctx.font='900 22px "Noto Sans KR",sans-serif';ctx.fillText(score+'층',14,32);
-    ctx.font='700 13px "Noto Sans KR",sans-serif';ctx.fillStyle='#4a5161';ctx.fillText('직급 '+rankOf(score),14,52);
-    if(state!=='run'){ctx.fillStyle='rgba(15,30,69,.78)';ctx.fillRect(0,0,W,H);ctx.fillStyle='#fff';ctx.textAlign='center';ctx.font='900 22px "Noto Sans KR",sans-serif';
-      ctx.fillText(state==='over'?'결재 반려!':'서류 탑 쌓기',W/2,H/2-16);ctx.font='500 14px "Noto Sans KR",sans-serif';
-      ctx.fillText(state==='over'?`${score}층 · 직급 ${rankOf(score)} · 눌러서 다시 시작`:'화면을 누르거나 스페이스바로 서류를 내려놓으세요',W/2,H/2+14);ctx.textAlign='left'}}
+      if(b.desk){ctx.fillStyle='#7a6a58';ctx.fillRect(b.x-10,y,b.w+20,BH-4);ctx.fillRect(b.x,y+BH-4,10,FLOOR);ctx.fillRect(b.x+b.w-10,y+BH-4,10,FLOOR)}else sheet(b,y,i)});
+    if(state==='run'&&cur){const y=yOf(stack.length);if(fever>0||clip>0){const top=stack[stack.length-1];ctx.strokeStyle=fever>0?'rgba(255,91,46,.6)':'rgba(47,91,234,.55)';ctx.setLineDash([5,4]);ctx.lineWidth=1.5;ctx.strokeRect(top.x,y,top.w,BH-2);ctx.setLineDash([])}sheet(cur,y,stack.length)}
+    falls.forEach(f=>{ctx.save();ctx.translate(f.x+f.w/2,f.y+BH/2);ctx.rotate(f.r);sheet({...f,x:-f.w/2,label:''},-BH/2);ctx.restore()});
+    parts.forEach(p=>{ctx.globalAlpha=Math.max(0,p.life);ctx.fillStyle=p.color;ctx.fillRect(p.x,p.y,4,4)});ctx.globalAlpha=1;
+    floats.forEach(f=>{ctx.globalAlpha=Math.max(0,f.a);ctx.fillStyle=f.color;ctx.font=`900 ${f.big?17:14}px "Noto Sans KR",sans-serif`;ctx.textAlign='center';ctx.textBaseline='middle';ctx.lineWidth=4;ctx.strokeStyle='rgba(255,255,255,.85)';ctx.strokeText(f.txt,f.x,f.y);ctx.fillText(f.txt,f.x,f.y)});ctx.globalAlpha=1;
+    ctx.restore();if(flash>0){ctx.fillStyle=`rgba(255,255,255,${flash*.6})`;ctx.fillRect(0,0,W,H)}
+    const dark=floors>=24;ctx.textAlign='left';ctx.textBaseline='alphabetic';ctx.fillStyle=dark?'#fff':'#0f1e45';ctx.font='900 24px "Noto Sans KR",sans-serif';ctx.fillText(fmt(score)+'점',14,34);
+    ctx.font='700 13px "Noto Sans KR",sans-serif';ctx.fillStyle=dark?'#cfd6ea':'#4a5161';ctx.fillText(`${floors}층 · ${rankOf(floors)}`,14,54);
+    if(combo>1){ctx.fillStyle='#12a36b';ctx.font='900 15px "Noto Sans KR",sans-serif';ctx.fillText(`콤보 x${Math.min(10,combo)}`,14,74)}
+    ctx.textAlign='right';ctx.font='700 13px "Noto Sans KR",sans-serif';ctx.fillStyle=dark?'#fff':'#0f1e45';ctx.fillText('반려권 '+('◆'.repeat(lives)||'없음'),W-14,26);
+    if(clip>0){ctx.fillStyle='#2f5bea';ctx.fillText(`📎 x${clip}`,W-14,46)}
+    if(fever>0){const bw=120;ctx.fillStyle='rgba(0,0,0,.15)';ctx.fillRect(W-14-bw,54,bw,8);ctx.fillStyle='#ff5b2e';ctx.fillRect(W-14-bw,54,bw*fever/FEVER,8);ctx.font='900 12px "Noto Sans KR",sans-serif';ctx.fillText('FEVER',W-14,78)}
+    if(state!=='run'){ctx.fillStyle='rgba(15,30,69,.8)';ctx.fillRect(0,0,W,H);ctx.fillStyle='#fff';ctx.textAlign='center';ctx.font='900 24px "Noto Sans KR",sans-serif';
+      ctx.fillText(state==='over'?'결재 반려!':'서류 탑 쌓기 2',W/2,H/2-26);ctx.font='500 14px "Noto Sans KR",sans-serif';
+      if(state==='over'){ctx.fillText(`${fmt(score)}점 · ${floors}층 · 최대 콤보 ${maxC} · 직급 ${rankOf(floors)}`,W/2,H/2+6);ctx.fillText('눌러서 다시 시작',W/2,H/2+30)}
+      else{ctx.fillText('화면을 누르거나 스페이스바로 서류를 내려놓으세요',W/2,H/2+6);ctx.fillStyle='#ffd23f';ctx.fillText('콤보 · FEVER · 커피 수혈 · 긴급 결재 · 자석 클립 · 반려권',W/2,H/2+32)}
+      ctx.textAlign='left'}}
   cv.addEventListener('pointerdown',e=>{e.preventDefault();drop()});
-  window.addEventListener('resize',()=>{if(current==='game-stack')resize()});
-  return{enter(){state='ready';resize()},leave(){if(state==='run'){state='ready';cancelAnimationFrame(raf);reset();draw();$('kMsg').textContent='게임이 중단되었습니다. 화면을 눌러 다시 시작하세요.'}},key(){drop()}};
+  window.addEventListener('resize',()=>{if(current==='game-stack2')resize()});
+  return{enter(){state='ready';resize()},leave(){if(state==='run'){state='ready';cancelAnimationFrame(raf);reset();draw();$('k2Msg').textContent='게임이 중단되었습니다. 화면을 눌러 다시 시작하세요.'}},key(){drop()}};
 })();
-onEnter['game-stack']=()=>Sk.enter();onLeave['game-stack']=()=>Sk.leave();
+onEnter['game-stack2']=()=>Sk2.enter();onLeave['game-stack2']=()=>Sk2.leave();
+/* ───── 게임 4: 받은편지함 0 ───── */
+const Ml=(()=>{
+  const KEEP=[['팀장님','[긴급] 오늘 3시 회의 자료 부탁해요'],['인사팀','11월 급여 명세서 안내','gold'],['고객사 김 과장','견적서 수정본 요청드립니다'],['총무팀','회의실 예약 변경 안내'],['팀장님','금요일 회식 장소 공지'],['인사팀','연차 신청이 승인되었습니다'],['프로젝트 봇','[리마인더] 보고서 마감 D-1'],['재무팀','법인카드 영수증 제출 요청'],['옆팀 대리','어제 말씀하신 파일 보내드려요'],['대표이사','전 직원 공지: 오늘 조기 퇴근','gold'],['IT지원팀','사내 메신저 점검 일정 안내'],['고객센터','고객 문의 #4521 답변 요청'],['팀장님','이 문서 검토 부탁해요'],['교육팀','필수 교육 이수 마감 안내']];
+  const DEL=[['(광고) 무한쇼핑','오늘만 90% 할인! 지금 클릭','광고 메일이었습니다'],['당첨 안내센터','축하합니다! 아이폰에 당첨되셨습니다','당첨 사기 메일이었습니다'],['이 과장','RE: RE: RE: 저도요','전체회신 "저도요"였습니다'],['뉴스레터','이번 주 꼭 읽어야 할 자기계발 10선','안 읽을 뉴스레터였습니다'],['보안팀(외부메일)','비밀번호 만료! 링크로 재설정하세요','피싱 메일이었습니다'],['팀장님(외부메일)','급하게 상품권 좀 사줄 수 있어요?','팀장님 사칭 피싱이었습니다'],['자동응답','퇴사하였습니다. 연락 주지 마세요','퇴사자 자동응답이었습니다'],['코인부자','하루 300% 수익 보장 리딩방','투자 사기 메일이었습니다'],['전체회신','[전체] 엘리베이터 사진 공유합니다','쓸데없는 전체메일이었습니다'],['(광고) 헬스장','작심삼일 회원님, 다시 돌아오세요','광고 메일이었습니다'],['해외 왕자','귀하에게 유산을 상속하고자 합니다','국제 사기 메일이었습니다'],['택배사(외부메일)','배송 실패. 주소 확인 링크 클릭','택배 사칭 피싱이었습니다']];
+  const card=$('mCard'),bar=$('mTimer'),stage=$('mailStage');
+  let run=false,score=0,lives=3,combo=0,done=0,limit=3.2,left=3.2,cur=null,tick=null,busy=false,sx=null,dx=0;
+  const hearts=()=>{$('mLife').textContent='♥'.repeat(lives)+'♡'.repeat(3-lives)};
+  function show(){const keep=Math.random()<.5;const g=pick(keep?KEEP:DEL);cur={keep,from:g[0],subj:g[1],gold:g[2]==='gold',why:keep?'':g[2]};
+    card.className='mail-card in'+(cur.gold?' gold':'');card.style.transform='';card.textContent='';
+    const head=el('div',{className:'mc-from'});head.append(el('i',{textContent:cur.from[0]}),el('b',{textContent:cur.from}),el('span',{textContent:'방금'}));
+    card.append(head,el('div',{className:'mc-subj',textContent:cur.subj}),el('div',{className:'mc-body',textContent:cur.gold?'⭐ 놓치면 안 되는 메일':'안녕하세요, 확인 부탁드립니다…'}));
+    limit=Math.max(1.1,3.2-done*.05);left=limit;busy=false}
+  function start(){stop();run=true;score=0;lives=3;combo=0;done=0;hearts();$('mScore').textContent=0;$('mCount').textContent='처리한 메일 0통';$('mMsg').textContent='업무 메일은 보관 →, 스팸·광고·피싱은 ← 삭제!';stage.classList.add('on');show();tick=setInterval(step,50)}
+  function stop(){run=false;clearInterval(tick)}
+  function step(){if(!run||busy)return;left-=.05;bar.style.transform=`scaleX(${Math.max(0,left/limit)})`;bar.classList.toggle('hurry',left/limit<.3);if(left<=0)judge(null)}
+  function judge(keep){if(!run||busy)return;busy=true;const ok=keep!==null&&keep===cur.keep;
+    card.classList.add(keep===false?'out-l':keep===true?'out-r':'out-d');
+    if(ok){combo++;done++;let p=10+Math.min(30,combo*2),healed=false;if(cur.gold){p+=50;if(lives<3){lives++;healed=true}hearts()}score+=p;$('mScore').textContent=fmt(score);$('mCount').textContent=`처리한 메일 ${done}통`;
+      $('mMsg').textContent=cur.gold?`⭐ 중요 메일 보관! +${p}${healed?' · 목숨 회복':''}`:combo>=5?`${combo}연속 정리! +${p}`:`+${p}`}
+    else{combo=0;lives--;hearts();stage.classList.remove('shake');void stage.offsetWidth;stage.classList.add('shake');
+      $('mMsg').textContent=keep===null?'시간 초과! 메일이 쌓였습니다.':cur.keep?`앗, 업무 메일(${cur.from})을 지웠습니다!`:`앗, ${cur.why}!`}
+    if(lives<=0){setTimeout(end,350);return}setTimeout(show,220)}
+  function title(n){return n>=80?'받은편지함 0의 신':n>=50?'메일 정리 장인':n>=30?'칼답 대리':n>=15?'성실한 사원':'아직은 메일함 9,999+'}
+  function end(){stop();stage.classList.remove('on');card.className='mail-card';card.textContent='';const nb=saveBest('mail',score);
+    $('mMsg').textContent='';$('mMsg').append(el('b',{textContent:`종료! ${fmt(score)}점 · ${done}통 처리 · ${title(done)}${nb?' · 최고 기록 갱신!':''} `}),startBtn());if(nb)confetti()}
+  function startBtn(){const b=el('button',{type:'button',className:'btn org sm',textContent:'다시 하기'});b.onclick=start;return b}
+  $('mStart').onclick=start;$('mDel').onclick=()=>run?judge(false):start();$('mKeep').onclick=()=>run?judge(true):start();
+  card.addEventListener('pointerdown',e=>{if(!run||busy)return;sx=e.clientX;dx=0;card.setPointerCapture(e.pointerId)});
+  card.addEventListener('pointermove',e=>{if(sx===null)return;dx=e.clientX-sx;card.style.transform=`translateX(${dx}px) rotate(${dx/18}deg)`});
+  const endDrag=()=>{if(sx===null)return;sx=null;if(Math.abs(dx)>60)judge(dx>0);else card.style.transform=''};
+  card.addEventListener('pointerup',endDrag);card.addEventListener('pointercancel',endDrag);
+  return{key(k){if(!run){if(k==='start')start();return}if(k==='left')judge(false);else if(k==='right')judge(true)},
+    leave(){if(run){stop();stage.classList.remove('on');card.className='mail-card';card.textContent='';$('mMsg').textContent='';$('mMsg').append(startBtn(),' 게임이 중단되었습니다.')}}};
+})();
+onLeave['game-mail']=()=>Ml.leave();
 
 /* ───── 게임 3: 딴짓 들키지 마 ───── */
 const Sl=(()=>{
@@ -1546,7 +1774,7 @@ function fillBoss(){const names=['프로젝트 종합 달성률','전략적 정�
   const tasks=['글로벌 운영 효율화 방안 도출','차세대 협업 프로세스 최적화','핵심 이해관계자 커뮤니케이션','데이터 기반 의사결정 체계 고도화','전사 업무 표준화 2.0','고객 경험 혁신 로드맵'];const depts=['혁신전략팀','기획실','전사 공통','경영지원실','DX추진단'];
   const tb=$('btbl');tb.textContent='';shuffle(tasks).slice(0,4).forEach(t=>{const tr=el('tr');[t,pick(depts),pick(['매우 높음','높음']),pick(['정상 진행','순항 중','조기 달성 예상'])].forEach(v=>tr.append(el('td',{textContent:v})));tb.append(tr)});
   $('bossMeta').textContent='전사 핵심성과지표(KPI) 실시간 모니터링 · 업데이트: '+clockNow()}
-function setBoss(o){bossOpen=o;if(o){Sk.leave();Sl.leave();R.leave();fillBoss();lastF=document.activeElement;$('boss').hidden=false;document.body.style.overflow='hidden';$('bossClose').focus()}else{$('boss').hidden=true;document.body.style.overflow='';if(lastF)lastF.focus()}}
+function setBoss(o){bossOpen=o;if(o){Sk2.leave();Ml.leave();Sl.leave();R.leave();fillBoss();lastF=document.activeElement;$('boss').hidden=false;document.body.style.overflow='hidden';$('bossClose').focus()}else{$('boss').hidden=true;document.body.style.overflow='';if(lastF)lastF.focus()}}
 $('bossLink').onclick=()=>setBoss(true);$('bossClose').onclick=()=>setBoss(false);
 
 /* ═════ 커뮤니티 · 회원 · 명예의 전당 (Supabase) ═════ */
@@ -1689,11 +1917,11 @@ document.addEventListener('click',e=>{const a=e.target.closest&&e.target.closest
 BBS.notice.load();BBS.free.load();
 
 /* 내 기록 + 명예의 전당 */
-const RK={runner:'rkRunner',stack:'rkStack',slack:'rkSlack'};const MSG={runner:'rMsg',stack:'kMsg',slack:'sMsg'};
-const fmtS=(k,v)=>k==='slack'?(v/1000).toFixed(1)+'초':k==='stack'?fmt(v)+'층':fmt(v)+'점';
+const RK={runner:'rkRunner',stack2:'rkStack2',slack:'rkSlack',mail:'rkMail'};const MSG={runner:'rMsg',stack2:'k2Msg',slack:'sMsg',mail:'mMsg'};
+const fmtS=(k,v)=>k==='slack'?(v/1000).toFixed(1)+'초':fmt(v)+'점';
 const histGet=k=>{try{return JSON.parse(store.get('amutun-hist-'+k)||'[]')}catch(e){return[]}};
 function logRecent(k,v){const h=histGet(k);h.unshift({v,t:Date.now()});store.set('amutun-hist-'+k,JSON.stringify(h.slice(0,10)))}
-const ranks={runner:null,stack:null,slack:null};
+const ranks={runner:null,stack2:null,slack:null,mail:null};
 async function loadRanks(){if(!API_ON){rankRender();return}
   await Promise.all(Object.keys(RK).map(async k=>{try{ranks[k]=await sel(`v_ranks?game=eq.${k}&select=nick,is_member,score&order=score.desc,created_at.asc&limit=10`)}catch(e){ranks[k]=ranks[k]||[]}}));rankRender()}
 function rankRender(){for(const k in RK){const ol=$(RK[k]);ol.textContent='';const list=ranks[k];
@@ -1703,9 +1931,9 @@ function rankRender(){for(const k in RK){const ol=$(RK[k]);ol.textContent='';con
     const me=session?session.nick:guestNick();
     list.forEach((d,i)=>{const li=el('li');if(me&&d.nick===me)li.className='me';li.append(el('span',{className:'no',textContent:i+1}),nickEl(d),el('span',{className:'sc',textContent:fmtS(k,d.score)}));ol.append(li)})}
   window.__ranksReady=true;renderPromo2();renderMyRec()}
-function renderPromo2(){[['runner','gpRunner'],['stack','gpStack'],['slack','gpSlack']].forEach(([k,id])=>{const t=ranks[k]&&ranks[k][0];$(id).textContent=t?`1위 ${t.nick} ${fmtS(k,t.score)}`:'내 최고 '+(best[k]?fmtS(k,best[k]):'-')})}
+function renderPromo2(){[['runner','gpRunner'],['stack2','gpStack2'],['slack','gpSlack'],['mail','gpMail']].forEach(([k,id])=>{const t=ranks[k]&&ranks[k][0];$(id).textContent=t?`1위 ${t.nick} ${fmtS(k,t.score)}`:'내 최고 '+(best[k]?fmtS(k,best[k]):'-')})}
 function renderMyRec(){const m=$('myRec');if(!m)return;m.textContent='';const s=el('span');
-  s.append('내 최고 기록 · 칼퇴 러너 ',el('b',{textContent:best.runner?fmtS('runner',best.runner):'-'}),' · 서류 탑 ',el('b',{textContent:best.stack?fmtS('stack',best.stack):'-'}),' · 딴짓 ',el('b',{textContent:best.slack?fmtS('slack',best.slack):'-'}));m.append(s);}
+  s.append('내 최고 기록 · 칼퇴 러너 ',el('b',{textContent:best.runner?fmtS('runner',best.runner):'-'}),' · 서류 탑 2 ',el('b',{textContent:best.stack2?fmtS('stack2',best.stack2):'-'}),' · 딴짓 ',el('b',{textContent:best.slack?fmtS('slack',best.slack):'-'}),' · 메일 ',el('b',{textContent:best.mail?fmtS('mail',best.mail):'-'}));m.append(s);}
 function offerScore(k,v){if(!API_ON||!(v>0))return;
   setTimeout(()=>{const host=$(MSG[k]);if(!host)return;const wrap=el('div',{className:'row',style:'margin-top:10px'});
     const send=async(nick,btn)=>{if(btn)btn.disabled=true;try{const ok=await rpc('submit_score',{p_game:k,p_score:v,p_token:session&&session.token,p_nick:nick});
@@ -1725,7 +1953,8 @@ if(session&&API_ON)rpc('me',{p_token:session.token}).then(m=>{if(!m)saveSession(
 document.addEventListener('keydown',e=>{
   const tag=(document.activeElement&&document.activeElement.tagName)||'';const typing=['INPUT','TEXTAREA','SELECT'].includes(tag);
   if(!typing&&!bossOpen&&(e.code==='Space'||e.key==='ArrowUp')&&current==='game-runner'){e.preventDefault();R.key();return}
-  if(!typing&&!bossOpen&&e.code==='Space'&&current==='game-stack'){e.preventDefault();if(!e.repeat)Sk.key();return}
+  if(!typing&&!bossOpen&&e.code==='Space'&&current==='game-stack2'){e.preventDefault();if(!e.repeat)Sk2.key();return}
+  if(!typing&&!bossOpen&&current==='game-mail'){const k=e.key;if(k==='ArrowLeft'||k==='a'||k==='A'){e.preventDefault();Ml.key('left');return}if(k==='ArrowRight'||k==='d'||k==='D'){e.preventDefault();Ml.key('right');return}if((e.code==='Space'||k==='Enter')&&!e.repeat){e.preventDefault();Ml.key('start');return}}
   if(!typing&&!bossOpen&&e.code==='Space'&&current==='game-slack'){e.preventDefault();if(!e.repeat)Sl.key(true);return}
   if(e.key&&e.key.toLowerCase()==='b'&&!e.ctrlKey&&!e.metaKey&&!e.altKey&&!typing){e.preventDefault();setBoss(!bossOpen);return}
   if(e.key==='Escape'){if(bossOpen)setBoss(false);else if(!$('authM').hidden)closeAuth();else if(!$('modal').hidden)closeModal();else if(!$('drawer').hidden)$('drawer').hidden=true;else if(!$('layer').hidden)$('layer').hidden=true}
