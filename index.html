@@ -423,9 +423,8 @@ main{overflow-x:clip}
 .sp-meet input{width:40px;height:22px;margin:0 3px;padding:0 4px;border:1px solid #7f9db9;background:#fff;font:700 13px "Gulim",sans-serif;text-align:center;user-select:text}
 .sp-tv{margin:4px auto 10px;width:44%;min-width:170px;height:46px;background:#5a3410;border:3px solid #2e1a06;box-shadow:inset 0 0 0 2px #8a5a2a,2px 2px 0 rgba(0,0,0,.25);color:#ffd84a;font:900 20px/40px "Gulim",sans-serif;letter-spacing:.9em;text-indent:.9em;text-align:center}
 .sp-head{display:flex;justify-content:center;gap:4px;margin-bottom:10px}
-.sp-head .sp-seat{width:min(160px,32%);height:58px;padding-top:13px;padding-bottom:13px}
-.sp-head .sp-seat small{left:0;right:0;text-align:center}
-.sp-head .sp-seat .lock{left:0;right:0;bottom:2px;text-align:center}
+.sp-head .sp-seat{width:min(160px,32%);height:52px;padding-top:16px}
+.sp-head .sp-seat .lock{right:19px}
 .sp-room{display:grid;grid-template-columns:1fr minmax(54px,.9fr) 1fr;gap:10px;align-items:stretch}
 .sp-col{display:grid;gap:4px}
 .sp-table{border:2px solid #9aa5b5;border-radius:40px;background:linear-gradient(90deg,#f3f5f8,#fff 50%,#f3f5f8);display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;letter-spacing:.5em;font-size:13px;color:#8a95a6}
@@ -1463,22 +1462,28 @@ $('bingoNew').onclick=newBingo;newBingo();
 
 /* ───── 업무 도구: 중운위 자리 배치 ───── */
 (()=>{
-  /* 위원장단 고정석: 박성재는 TV 앞, 차해나는 박성재의 왼쪽, 전종현은 박성재의 오른쪽 (화면에서는 좌우가 반대로 보임) */
-  const HEAD=[['전종현','중집장'],['박성재','위원장'],['차해나','부위원장']];
-  const MEMBERS=[['박규현','공과'],['변다혜','국제'],['김여울','자연'],['이재후','의과'],['박영주','간호'],['김민찬','인문'],['류다영','경영'],['이준희','생활'],['이민규','기혁'],['허다연','사회'],['천세진','건축'],['이찬혁','예체'],['장한결','정책'],['도우경','사범'],['당현우','경금'],['한민성','인칼']];
-  const N=MEMBERS.length,HALF=Math.ceil(N/2),KEY='amutun-seat';
+  /* 자리 0~2는 TV 앞 위원장단석(화면 왼쪽부터 전종현·박성재·차해나 = 박성재 기준 오른쪽·가운데·왼쪽), 3~18은 테이블 양옆.
+     위원장단석은 처음엔 고정이고, 동그라미를 누르면 고정을 풀어 함께 섞을 수 있음 */
+  const PEOPLE=[['전종현','중집장'],['박성재','위원장'],['차해나','부위원장'],['박규현','공과'],['변다혜','국제'],['김여울','자연'],['이재후','의과'],['박영주','간호'],['김민찬','인문'],['류다영','경영'],['이준희','생활'],['이민규','기혁'],['허다연','사회'],['천세진','건축'],['이찬혁','예체'],['장한결','정책'],['도우경','사범'],['당현우','경금'],['한민성','인칼']];
+  const NH=3,N=PEOPLE.length,NS=N-NH,HALF=Math.ceil(NS/2),KEY='amutun-seat';
   const rnd=n=>{const a=new Uint32Array(1);crypto.getRandomValues(a);return a[0]%n};
   const shuffle=a=>{for(let i=a.length-1;i>0;i--){const j=rnd(i+1);[a[i],a[j]]=[a[j],a[i]]}return a};
-  let arr=MEMBERS.map((_,i)=>i),pins=new Set(),busy=false;
-  try{const s=JSON.parse(store.get(KEY)||'null');if(s&&Array.isArray(s.arr)&&s.arr.length===N&&new Set(s.arr).size===N&&s.arr.every(i=>i>=0&&i<N)){arr=s.arr;pins=new Set((s.pins||[]).filter(i=>i>=0&&i<N));if(s.no)$('spNo').value=s.no}}catch(e){}
+  let arr=PEOPLE.map((_,i)=>i),pins=new Set([0,1,2]),busy=false;
+  try{const s=JSON.parse(store.get(KEY)||'null');
+    if(s&&Array.isArray(s.arr)){let a=s.arr,p=s.pins||[];
+      if(a.length===NS){a=[0,1,2].concat(a.map(i=>i+NH));p=[0,1,2].concat(p.map(i=>i+NH))} /* 예전 저장 형식(위원 16명만) 변환 */
+      if(a.length===N&&new Set(a).size===N&&a.every(i=>i>=0&&i<N)){arr=a;pins=new Set(p.filter(i=>i>=0&&i<N))}}
+    if(s&&s.no)$('spNo').value=s.no}catch(e){}
   const save=()=>store.set(KEY,JSON.stringify({arr,pins:[...pins],no:$('spNo').value}));
   const tiles=[];
-  function seatEl(name,dept,fixed){const d=el('div',{className:'sp-seat'+(fixed?' fixed':'')});d.append(el('small',{textContent:dept}),el('span',{textContent:name}));if(fixed)d.append(el('span',{className:'lock',textContent:'고정'}));return d}
-  HEAD.forEach(([n,r])=>$('spHead').append(seatEl(n,r,true)));
-  for(let s=0;s<N;s++){const d=seatEl('','',false);const p=el('button',{type:'button',className:'pin'});p.setAttribute('aria-label',(s+1)+'번 자리 고정');
-    p.onclick=()=>{if(busy)return;pins.has(s)?pins.delete(s):pins.add(s);paint(s);save()};d.append(p);($(s<HALF?'spL':'spR')).append(d);tiles.push(d)}
-  function paint(s,name){const d=tiles[s],m=MEMBERS[arr[s]];d.querySelector('small').textContent=name?'':m[1];d.querySelector('span').textContent=name||m[0];
-    const on=pins.has(s);d.classList.toggle('pinned',on);const p=d.querySelector('.pin');p.classList.toggle('on',on);p.setAttribute('aria-pressed',on);p.title=on?'고정 해제':'이 자리 고정'}
+  function seatEl(s){const head=s<NH;const d=el('div',{className:'sp-seat'});d.append(el('small'),el('span'));if(head)d.append(el('span',{className:'lock',textContent:'고정'}));
+    const p=el('button',{type:'button',className:'pin'});p.setAttribute('aria-label',(head?'위원장단 ':'')+(s+1)+'번 자리 고정');
+    p.onclick=()=>{if(busy)return;pins.has(s)?pins.delete(s):pins.add(s);paint(s);save()};d.append(p);return d}
+  for(let s=0;s<N;s++){const d=seatEl(s);$(s<NH?'spHead':(s-NH<HALF?'spL':'spR')).append(d);tiles.push(d)}
+  function paint(s,name){const d=tiles[s],pi=arr[s],m=PEOPLE[pi];d.querySelector('small').textContent=name?'':m[1];d.querySelector('span').textContent=name||m[0];
+    d.classList.toggle('fixed',!name&&pi<NH);
+    const on=pins.has(s);d.classList.toggle('pinned',on);const lk=d.querySelector('.lock');if(lk)lk.hidden=!on;
+    const p=d.querySelector('.pin');p.classList.toggle('on',on);p.setAttribute('aria-pressed',on);p.title=on?'고정 해제':'이 자리 고정'}
   const paintAll=()=>{for(let s=0;s<N;s++)paint(s)};
   let ac=null;function beep(f,t){if($('spFx').checked)return;try{ac=ac||new (window.AudioContext||window.webkitAudioContext)();const o=ac.createOscillator(),g=ac.createGain();o.type='square';o.frequency.value=f;g.gain.value=.04;o.connect(g);g.connect(ac.destination);o.start();o.stop(ac.currentTime+t)}catch(e){}}
   function go(){if(busy)return;const free=[...Array(N).keys()].filter(s=>!pins.has(s));if(!free.length){alert('모든 자리가 고정되어 있습니다. 동그라미를 눌러 고정을 풀어 주세요.');return}
@@ -1486,12 +1491,12 @@ $('bingoNew').onclick=newBingo;newBingo();
     const fx=!$('spFx').checked&&!reduced;if(!fx){paintAll();return}
     busy=true;$('spGo').disabled=true;const bar=$('spBar');let k=0;const K=16;
     const t=setInterval(()=>{k++;bar.style.transform=`scaleX(${k/K})`;
-      free.forEach(s=>{tiles[s].classList.add('flick');paint(s,MEMBERS[rnd(N)][0])});beep(380+rnd(500),.04);
+      free.forEach(s=>{tiles[s].classList.add('flick');paint(s,PEOPLE[rnd(N)][0])});beep(380+rnd(500),.04);
       if(k>=K){clearInterval(t);free.forEach((s,i)=>setTimeout(()=>{tiles[s].classList.remove('flick');paint(s);tiles[s].classList.remove('sp-pop');void tiles[s].offsetWidth;tiles[s].classList.add('sp-pop');beep(660+i*40,.06);
         if(i===free.length-1){busy=false;$('spGo').disabled=false;bar.style.transform='scaleX(1)'}},i*45))}},70)}
   function help(){const stage=$('spPrint');if(stage.querySelector('.sp-dlg'))return;const w=el('div',{className:'sp-dlg'});const b=el('div');b.setAttribute('role','dialog');b.setAttribute('aria-label','도움말');
     const ok=el('button',{type:'button',textContent:'확인'});ok.onclick=()=>w.remove();const r=el('div',{className:'r'});r.append(ok);
-    b.append(el('h4',{textContent:'중운위 자리바꾸기 2.5 도움말'}),el('p',{textContent:'① [자리배치]를 누르면 위원장단(박성재·차해나·전종현)을 뺀 위원들의 자리가 무작위로 바뀝니다.\n② 이름 옆 동그라미를 누르면 그 자리는 다음 배치에서도 그대로 고정됩니다. 다시 누르면 풀립니다.\n③ 회차 숫자를 바꾸고 [프린트]를 누르면 자리표만 인쇄됩니다.\n④ 마지막 배치는 이 브라우저에 저장되어 다시 열어도 그대로입니다.'}),r);
+    b.append(el('h4',{textContent:'중운위 자리바꾸기 2.5 도움말'}),el('p',{textContent:'① [자리배치]를 누르면 고정되지 않은 사람들의 자리가 무작위로 바뀝니다. 위원장단(박성재·차해나·전종현)은 처음엔 고정되어 있습니다.\n② 이름 옆 동그라미를 누르면 그 자리가 고정되거나 풀립니다. 위원장단 자리도 동그라미를 눌러 고정을 풀면 함께 섞입니다.\n③ 회차 숫자를 바꾸고 [프린트]를 누르면 자리표만 인쇄됩니다.\n④ 마지막 배치는 이 브라우저에 저장되어 다시 열어도 그대로입니다.'}),r);
     b.querySelector('p').style.whiteSpace='pre-line';w.append(b);w.onclick=e=>{if(e.target===w)w.remove()};stage.append(w);ok.focus()}
   function printIt(){$('spPh').textContent=`제${$('spNo').value||''}차 중앙운영위원회 자리배치 · ${new Date().toLocaleDateString('ko-KR')}`;document.body.classList.add('print-seat');
     const done=()=>{document.body.classList.remove('print-seat');window.removeEventListener('afterprint',done)};window.addEventListener('afterprint',done);window.print();setTimeout(done,1500)}
